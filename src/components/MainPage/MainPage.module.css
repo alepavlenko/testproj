@@ -1,0 +1,22 @@
+.main{
+    max-width: 1200px;
+    height: 100vh;
+    margin: auto;
+    /*border: 1px solid #3E4C59;*/
+    /*background-color: #3E4C59;*/
+    /*display: flex;*/
+    /*justify-content: space-between;*/
+}
+.track{
+    position: absolute;
+    top: 50px;
+    right: 0;
+}
+
+.regtac{
+    position: absolute;
+    right: 0;
+    top: 0;
+    max-height: 100vh;
+    overflow: hidden;
+}
