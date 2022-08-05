@@ -1,14 +1,13 @@
 import React from 'react';
+
 import styles from './BarItem.module.css'
 
 const BarItem = () => {
+    const arrayBar = ['Home', 'Service', 'Clients', 'Contact',];
     return (
         <>
             <div className={styles.storageItem}>
-                <div className={styles.baritem}>Home</div>
-                <div className={styles.baritem}>Service</div>
-                <div className={styles.baritem}>Clients</div>
-                <div className={styles.baritem}>Contact</div>
+                {arrayBar.map((temp) => <div className="styles.baritem">{temp}</div>)}
             </div>
             <div className={styles.baritemBuffer}></div>
         </>

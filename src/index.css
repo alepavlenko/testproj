@@ -1,3 +1,13 @@
+@font-face {
+  font-family: 'Inter', sans-serif;
+  src: url("/src/assets/fonts/Inter-Regular.ttf") format("ttf");
+}
+
+@font-face {
+  font-family: 'Inter-bold', sans-serif;
+  src: url("/src/assets/fonts/Inter-Bold.ttf") format("ttf");
+}
+
 body {
   margin: 0;
 }

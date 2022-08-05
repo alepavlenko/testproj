@@ -1,9 +1,11 @@
 import React from 'react';
+
 import {Button} from "@mui/material";
-const MyButton = (props) => {
+
+const MyButton = ({variant, value}) => {
     return (
         <div>
-            <Button variant={props.variant}>{props.value}</Button>
+            <Button variant={variant}>{value}</Button>
         </div>
     );
 };
