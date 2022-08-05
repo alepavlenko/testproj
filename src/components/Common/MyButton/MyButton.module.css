@@ -1,0 +1,8 @@
+.button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid teal;
+    width: 100px;
+    height: 30px;
+}

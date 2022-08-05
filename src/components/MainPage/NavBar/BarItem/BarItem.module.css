@@ -1,0 +1,28 @@
+@font-face {
+    font-family: 'Inter', sans-serif;
+    src: url("/src/assets/fonts/Inter-Regular.ttf") format("ttf");
+}
+
+
+.baritem{
+    width: 40px;
+    height: 14px;
+    font-family: 'Inter', sans-serif;
+    color: #3E4C59B2;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 14px;
+}
+
+.baritemBuffer{
+ flex-grow: 1;
+}
+
+.storageItem{
+    gap: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 2;
+}

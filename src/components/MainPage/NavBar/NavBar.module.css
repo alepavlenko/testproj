@@ -1,0 +1,19 @@
+.wrapperNav{
+    margin-top: 24px;
+    justify-content: space-between;
+    display: flex;
+    z-index: 10;
+    position: relative;
+}
+.wrapperLogo{
+    margin-right: 120px;
+}
+.wrapperLogin{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.leftSide{
+    display: flex;
+}
