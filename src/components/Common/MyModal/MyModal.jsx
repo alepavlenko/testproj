@@ -6,10 +6,6 @@ import {useFormik} from 'formik';
 
 import style from './MyModal.module.css'
 
-
-const array = []
-localStorage.setItem('users', JSON.stringify(array))
-
 const SignupSchema = Yup.object().shape({
     password: Yup.string()
         .min(2, 'Too Short!')
@@ -21,7 +17,8 @@ const SignupSchema = Yup.object().shape({
 
 });
 
-const MyModal = ({open, handleClose, value, checkAuth, openNext}) => {
+const MyModal = ({open, handleClose, value, checkAuth, openNext, validError, setValidError}) => {
+
     const formik = useFormik({
         initialValues: {
             password: '',
@@ -29,11 +26,15 @@ const MyModal = ({open, handleClose, value, checkAuth, openNext}) => {
         },
         validationSchema: SignupSchema,
         onSubmit: values => {
-            let check = checkAuth(values);
-            console.log('check - ', check)
-            setTimeout(() => {
-                handleClose()
-            }, 100)
+            if(checkAuth(values)){
+                setTimeout(() => {
+                    handleClose()
+                }, 100)
+            } else{
+                if(value === "Log in"){
+                    setValidError(true)
+                }
+            }
         },
     });
 
@@ -85,15 +86,18 @@ const MyModal = ({open, handleClose, value, checkAuth, openNext}) => {
                             onChange={formik.handleChange}
                             value={formik.values.password}
                         />
-                        {formik.errors.password && formik.touched.password ? (
-                            <div className={style.wrapError}>{formik.errors.password}</div>
-                        ) : null}
+                        {validError
+                            ? <div className={style.wrapError}>Ошибка</div>
+                            : null}
+                        {formik.errors.password && formik.touched.password
+                            ? (<div className={style.wrapError}>{formik.errors.password}</div>)
+                            : null}
                     </div>
                     <div>
                         <ButtonStyled type="submit" variant="contained">{value}</ButtonStyled>
                     </div>
                     <div className={style.wrapText}>
-                        {value == "Sign up"
+                        {value === "Sign up"
                             ?
                             <p>Already have an account? <a className={style.wrapLink} onClick={openNextModal}>Log in</a>
                             </p>

@@ -1,9 +1,13 @@
 export const signUpAuth = (values) => {
     let flag = false;
     const user = {};
+    if(!localStorage.getItem('users')){
+        const array = []
+        localStorage.setItem('users', JSON.stringify(array))
+    }
     const localUsers = JSON.parse(localStorage.getItem('users'))
     localUsers.forEach((user) => {
-        if (user.email == values.email.trim()) {
+        if (user.email === values.email.trim()) {
             flag = true;
             console.log(user.email, ' Уже существует')
         }
@@ -21,7 +25,7 @@ export const loginAuth = (values) => {
     let flag = false;
     let localUsers = JSON.parse(localStorage.getItem("users"))
     localUsers.forEach((user) => {
-        if (user.email == values.email.trim() && user.password == values.password.trim()) {
+        if (user.email === values.email.trim() && user.password === values.password.trim()) {
             flag = true;
         }
     })
