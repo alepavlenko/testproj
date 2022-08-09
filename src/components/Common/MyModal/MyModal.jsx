@@ -6,6 +6,10 @@ import {useFormik} from 'formik';
 
 import style from './MyModal.module.css'
 
+
+const array = []
+localStorage.setItem('users', JSON.stringify(array))
+
 const SignupSchema = Yup.object().shape({
     password: Yup.string()
         .min(2, 'Too Short!')
@@ -17,7 +21,7 @@ const SignupSchema = Yup.object().shape({
 
 });
 
-const MyModal = ({open, handleClose, value}) => {
+const MyModal = ({open, handleClose, value, checkAuth, openNext}) => {
     const formik = useFormik({
         initialValues: {
             password: '',
@@ -25,11 +29,18 @@ const MyModal = ({open, handleClose, value}) => {
         },
         validationSchema: SignupSchema,
         onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
+            let check = checkAuth(values);
+            console.log('check - ', check)
+            setTimeout(() => {
+                handleClose()
+            }, 100)
         },
     });
 
-    console.log(formik.errors)
+    const openNextModal = () => {
+        handleClose();
+        openNext(true);
+    }
 
     return (
         <DialogStyled
@@ -82,7 +93,13 @@ const MyModal = ({open, handleClose, value}) => {
                         <ButtonStyled type="submit" variant="contained">{value}</ButtonStyled>
                     </div>
                     <div className={style.wrapText}>
-                        <p>Already have an account? <a className={style.wrapLink} href="">Log in</a></p>
+                        {value == "Sign up"
+                            ?
+                            <p>Already have an account? <a className={style.wrapLink} onClick={openNextModal}>Log in</a>
+                            </p>
+                            : <p> No account? <a className={style.wrapLink} onClick={openNextModal}>Create one</a></p>
+                        }
+
                     </div>
                 </FormStyled>
             </DialogContentStyled>
