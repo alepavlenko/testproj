@@ -6,6 +6,7 @@ import {loginAuth, signUpAuth} from "../../../Auth/checkAuth";
 
 import {Context} from "../../../App";
 import style from './TypographyBlock.module.css'
+import {useNavigate} from "react-router-dom";
 
 const TypographyBlock = () => {
 
@@ -13,6 +14,7 @@ const TypographyBlock = () => {
     const [openSignUp, setOpenSignUp] = useState(false)
     const [openLogIn, setOpenLogIn] = useState(false)
     const [validError, setValidError] = useState(null)
+    let navigate = useNavigate();
 
     const handleClose1 = () => {
         setValidError(false)
@@ -27,7 +29,7 @@ const TypographyBlock = () => {
 
     const butGetStart = () => {
         if(isAuth){
-            console.log('открытие новой страницы')
+            navigate('/warehouses', {replace: true})
         } else{
             setOpenLogIn(true)
         }
