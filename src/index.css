@@ -8,6 +8,11 @@
   src: url("/src/assets/fonts/Inter-Bold.ttf") format("ttf");
 }
 
+@font-face {
+  font-family: 'Inter-semibold', sans-serif;
+  src: url("/src/assets/fonts/Inter-semibold.ttf") format("ttf");
+}
+
 body {
   margin: 0;
 }
@@ -16,3 +21,4 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+

@@ -7,7 +7,7 @@ const BarItem = () => {
     return (
         <>
             <div className={styles.storageItem}>
-                {arrayBar.map((temp) => <div className="styles.baritem">{temp}</div>)}
+                {arrayBar.map((temp) => <div className={styles.baritem}>{temp}</div>)}
             </div>
             <div className={styles.baritemBuffer}></div>
         </>
