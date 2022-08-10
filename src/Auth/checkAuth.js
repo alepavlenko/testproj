@@ -1,4 +1,4 @@
-export const signUpAuth = (values) => {
+export const signUpAuth = (values, setValidError) => {
     let flag = false;
     const user = {};
     if(!localStorage.getItem('users')){
@@ -9,10 +9,11 @@ export const signUpAuth = (values) => {
     localUsers.forEach((user) => {
         if (user.email === values.email.trim()) {
             flag = true;
-            console.log(user.email, ' Уже существует')
+            setValidError(true)
         }
     })
     if (!flag) {
+        setValidError(false)
         user.password = values.password.trim()
         user.email = values.email.trim()
         localUsers.push(user)
@@ -23,11 +24,17 @@ export const signUpAuth = (values) => {
 
 export const loginAuth = (values) => {
     let flag = false;
+    const userTemp = {};
+    userTemp.password = values.password.trim()
+    userTemp.email = values.email.trim()
+
     let localUsers = JSON.parse(localStorage.getItem("users"))
     localUsers.forEach((user) => {
         if (user.email === values.email.trim() && user.password === values.password.trim()) {
+            localStorage.setItem("user", JSON.stringify(userTemp))
             flag = true;
         }
     })
-    if(flag) return true
+
+    return flag
 }

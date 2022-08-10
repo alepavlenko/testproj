@@ -2,11 +2,10 @@ import React from 'react';
 
 import {Button} from "@mui/material";
 
-const MyButton = ({variant, value, setOpen}) => {
-    const handleOpen = () => setOpen(true);
+const MyButton = ({variant, value, onClick}) => {
     return (
         <div>
-            <Button onClick={handleOpen} variant={variant}>{value}</Button>
+            <Button onClick={onClick} variant={variant}>{value}</Button>
         </div>
     );
 };

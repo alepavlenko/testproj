@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useContext} from 'react';
 
 import {ButtonStyled, DialogContentStyled, DialogStyled, DialogTitleStyled, FormStyled} from "./MyModal.styled";
 import * as Yup from 'yup';
 import {useFormik} from 'formik';
 
+import {Context} from "../../../App";
 import style from './MyModal.module.css'
 
 const SignupSchema = Yup.object().shape({
@@ -19,6 +20,8 @@ const SignupSchema = Yup.object().shape({
 
 const MyModal = ({open, handleClose, value, checkAuth, openNext, validError, setValidError}) => {
 
+    const [isAuth, setIsAuth] = useContext(Context)
+
     const formik = useFormik({
         initialValues: {
             password: '',
@@ -26,31 +29,38 @@ const MyModal = ({open, handleClose, value, checkAuth, openNext, validError, set
         },
         validationSchema: SignupSchema,
         onSubmit: values => {
-            if(checkAuth(values)){
-                setTimeout(() => {
-                    handleClose()
-                }, 100)
-            } else{
-                if(value === "Log in"){
+            if (checkAuth(values, setValidError)) {
+                    handleCloseWrap()
+                if ((value === "Sign up")) {
+                    openNext(true)
+                }
+                setIsAuth(true)
+            } else {
+                if (value === "Log in") {
                     setValidError(true)
                 }
             }
         },
     });
 
-    const openNextModal = () => {
+    const handleCloseWrap = () => {
+        formik.resetForm()
         handleClose();
+    }
+    const openNextModal = () => {
+        handleCloseWrap();
+        formik.resetForm()
         openNext(true);
     }
 
     return (
         <DialogStyled
             open={open}
-            onClose={handleClose}
+            onClose={handleCloseWrap}
         >
             <DialogTitleStyled id="alert-dialog-title">
                 <div className={style.wrapDivBut}>
-                    <button className={style.wrapClose} onClick={handleClose}>
+                    <button className={style.wrapClose} onClick={handleCloseWrap}>
                         <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd"
                                   d="M1.53033 0.46967C1.23744 0.176777 0.762563 0.176777 0.46967 0.46967C0.176777 0.762563 0.176777 1.23744 0.46967 1.53033L9.93934 11L0.469671 20.4697C0.176777 20.7626 0.176777 21.2374 0.469671 21.5303C0.762564 21.8232 1.23744 21.8232 1.53033 21.5303L11 12.0607L20.4697 21.5303C20.7626 21.8232 21.2374 21.8232 21.5303 21.5303C21.8232 21.2374 21.8232 20.7626 21.5303 20.4697L12.0607 11L21.5303 1.53033C21.8232 1.23744 21.8232 0.762563 21.5303 0.46967C21.2374 0.176777 20.7626 0.176777 20.4697 0.46967L11 9.93934L1.53033 0.46967Z"
