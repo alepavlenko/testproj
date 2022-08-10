@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 import NavBar from "./NavBar/NavBar";
 import TypographyBlock from "./TypographyBlock/TypographyBlock";

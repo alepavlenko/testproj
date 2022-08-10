@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 
 import MyButton from "../../Common/MyButton/MyButton";
 import MyModal from "../../Common/MyModal/MyModal";
@@ -10,7 +10,7 @@ import {useNavigate} from "react-router-dom";
 
 const TypographyBlock = () => {
 
-    const [isAuth, setIsAuth] = useContext(Context)
+    const {isAuth, setIsAuth} = useContext(Context)
     const [openSignUp, setOpenSignUp] = useState(false)
     const [openLogIn, setOpenLogIn] = useState(false)
     const [validError, setValidError] = useState(null)

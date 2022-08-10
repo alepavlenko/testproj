@@ -7,15 +7,20 @@ export const Context = React.createContext();
 
 
 function App() {
-    const [isAuth, setIsAuth] = useState(false)
-  return (
-      <Context.Provider value={[isAuth, setIsAuth]}>
-          <BrowserRouter>
-              <AppRouter/>
-          </BrowserRouter>
-      </Context.Provider>
+    const [isAuth, setIsAuth] = useState(Boolean(localStorage.getItem('user')))
 
-  );
+    const values = {
+        isAuth,
+        setIsAuth
+    }
+    return (
+        <Context.Provider value={values}>
+            <BrowserRouter>
+                <AppRouter/>
+            </BrowserRouter>
+        </Context.Provider>
+
+    );
 }
 
 export default App;

@@ -12,7 +12,7 @@ const LoginGroup = () => {
     const [openSignUp, setOpenSignUp] = useState(false)
     const [openLogIn, setOpenLogIn] = useState(false)
     const [validError, setValidError] = useState(null)
-    const [isAuth, setIsAuth] = useContext(Context)
+    const {isAuth, setIsAuth} = useContext(Context)
 
 
    const handleClose1 = () => {

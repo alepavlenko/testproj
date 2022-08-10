@@ -1,0 +1,26 @@
+.wrapNavBar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    background-color: white;
+}
+.wrapContent{
+    padding-top: 120px;
+}
+.wrapSideBar{
+    height: 100vh;
+    overflow: hidden;
+}
+.wrapList{
+    height: 100vh;
+    overflow: hidden;
+}
+.wrapLogo{
+    margin-left: 32px;
+    margin-top: 34px;
+    margin-bottom: 145px;
+}
+hr{
+    display: none;
+}

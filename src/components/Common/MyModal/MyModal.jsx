@@ -24,7 +24,7 @@ const SignupSchema = Yup.object().shape({
 
 const MyModal = ({open, handleClose, value, checkAuth, openNext, validError, setValidError}) => {
 
-    const [isAuth, setIsAuth] = useContext(Context)
+    const {setIsAuth} = useContext(Context)
     let navigate = useNavigate();
 
     const formik = useFormik({
