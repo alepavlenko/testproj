@@ -10,44 +10,15 @@
 .wrapContent{
     padding-top: 120px;
 }
-.wrapSideBar{
-    height: 100vh;
-    overflow: hidden;
-}
-.wrapList{
-    height: 100vh;
-    overflow: hidden;
-    font-family: 'Inter-semibold', sans-serif;
-    font-size: 14px;
-    line-height: 14px;
-    color: rgba(62, 76, 89, 0.7);
-}
-.wrapListItem{
-    display: flex;
-    justify-content: center;
-}
-.wrapLogo{
-    margin-left: 32px;
-    margin-top: 34px;
-    margin-bottom: 145px;
-}
+
 hr{
     display: none;
 }
 .wrapNavLogo{
     display: flex;
     gap: 40px;
-    /*cursor: pointer;*/
 
 }
 .styledSvg:hover{
     cursor: pointer;
-    /*background-color: #EE950F;*/
-}
-.wrapLink{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: #3E4C59B2;
 }
