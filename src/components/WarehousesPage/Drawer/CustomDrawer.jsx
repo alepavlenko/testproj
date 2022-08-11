@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-import {Divider, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
+import {Divider, Drawer, List, ListItem, ListItemButton, ListItemText} from "@mui/material";
 import {Link} from "react-router-dom";
 import Logo from "../../Common/Logo/Logo";
 import Home from "../../Common/Icons/Home";
@@ -9,6 +9,8 @@ import Accounts from "../../Common/Icons/Accounts";
 import Cards from "../../Common/Icons/Cards";
 import Contacts from "../../Common/Icons/Contacts";
 import Chat from "../../Common/Icons/Chat";
+import {ListItemIconStyled} from "./CustomDrawer.style";
+
 
 import style from "./CustomDrawer.module.css";
 
@@ -61,34 +63,30 @@ const CustomDrawer = () => {
         setMobileOpen(!mobileOpen);
     };
 
-    const checkedList = (event, index) => {
-        // setSelectedIndex(index);
-        // console.log(selectedIndex)
-
-    }
-
     const test = (id) => {
         setSelectedIndex(id)
     }
 
 
     const drawer = () => (
-        <div className={style.wrapSideBar}>
+        <div className={style.wrapSideBar} >
             <div className={style.wrapLogo}>
                 <Logo/>
             </div>
             <Divider/>
             <List className={style.wrapList}>
                 {listArray.map((item) => (
-                    <ListItem className={selectedIndex === item.id ? 'ACTIVE222222222' : ''} key={item.id} disablePadding onClick={() => test(item.id)}>
-                        {/*<Link to={`/${item.label}`} className={style.wrapLink}>*/}
-                            <ListItemButton onClick={(event) => checkedList(event, item.id)} >
-                                <ListItemIcon className={style.wrapListItem}>
+                    <ListItem className={selectedIndex === item.id ? style.selectedMenu : ''} key={item.id} disablePadding onClick={() => test(item.id)}>
+                        {/* <Link to={`/${item.label}`} className={style.wrapLink}> */}
+                            <div className={style.wrapLink}>
+                            <ListItemButton >
+                                <ListItemIconStyled className={selectedIndex === item.id ? style.selectIcon : style.wrapListItem}>
                                     {item.icon}
-                                </ListItemIcon>
-                                <ListItemText primary={item.label}/>
+                                </ListItemIconStyled>
+                                <ListItemText  primary={item.label}/>
                             </ListItemButton>
-                        {/*</Link>*/}
+                            </div>
+                        {/* </Link> */}
                     </ListItem>
                 ))}
             </List>

@@ -1,13 +1,10 @@
 import React from 'react';
 
-import {AppBar, Box, CssBaseline, Typography} from "@mui/material";
-import {TextFieldStyled} from "./Warehouses.style";
-import Person from "../Common/Icons/Person";
-import Settings from "../Common/Icons/Settings";
-import Notification from "../Common/Icons/Notification";
+import {Box, CssBaseline, Typography} from "@mui/material";
 import CustomDrawer from "./Drawer/CustomDrawer";
 
 import style from './WarehousesPage.module.css'
+import NavBarWereHouses from './NavBarWereHouses/NavBarWereHouses';
 
 const drawerWidth = 240;
 
@@ -19,28 +16,9 @@ const WarehousesPage = () => {
 
         <Box sx={{display: 'flex'}}>
             <CssBaseline/>
-
+            
             {/*NavBar*/}
-            <AppBar
-                position="fixed"
-                sx={{
-                    boxShadow: 'none',
-                    borderBottom: 1,
-                    borderColor: "#ECEFF2",
-                    height: 112,
-                    width: {sm: `calc(100% - ${drawerWidth}px)`},
-                    ml: {sm: `${drawerWidth}px`},
-                }}
-            >
-                <div className={style.wrapNavBar}>
-                    <TextFieldStyled label="Search"/>
-                    <div className={style.wrapNavLogo}>
-                        <div className={style.styledSvg}><Person/></div>
-                        <div className={style.styledSvg}><Settings/></div>
-                        <div className={style.styledSvg}><Notification/></div>
-                    </div>
-                </div>
-            </AppBar>
+            <NavBarWereHouses/>
 
             {/*side bar*/}
             <Box
