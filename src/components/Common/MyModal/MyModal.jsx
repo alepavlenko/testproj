@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import * as Yup from 'yup';
 
 import {useFormik} from 'formik';
-import ExitButton from "../../icons/ExitButton";
+import ExitButton from "../Icons/ExitButton";
 
 
 import {Context} from "../../../App";

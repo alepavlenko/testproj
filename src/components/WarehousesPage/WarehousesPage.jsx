@@ -1,71 +1,105 @@
 import React from 'react';
 import {
     AppBar, Box,
-    Button,
     CssBaseline,
-    Divider, Drawer, IconButton,
+    Divider, Drawer,
     List,
     ListItem,
     ListItemButton,
     ListItemIcon,
-    ListItemText, TextField,
-    Toolbar, Typography
+    ListItemText,
+     Typography
 } from "@mui/material";
 import {Link} from "react-router-dom";
 import Logo from "../Common/Logo/Logo";
-import ExitButton from "../icons/ExitButton";
-import {TextFieldStyled, ToolbarStyled} from "./Warehouses.style";
+import {TextFieldStyled} from "./Warehouses.style";
 import style from './WarehousesPage.module.css'
+import Person from "../Common/Icons/Person";
+import Settings from "../Common/Icons/Settings";
+import Notification from "../Common/Icons/Notification";
+import Home from "../Common/Icons/Home";
+import Warehouses from "../Common/Icons/Warehouses";
+import Accounts from "../Common/Icons/Accounts";
+import Cards from "../Common/Icons/Cards";
+import Contacts from "../Common/Icons/Contacts";
+import Chat from "../Common/Icons/Chat";
 
-function InboxIcon() {
-    return null;
-}
 
-function MailIcon() {
-    return null;
-}
-
-function MenuIcon() {
-    return null;
-}
+const listArray = [
+    {
+        id: 1,
+        label: 'Home',
+        icon: <Home/>
+    },
+    {
+        id: 2,
+        label: 'Warehouses',
+        icon: <Warehouses/>
+    },
+    {
+        id: 3,
+        label: 'Accounts',
+        icon: <Accounts/>
+    },
+    {
+        id: 4,
+        label: 'Cards',
+        icon: <Cards/>
+    },
+    {
+        id: 5,
+        label: 'Contacts',
+        icon: <Contacts/>
+    },
+    {
+        id: 6,
+        label: 'Chat',
+        icon: <Chat/>
+    },
+]
 
 const drawerWidth = 240;
 
 const WarehousesPage = (props) => {
-    const { window } = props;
+    const {window} = props;
+
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
 
+
     const drawer = (
         <div className={style.wrapSideBar}>
             <div className={style.wrapLogo}>
                 <Logo/>
             </div>
-            <Divider />
+            <Divider/>
             <List className={style.wrapList}>
-                {['Home', 'Warehouses', 'Accounts', 'Cards','Contacts','Chat'].map((text, index) => (
-                    <ListItem key={text} disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                {index ? <InboxIcon /> : <MailIcon />}
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItemButton>
+                {listArray.map((item) => (
+                    <ListItem key={item.id} disablePadding>
+                        <Link to={`/${item.label}`} className={style.wrapLink}>
+                            <ListItemButton>
+                                <ListItemIcon className={style.wrapListItem}>
+                                    {item.icon}
+                                </ListItemIcon>
+                                <ListItemText primary={item.label}/>
+                            </ListItemButton>
+                        </Link>
+
                     </ListItem>
                 ))}
             </List>
-            <Divider />
+            <Divider/>
         </div>
     );
 
     const container = window !== undefined ? () => window().document.body : undefined;
 
     return (
-        <Box sx={{ display: 'flex' }}>
-            <CssBaseline />
+        <Box sx={{display: 'flex'}}>
+            <CssBaseline/>
             <AppBar
                 position="fixed"
                 sx={{
@@ -73,24 +107,26 @@ const WarehousesPage = (props) => {
                     borderBottom: 1,
                     borderColor: "#ECEFF2",
                     height: 112,
-                    width: { sm: `calc(100% - ${drawerWidth}px)` },
-                    ml: { sm: `${drawerWidth}px` },
+                    width: {sm: `calc(100% - ${drawerWidth}px)`},
+                    ml: {sm: `${drawerWidth}px`},
                 }}
             >
                 <div className={style.wrapNavBar}>
-                    <TextFieldStyled label="Search" />
-                    <Typography variant="h6" noWrap component="div">
-                        Responsive drawer
-                    </Typography>
+                    <TextFieldStyled label="Search"/>
+                    <div className={style.wrapNavLogo}>
+                        <div className={style.styledSvg}><Person/></div>
+                        <div className={style.styledSvg}><Settings/></div>
+                        <div className={style.styledSvg}><Notification/></div>
+                    </div>
                 </div>
             </AppBar>
             <Box
                 component="nav"
                 sx={{
-                    width: { sm: drawerWidth },
-                    flexShrink: { sm: 0 },
+                    width: {sm: drawerWidth},
+                    flexShrink: {sm: 0},
                     height: "100vh",
-            }}
+                }}
                 aria-label="mailbox folders"
             >
                 <Drawer
@@ -102,8 +138,8 @@ const WarehousesPage = (props) => {
                         keepMounted: true, // Better open performance on mobile.
                     }}
                     sx={{
-                        display: { xs: 'block', sm: 'none' },
-                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+                        display: {xs: 'block', sm: 'none'},
+                        '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWidth},
                     }}
                 >
                     {drawer}
@@ -116,7 +152,7 @@ const WarehousesPage = (props) => {
                             sm: 'block',
                             height: "100vh"
                         },
-                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+                        '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWidth},
                     }}
                 >
                     {drawer}
@@ -129,7 +165,7 @@ const WarehousesPage = (props) => {
                         paddingTop: "520px",
                         flexGrow: 1,
                         p: 3,
-                        width: { sm: `calc(100% - ${drawerWidth}px)` }
+                        width: {sm: `calc(100% - ${drawerWidth}px)`}
                     }}
                 >
                     {/*<Toolbar />*/}
