@@ -77,16 +77,14 @@ const CustomDrawer = () => {
             <List className={style.wrapList}>
                 {listArray.map((item) => (
                     <ListItem className={selectedIndex === item.id ? style.selectedMenu : ''} key={item.id} disablePadding onClick={() => test(item.id)}>
-                        {/* <Link to={`/${item.label}`} className={style.wrapLink}> */}
-                            <div className={style.wrapLink}>
+                         <Link to={`/${item.label}`} className={style.wrapLink}>
                             <ListItemButton >
                                 <ListItemIconStyled className={selectedIndex === item.id ? style.selectIcon : style.wrapListItem}>
                                     {item.icon}
                                 </ListItemIconStyled>
                                 <ListItemText  primary={item.label}/>
                             </ListItemButton>
-                            </div>
-                        {/* </Link> */}
+                         </Link>
                     </ListItem>
                 ))}
             </List>

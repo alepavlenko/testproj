@@ -2,9 +2,9 @@ import React from 'react';
 
 import {Box, CssBaseline, Typography} from "@mui/material";
 import CustomDrawer from "./Drawer/CustomDrawer";
+import NavBarWereHouses from './NavBarWereHouses/NavBarWereHouses';
 
 import style from './WarehousesPage.module.css'
-import NavBarWereHouses from './NavBarWereHouses/NavBarWereHouses';
 
 const drawerWidth = 240;
 
@@ -38,7 +38,6 @@ const WarehousesPage = () => {
                 <Box
                     component="main"
                     sx={{
-                        paddingTop: "520px",
                         flexGrow: 1,
                         p: 3,
                         width: {sm: `calc(100% - ${drawerWidth}px)`}

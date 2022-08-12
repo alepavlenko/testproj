@@ -1,9 +1,11 @@
 import React from 'react';
+
 import { AppBar } from '@mui/material';
 import {TextFieldStyled} from "./NavBarWereHouses.style";
 import Person from "../../Common/Icons/Person";
 import Settings from "../../Common/Icons/Settings";
 import Notification from "../../Common/Icons/Notification";
+
 import style from './NavBarWereHouses.module.css'
 
 const drawerWidth = 240;
