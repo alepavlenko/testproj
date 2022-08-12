@@ -1,0 +1,19 @@
+.wrapTable{
+    display: flex;
+}
+.wrapTableHead{
+    display: flex;
+    justify-content: left;
+    flex-direction: row;
+}
+.wrapTableHeadAnother{
+    display: flex;
+    justify-content: left;
+}
+.wrapRow{
+    height: 68px;
+}
+
+.wrapTableHead > svg {
+    order: 3;
+}
