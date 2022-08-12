@@ -3,6 +3,8 @@ import React, {useContext, useState} from 'react';
 import MyButton from "../../../Common/MyButton/MyButton";
 import MyModal from "../../../Common/MyModal/MyModal";
 import {signUpAuth, loginAuth} from '../../../../Auth/checkAuth'
+import LogInForm from "../../AuthForm/LogInForm/LogInForm";
+
 
 import {Context} from "../../../../App";
 import style from './LoginGroup.module.css'
@@ -42,20 +44,26 @@ const LoginGroup = () => {
             }
             <MyModal
                 open={openSignUp}
-                openNext={setOpenLogIn}
                 handleClose={handleClose1}
-                checkAuth={signUpAuth}
-                validError={validError}
-                setValidError={setValidError}
-                value="Sign up"
+                content={<LogInForm
+                    checkAuth={signUpAuth}
+                    handleClose={handleClose1}
+                    validError={validError}
+                    setValidError={setValidError}
+                    openNext={setOpenLogIn}
+                    value="Sign up"
+                />}
             />
             <MyModal open={openLogIn}
-                     openNext={setOpenSignUp}
                      handleClose={handleClose}
-                     checkAuth={loginAuth}
-                     validError={validError}
-                     setValidError={setValidError}
-                     value="Log in"
+                     content={<LogInForm
+                         checkAuth={loginAuth}
+                         handleClose={handleClose}
+                         validError={validError}
+                         setValidError={setValidError}
+                         openNext={setOpenSignUp}
+                         value="Log in"
+                     />}
             />
 
         </div>

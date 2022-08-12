@@ -1,65 +1,18 @@
-import React, {useContext} from 'react';
-import * as Yup from 'yup';
+import React from 'react';
 
-import {useFormik} from 'formik';
 import ExitButton from "../Icons/ExitButton";
+import {DialogContentStyled, DialogStyled, DialogTitleStyled} from "./MyModal.styled";
 
-
-import {Context} from "../../../App";
-import {ButtonStyled, DialogContentStyled, DialogStyled, DialogTitleStyled, FormStyled} from "./MyModal.styled";
 import style from './MyModal.module.css'
-import {useNavigate} from "react-router-dom";
 
+const MyModal = ({open, handleClose, content}) => {
 
-const SignupSchema = Yup.object().shape({
-    password: Yup.string()
-        .min(2, 'Too Short!')
-        .max(50, 'Too Long!')
-        .required('Required'),
-    email: Yup.string()
-        .email('Invalid email')
-        .required('Required'),
-
-});
-
-const MyModal = ({open, handleClose, value, checkAuth, openNext, validError, setValidError}) => {
-
-    const {setIsAuth} = useContext(Context)
-    let navigate = useNavigate();
-
-    const formik = useFormik({
-        initialValues: {
-            password: '',
-            email: '',
-        },
-        validationSchema: SignupSchema,
-        onSubmit: values => {
-            if (checkAuth(values, setValidError)) {
-                handleCloseWrap()
-                if ((value === "Sign up")) {
-                    openNext(true)
-                }
-                else if (value === "Log in"){
-                    navigate('/warehouses', {replace: true})
-                    setIsAuth(true)
-                }
-            } else {
-                if (value === "Log in") {
-                    setValidError(true)
-                }
-            }
-        },
-    });
 
     const handleCloseWrap = () => {
-        formik.resetForm()
+        // formik.resetForm()
         handleClose();
     }
-    const openNextModal = () => {
-        handleCloseWrap();
-        formik.resetForm()
-        openNext(true);
-    }
+
 
     return (
         <DialogStyled
@@ -74,52 +27,9 @@ const MyModal = ({open, handleClose, value, checkAuth, openNext, validError, set
                 </div>
             </DialogTitleStyled>
             <DialogContentStyled>
-                <h1>{value}</h1>
-                <FormStyled onSubmit={formik.handleSubmit}>
-                    <div className={style.wrapInput}>
-                        <label htmlFor="email">Email Address</label>
-                        <input
-                            placeholder='Enter a email'
-                            id="email"
-                            name="email"
-                            type="text"
-                            onChange={formik.handleChange}
-                            value={formik.values.email}
-                        />
-                        {formik.errors.email && formik.touched.email ? (
-                            <div className={style.wrapError}>{formik.errors.email}</div>
-                        ) : null}
-                    </div>
-                    <div className={style.wrapInput}>
-                        <label htmlFor="password">Password</label>
-                        <input
-                            placeholder='Enter password'
-                            id="password"
-                            name="password"
-                            type="password"
-                            onChange={formik.handleChange}
-                            value={formik.values.password}
-                        />
-                        {validError
-                            ? <div className={style.wrapError}>Ошибка</div>
-                            : null}
-                        {formik.errors.password && formik.touched.password
-                            ? (<div className={style.wrapError}>{formik.errors.password}</div>)
-                            : null}
-                    </div>
-                    <div>
-                        <ButtonStyled type="submit" variant="contained">{value}</ButtonStyled>
-                    </div>
-                    <div className={style.wrapText}>
-                        {value === "Sign up"
-                            ?
-                            <p>Already have an account? <a className={style.wrapLink} onClick={openNextModal}>Log in</a>
-                            </p>
-                            : <p> No account? <a className={style.wrapLink} onClick={openNextModal}>Create one</a></p>
-                        }
 
-                    </div>
-                </FormStyled>
+                {content}
+
             </DialogContentStyled>
         </DialogStyled>
     );

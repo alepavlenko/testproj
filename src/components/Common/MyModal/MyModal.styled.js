@@ -11,9 +11,6 @@ export const DialogStyled = styled(Dialog)(({theme}) => ({
 
 }))
 
-export const FormStyled = styled('form')(({theme}) => ({
-    width: 300
-}))
 
 export const DialogContentStyled = styled(DialogContent)(({theme}) => ({
     display: 'flex',
@@ -24,15 +21,3 @@ export const DialogContentStyled = styled(DialogContent)(({theme}) => ({
 export const DialogTitleStyled = styled(DialogTitle)(({theme}) => ({
     padding: 26,
 }))
-
-export const ButtonStyled = styled(Button)(({theme}) => ({
-    fontFamily: '"Inter-semibold", sans-serif',
-    fontWeight: 600,
-    fontSize: 14,
-    lineHeight: "14px",
-    color: "#FFFFFF",
-    width: 300,
-    height: 50,
-
-}))
-
