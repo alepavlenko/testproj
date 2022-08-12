@@ -1,0 +1,45 @@
+.wrapSideBar{
+    height: 100vh;
+    overflow: hidden;
+}
+
+.wrapLogo{
+    margin-left: 32px;
+    margin-top: 34px;
+    margin-bottom: 145px;
+}
+
+.wrapList{
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Inter-semibold', sans-serif;
+    font-size: 14px;
+    line-height: 14px;
+    /* color: rgba(62, 76, 89, 0.7); */
+}
+
+.wrapLink{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    /* color: #3E4C59B2; */
+    /* color: #EE950F; */
+
+}
+
+.wrapListItem{
+    display: flex;
+    justify-content: center;
+}
+
+.selectedMenu{
+    border-left: 2px solid #EE950F;
+    color: #EE950F;
+}
+.selectIcon{
+    display: flex;
+    justify-content: center;
+    color: #EE950F;
+}

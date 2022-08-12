@@ -2,12 +2,13 @@ import React, {useContext} from 'react';
 import * as Yup from 'yup';
 
 import {useFormik} from 'formik';
-import ExitButton from "../../icons/ExitButton";
+import ExitButton from "../Icons/ExitButton";
 
 
 import {Context} from "../../../App";
 import {ButtonStyled, DialogContentStyled, DialogStyled, DialogTitleStyled, FormStyled} from "./MyModal.styled";
 import style from './MyModal.module.css'
+import {useNavigate} from "react-router-dom";
 
 
 const SignupSchema = Yup.object().shape({
@@ -23,7 +24,8 @@ const SignupSchema = Yup.object().shape({
 
 const MyModal = ({open, handleClose, value, checkAuth, openNext, validError, setValidError}) => {
 
-    const [isAuth, setIsAuth] = useContext(Context)
+    const {setIsAuth} = useContext(Context)
+    let navigate = useNavigate();
 
     const formik = useFormik({
         initialValues: {
@@ -37,7 +39,10 @@ const MyModal = ({open, handleClose, value, checkAuth, openNext, validError, set
                 if ((value === "Sign up")) {
                     openNext(true)
                 }
-                setIsAuth(true)
+                else if (value === "Log in"){
+                    navigate('/warehouses', {replace: true})
+                    setIsAuth(true)
+                }
             } else {
                 if (value === "Log in") {
                     setValidError(true)
