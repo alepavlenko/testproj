@@ -3,6 +3,7 @@ import * as Yup from "yup";
 import {useFormik} from "formik";
 import {ButtonStyled, FormStyled} from './AddWarehouses.style';
 import style from './AddWarehouses.module.css'
+import {addWarehouses} from "../../../Logic/Warehouses/logicAddingWarehouses";
 
 const SignupSchema = Yup.object().shape({
     nameWarehouses: Yup.string()
@@ -47,7 +48,7 @@ const AddWarehouses = ({handleClose, openNext, value }) => {
         },
         validationSchema: SignupSchema,
         onSubmit: values => {
-            console.log(values);
+            addWarehouses(values)
             handleCloseWrap();
         },
     });

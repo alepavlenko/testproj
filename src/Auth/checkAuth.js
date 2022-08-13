@@ -32,6 +32,7 @@ export const loginAuth = (values) => {
     let localUsers = JSON.parse(localStorage.getItem("users"))
     localUsers.forEach((user) => {
         if (user.email === values.email.trim() && user.password === values.password.trim()) {
+            userTemp.id = user.id;
             localStorage.setItem("user", JSON.stringify(userTemp))
             flag = true;
         }

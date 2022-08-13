@@ -1,17 +1,28 @@
-//
-// export const loginAuth = (values) => {
-//     let flag = false;
-//     const userTemp = {};
-//     userTemp.password = values.password.trim()
-//     userTemp.email = values.email.trim()
-//
-//     let localUsers = JSON.parse(localStorage.getItem("users"))
-//     localUsers.forEach((user) => {
-//         if (user.email === values.email.trim() && user.password === values.password.trim()) {
-//             localStorage.setItem("user", JSON.stringify(userTemp))
-//             flag = true;
-//         }
-//     })
-//
-//     return flag
-// }
+export const addWarehouses = (values) => {
+    const warehouses = {};
+    let flag = true
+    if(!localStorage.getItem('warehouses')){
+        const array = []
+        localStorage.setItem('warehouses', JSON.stringify(array))
+    }
+    const localWarehouses = JSON.parse(localStorage.getItem('warehouses'))
+
+    if(!localStorage.getItem('user')){
+        flag = false
+    }
+    const thisUser = JSON.parse(localStorage.getItem('user'))
+
+
+
+    warehouses.userid = thisUser.id
+    warehouses.nameWarehouses = values.nameWarehouses.trim()
+    warehouses.length = values.length.trim()
+    warehouses.width = values.width.trim()
+    warehouses.height = values.height.trim()
+
+
+    localWarehouses.push(warehouses)
+    localStorage.setItem("warehouses", JSON.stringify(localWarehouses))
+
+    return flag;
+}
