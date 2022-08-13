@@ -2,10 +2,9 @@ import React, {useContext, useState} from 'react';
 
 import MyButton from "../../../Common/MyButton/MyButton";
 import MyModal from "../../../Common/MyModal/MyModal";
-import {signUpAuth, loginAuth} from '../../../../Auth/checkAuth'
 import LogInForm from "../../AuthForm/LogInForm/LogInForm";
 
-
+import {signUpAuth, loginAuth} from '../../../../Auth/checkAuth'
 import {Context} from "../../../../App";
 import style from './LoginGroup.module.css'
 
