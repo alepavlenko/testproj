@@ -1,0 +1,14 @@
+.wrapInput{
+    margin: 32px 0 32px 0;
+}
+.wrapError{
+    margin-top: 5px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 12px;
+    color: darkred;
+}
+.wrapTextInput{
+    width: 100%;
+}

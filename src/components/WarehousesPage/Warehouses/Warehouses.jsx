@@ -15,6 +15,9 @@ import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
 import style from './Warehouses.module.css'
 import MyButton from "../../Common/MyButton/MyButton";
+import {useState} from "react";
+import MyModal from "../../Common/MyModal/MyModal";
+import AddWarehouses from "../AddWarehouses/AddWarehouses";
 
 function createData(name, wirehousesNumber, length, width, height) {
     return {
@@ -91,33 +94,31 @@ function EnhancedTableHead({onSelectAllClick}) {
     );
 }
 
-const EnhancedTableToolbar = () => {
-    return (
-        <Toolbar
-            sx={{
-                pl: {sm: 2},
-                pr: {xs: 1, sm: 1},
-            }}
-        >
-            <Typography
-                sx={{flex: '1 1 100%'}}
-                variant="h6"
-                id="tableTitle"
-                component="div"
-            >
-                Warehouses
-            </Typography>
-            {/*FILTER BUTTON*/}
-            <MyButton variant="contained" value='Add Warehouses'/>
-        </Toolbar>
-    );
-};
-
-
-
 const Warehouses = () => {
     const [selected, setSelected] = React.useState([]);
+    const [openAddWarehouses, setOpenAddWarehouses] = useState(false)
 
+    const EnhancedTableToolbar = () => {
+        return (
+            <Toolbar
+                sx={{
+                    pl: {sm: 2},
+                    pr: {xs: 1, sm: 1},
+                }}
+            >
+                <Typography
+                    sx={{flex: '1 1 100%'}}
+                    variant="h6"
+                    id="tableTitle"
+                    component="div"
+                >
+                    Warehouses
+                </Typography>
+                {/*FILTER BUTTON*/}
+                <MyButton variant="contained" value='Add Warehouses' onClick={setOpenAddWarehouses} />
+            </Toolbar>
+        );
+    };
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
@@ -208,54 +209,15 @@ const Warehouses = () => {
                     </TableContainer>
                 </Paper>
             </Box>
-            {/*//modal*/}
-            {/*<MyModal>*/}
-            {/*    <FormStyled onSubmit={formik.handleSubmit}>*/}
-            {/*        <div className={style.wrapInput}>*/}
-            {/*            <label htmlFor="email">Email Address</label>*/}
-            {/*            <input*/}
-            {/*                placeholder='Enter a email'*/}
-            {/*                id="email"*/}
-            {/*                name="email"*/}
-            {/*                type="text"*/}
-            {/*                onChange={formik.handleChange}*/}
-            {/*                value={formik.values.email}*/}
-            {/*            />*/}
-            {/*            {formik.errors.email && formik.touched.email ? (*/}
-            {/*                <div className={style.wrapError}>{formik.errors.email}</div>*/}
-            {/*            ) : null}*/}
-            {/*        </div>*/}
-            {/*        <div className={style.wrapInput}>*/}
-            {/*            <label htmlFor="password">Password</label>*/}
-            {/*            <input*/}
-            {/*                placeholder='Enter password'*/}
-            {/*                id="password"*/}
-            {/*                name="password"*/}
-            {/*                type="password"*/}
-            {/*                onChange={formik.handleChange}*/}
-            {/*                value={formik.values.password}*/}
-            {/*            />*/}
-            {/*            {validError*/}
-            {/*                ? <div className={style.wrapError}>Ошибка</div>*/}
-            {/*                : null}*/}
-            {/*            {formik.errors.password && formik.touched.password*/}
-            {/*                ? (<div className={style.wrapError}>{formik.errors.password}</div>)*/}
-            {/*                : null}*/}
-            {/*        </div>*/}
-            {/*        <div>*/}
-            {/*            <ButtonStyled type="submit" variant="contained">{value}</ButtonStyled>*/}
-            {/*        </div>*/}
-            {/*        <div className={style.wrapText}>*/}
-            {/*            {value === "Sign up"*/}
-            {/*                ?*/}
-            {/*                <p>Already have an account? <a className={style.wrapLink} onClick={openNextModal}>Log in</a>*/}
-            {/*                </p>*/}
-            {/*                : <p> No account? <a className={style.wrapLink} onClick={openNextModal}>Create one</a></p>*/}
-            {/*            }*/}
-
-            {/*        </div>*/}
-            {/*    </FormStyled>*/}
-            {/*</MyModal>*/}
+            <MyModal
+                open={openAddWarehouses}
+                handleClose={setOpenAddWarehouses}
+                content={<AddWarehouses
+                    handleClose={setOpenAddWarehouses}
+                    // openNext={setOpenLogIn}
+                    value="Adding a warehouses"
+                />}
+            />
         </div>
 
     );
