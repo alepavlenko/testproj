@@ -1,23 +1,22 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
+import React, {useState} from 'react';
+
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
-import style from './Warehouses.module.css'
 import MyButton from "../../Common/MyButton/MyButton";
-import {useState} from "react";
 import MyModal from "../../Common/MyModal/MyModal";
 import AddWarehouses from "../AddWarehouses/AddWarehouses";
+
+import style from './Warehouses.module.css'
 
 function createData(name, wirehousesNumber, length, width, height) {
     return {
@@ -28,22 +27,18 @@ function createData(name, wirehousesNumber, length, width, height) {
         height,
     };
 }
+const getRows = ( ) => {
+    const localRows = [];
+    const thisUser = JSON.parse(localStorage.getItem('user'))
+    const localWarehouses = JSON.parse(localStorage.getItem('warehouses'))
 
-const rows = [
-    // createData('Cupcake', 305, 3.7, 67, 4.3),
-    // createData('Donut', 452, 25.0, 51, 4.9),
-    // createData('Eclair', 262, 16.0, 24, 6.0),
-    // createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    // createData('Gingerbread', 356, 16.0, 49, 3.9),
-    // createData('Honeycomb', 408, 3.2, 87, 6.5),
-    // createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    // createData('Jelly Bean', 375, 0.0, 94, 0.0),
-    // createData('KitKat', 518, 26.0, 65, 7.0),
-    // createData('Lollipop', 392, 0.2, 98, 0.0),
-    // createData('Marshmallow', 318, 0, 81, 2.0),
-    // createData('Nougat', 360, 19.0, 9, 37.0),
-    // createData('Oreo', 437, 18.0, 63, 4.0),
-]
+    localWarehouses.forEach((warehouses) => {
+        if (thisUser.id === warehouses.userid) {
+            localRows.push(createData(warehouses.nameWarehouses, 1, warehouses.length, warehouses.width, warehouses.height,))
+        }
+    })
+    return localRows;
+}
 
 const headCells = [
     {
@@ -122,7 +117,7 @@ const Warehouses = () => {
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
-            const newSelected = rows.map((n) => n.name);
+            const newSelected = getRows().map((n) => n.name);
             setSelected(newSelected);
             return;
         }
@@ -165,7 +160,7 @@ const Warehouses = () => {
                                 onSelectAllClick={handleSelectAllClick}
                             />
                                 <TableBody>
-                                    {rows.map((row, index) => {
+                                    {getRows().map((row, index) => {
                                             const isItemSelected = isSelected(row.name);
                                             const labelId = `enhanced-table-checkbox-${index}`;
 

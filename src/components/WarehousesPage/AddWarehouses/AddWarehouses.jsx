@@ -11,16 +11,13 @@ const SignupSchema = Yup.object().shape({
         .max(50, 'Too Long!')
         .required('Required'),
     length: Yup.number()
-        // .min(1, 'Too Short!')
-        .max(10, 'Too Long!')
+        .min(1, 'Too Short!')
         .required('Required'),
     width: Yup.number()
-        // .min(1, 'Too Short!')
-        .max(10, 'Too Long!')
+        .min(1, 'Too Short!')
         .required('Required'),
     height: Yup.number()
-        // .min(1, 'Too Short!')
-        .max(10, 'Too Long!')
+        .min(1, 'Too Short!')
         .required('Required'),
 });
 
