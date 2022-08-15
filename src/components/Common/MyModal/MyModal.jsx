@@ -7,10 +7,8 @@ import style from './MyModal.module.css'
 
 const MyModal = ({open, handleClose, content}) => {
 
-
     const handleCloseWrap = () => {
-        // formik.resetForm()
-        handleClose();
+        handleClose(false);
     }
 
 

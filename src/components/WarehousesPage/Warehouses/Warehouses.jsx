@@ -12,14 +12,18 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
-import MyButton from "../../Common/MyButton/MyButton";
 import MyModal from "../../Common/MyModal/MyModal";
-import AddWarehouses from "../AddWarehouses/AddWarehouses";
+import AddWarehouses from "../ModalComponent/AddWarehouses/AddWarehouses";
 
 import style from './Warehouses.module.css'
+import SucksesModal from "../ModalComponent/SucksesModal/SucksesModal";
+import {ButtonStyled} from "./Warehouses.style";
+import PlusIcons from "../../Common/Icons/PlusIcons";
+import DownNavbar from "../DownNavbar/DownNavbar";
 
-function createData(name, wirehousesNumber, length, width, height) {
+function createData(id,name, wirehousesNumber, length, width, height) {
     return {
+        id,
         name,
         wirehousesNumber,
         length,
@@ -30,11 +34,18 @@ function createData(name, wirehousesNumber, length, width, height) {
 const getRows = ( ) => {
     const localRows = [];
     const thisUser = JSON.parse(localStorage.getItem('user'))
+
+
+    if(!localStorage.getItem('warehouses')){
+        const array = []
+        localStorage.setItem('warehouses', JSON.stringify(array))
+    }
+
     const localWarehouses = JSON.parse(localStorage.getItem('warehouses'))
 
     localWarehouses.forEach((warehouses) => {
         if (thisUser.id === warehouses.userid) {
-            localRows.push(createData(warehouses.nameWarehouses, 1, warehouses.length, warehouses.width, warehouses.height,))
+            localRows.push(createData(warehouses.warehousesid ,warehouses.nameWarehouses, 1, warehouses.length, warehouses.width, warehouses.height,))
         }
     })
     return localRows;
@@ -92,6 +103,7 @@ function EnhancedTableHead({onSelectAllClick}) {
 const Warehouses = () => {
     const [selected, setSelected] = React.useState([]);
     const [openAddWarehouses, setOpenAddWarehouses] = useState(false)
+    const [openSucksesWarehouses, setOpenSucksesWarehouses] = useState(false)
 
     const EnhancedTableToolbar = () => {
         return (
@@ -110,14 +122,15 @@ const Warehouses = () => {
                     Warehouses
                 </Typography>
                 {/*FILTER BUTTON*/}
-                <MyButton variant="contained" value='Add Warehouses' onClick={setOpenAddWarehouses} />
+
+                <ButtonStyled variant="contained" onClick={setOpenAddWarehouses}>Add Warehouses <PlusIcons/> </ButtonStyled>
             </Toolbar>
         );
     };
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
-            const newSelected = getRows().map((n) => n.name);
+            const newSelected = getRows().map((n) => n.id);
             setSelected(newSelected);
             return;
         }
@@ -148,60 +161,64 @@ const Warehouses = () => {
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
 
-
     return (
         <div className={style.wrapTable}>
             <Box sx={{width: '100%'}}>
-                <Paper sx={{width: '100%', mb: 2}}>
+                <Paper sx={{width: '100%', mb: 2, boxShadow: 'none'}}>
                     <EnhancedTableToolbar numSelected={selected.length}/>
-                    <TableContainer>
-                        <Table>
-                            <EnhancedTableHead
-                                onSelectAllClick={handleSelectAllClick}
-                            />
+
+                    {getRows().length === 0
+                        ?<div className={style.wrapWarehouses}> Warehouses dosnt have </div>
+                        :<TableContainer className={style.wrapBody} >
+                            <Table>
+                                <EnhancedTableHead
+                                    onSelectAllClick={handleSelectAllClick}
+                                />
                                 <TableBody>
                                     {getRows().map((row, index) => {
-                                            const isItemSelected = isSelected(row.name);
-                                            const labelId = `enhanced-table-checkbox-${index}`;
+                                        const isItemSelected = isSelected(row.id);
+                                        const labelId = `enhanced-table-checkbox-${index}`;
 
-                                            return (
-                                                <TableRow
-                                                    hover
-                                                    onClick={(event) => handleClick(event, row.name)}
-                                                    role="checkbox"
-                                                    aria-checked={isItemSelected}
-                                                    tabIndex={-1}
-                                                    key={row.name}
-                                                    selected={isItemSelected}
-                                                    className={style.wrapRow}
+                                        return (
+                                            <TableRow
+                                                hover
+                                                role="checkbox"
+                                                aria-checked={isItemSelected}
+                                                tabIndex={-1}
+                                                key={row.id}
+                                                selected={isItemSelected}
+                                                className={style.wrapRow}
+                                            >
+                                                <TableCell padding="checkbox">
+                                                    <Checkbox
+                                                        onClick={(event) => handleClick(event, row.id)}
+                                                        color="primary"
+                                                        checked={isItemSelected}
+                                                        inputProps={{
+                                                            'aria-labelledby': labelId,
+                                                        }}
+                                                    />
+                                                </TableCell>
+                                                <TableCell
+                                                    component="th"
+                                                    id={labelId}
+                                                    scope="row"
+                                                    padding="none"
                                                 >
-                                                    <TableCell padding="checkbox">
-                                                        <Checkbox
-                                                            color="primary"
-                                                            checked={isItemSelected}
-                                                            inputProps={{
-                                                                'aria-labelledby': labelId,
-                                                            }}
-                                                        />
-                                                    </TableCell>
-                                                    <TableCell
-                                                        component="th"
-                                                        id={labelId}
-                                                        scope="row"
-                                                        padding="none"
-                                                    >
-                                                        {row.name}
-                                                    </TableCell>
-                                                    <TableCell align="left">{row.wirehousesNumber}</TableCell>
-                                                    <TableCell align="left">{row.length}</TableCell>
-                                                    <TableCell align="left">{row.width}</TableCell>
-                                                    <TableCell align="left">{row.height}</TableCell>
-                                                </TableRow>
-                                            );
-                                        })}
+                                                    {row.name}
+                                                </TableCell>
+                                                <TableCell align="left">{row.wirehousesNumber}</TableCell>
+                                                <TableCell align="left">{row.length}</TableCell>
+                                                <TableCell align="left">{row.width}</TableCell>
+                                                <TableCell align="left">{row.height}</TableCell>
+                                            </TableRow>
+                                        );
+                                    })}
                                 </TableBody>
-                        </Table>
-                    </TableContainer>
+                            </Table>
+                        </TableContainer>
+                    }
+
                 </Paper>
             </Box>
             <MyModal
@@ -209,10 +226,21 @@ const Warehouses = () => {
                 handleClose={setOpenAddWarehouses}
                 content={<AddWarehouses
                     handleClose={setOpenAddWarehouses}
-                    // openNext={setOpenLogIn}
+                    openNext={setOpenSucksesWarehouses}
                     value="Adding a warehouses"
                 />}
             />
+            <MyModal
+                open={openSucksesWarehouses}
+                handleClose={setOpenSucksesWarehouses}
+                content={<SucksesModal
+                    handleClose={setOpenSucksesWarehouses}
+                />}
+            />
+            {selected.length >= 1
+                ?  <DownNavbar/>
+                :   <div></div>
+            }
         </div>
 
     );

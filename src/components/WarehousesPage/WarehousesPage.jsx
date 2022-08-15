@@ -6,16 +6,18 @@ import NavBarWereHouses from './NavBarWereHouses/NavBarWereHouses';
 
 import style from './WarehousesPage.module.css'
 import Warehouses from "./Warehouses/Warehouses";
+import DownNavbar from "./DownNavbar/DownNavbar";
 
 const drawerWidth = 240;
 
 const WarehousesPage = () => {
 
-    console.log('lol')
-
     return (
-
-        <Box sx={{display: 'flex'}}>
+        <Box sx={{
+            display: 'flex',
+            outline: "none"
+        }}>
+            {/*<DownNavbar/>*/}
             <CssBaseline/>
             
             {/*NavBar*/}

@@ -15,6 +15,7 @@ export const addWarehouses = (values) => {
 
 
     warehouses.userid = thisUser.id
+    warehouses.warehousesid = Math.random().toString(36).substring(2)
     warehouses.nameWarehouses = values.nameWarehouses.trim()
     warehouses.length = values.length.trim()
     warehouses.width = values.width.trim()

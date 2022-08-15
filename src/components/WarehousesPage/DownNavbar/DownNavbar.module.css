@@ -1,0 +1,11 @@
+.downBar{
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    height: 92px;
+    width: 100vw;
+    border: 1px solid red;
+    left: 0;
+    bottom: 0;
+    z-index: 1201;
+}

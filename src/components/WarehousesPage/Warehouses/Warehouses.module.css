@@ -1,5 +1,6 @@
 .wrapTable{
     display: flex;
+
 }
 .wrapTableHead{
     display: flex;
@@ -17,3 +18,20 @@
 .wrapTableHead > svg {
     order: 3;
 }
+
+
+.wrapWarehouses{
+display: flex;
+    justify-content: center;
+    font-size: 40px;
+}
+
+.wrapBody{
+    max-height: calc(100vh - 200px);
+    overflow-y: scroll
+}
+
+
+.wrapBody::-webkit-scrollbar-track {border-radius: 4px;}
+.wrapBody::-webkit-scrollbar {width: 6px;}
+.wrapBody::-webkit-scrollbar-thumb {border-radius: 4px;background: #D2D2D2;}
