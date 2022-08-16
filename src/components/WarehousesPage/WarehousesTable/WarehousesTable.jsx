@@ -2,42 +2,16 @@ import React from 'react';
 
 import WarehousesTableBody from "../WarehousesTableBody/WarehousesTableBody";
 import Table from "@mui/material/Table";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import TableCell from "@mui/material/TableCell";
-import Checkbox from "@mui/material/Checkbox";
-import TableSortLabel from "@mui/material/TableSortLabel";
+import EnhancedTableHead from "../EnhancedTableHead/EnhancedTableHead";
 
-const WarehousesTable = ({wareHouses, headCells, handleSelectAllClick, getRows, isSelected, handleClick}) => {
-
-    function EnhancedTableHead({onSelectAllClick}) {
-        return (
-            <TableHead>
-                <TableRow>
-                    <TableCell padding="checkbox">
-                        <Checkbox
-                            color="primary"
-                            onChange={onSelectAllClick}
-                        />
-                    </TableCell>
-                    {headCells.map((headCell) => (
-                        <TableCell
-                            key={headCell.id}
-                            align={'left'}
-                        >
-                            <TableSortLabel>
-                                {headCell.label}
-                            </TableSortLabel>
-                        </TableCell>
-                    ))}
-                </TableRow>
-            </TableHead>
-        );
-    }
+const WarehousesTable = ({selected,wareHouses, headCells, handleSelectAllClick, getRows, isSelected, handleClick}) => {
 
     return (
         <Table>
             <EnhancedTableHead
+                wareHouses = {wareHouses}
+                selected ={selected}
+                headCells={headCells}
                 onSelectAllClick={handleSelectAllClick}
             />
             <WarehousesTableBody

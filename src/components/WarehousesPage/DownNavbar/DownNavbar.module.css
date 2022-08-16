@@ -9,7 +9,6 @@
     height: 92px;
     display: flex;
     justify-content: center;
-
 }
 .innerWrap{
     display: flex;
@@ -33,7 +32,6 @@
 .wrapButton:hover{
     cursor: pointer;
 }
-
 .wrapSelected{
     display: flex;
     align-items: center;

@@ -87,6 +87,7 @@ const Warehouses = () => {
                         ?<div className={style.wrapWarehouses}> Warehouses dosnt have </div>
                         :<TableContainer className={(selected.length >= 1) ?style.wrapBodyUltra : style.wrapBody} >
                             <WarehousesTable
+                                selected={selected}
                                 headCells={headCells}
                                 handleSelectAllClick = {handleSelectAllClick}
                                 getRows = {getRows}
