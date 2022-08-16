@@ -30,7 +30,14 @@ display: flex;
     max-height: calc(100vh - 200px);
     overflow-y: scroll
 }
+.wrapBodyUltra{
+    max-height: calc(100vh - 278px);
+    overflow-y: scroll
+}
 
+.wrapBodyUltra::-webkit-scrollbar-track {border-radius: 4px;}
+.wrapBodyUltra::-webkit-scrollbar {width: 6px;}
+.wrapBodyUltra::-webkit-scrollbar-thumb {border-radius: 4px;background: #D2D2D2;}
 
 .wrapBody::-webkit-scrollbar-track {border-radius: 4px;}
 .wrapBody::-webkit-scrollbar {width: 6px;}
