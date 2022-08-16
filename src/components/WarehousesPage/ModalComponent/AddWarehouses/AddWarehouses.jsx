@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import * as Yup from "yup";
+
 import {useFormik} from "formik";
 import {ButtonStyled, FormStyled} from './AddWarehouses.style';
 import style from './AddWarehouses.module.css'
 import {addWarehouses} from "../../../../Logic/Warehouses/logicAddingWarehouses";
+import {Context} from "../../../../App";
 
 const SignupSchema = Yup.object().shape({
     nameWarehouses: Yup.string()
@@ -22,6 +24,9 @@ const SignupSchema = Yup.object().shape({
 });
 
 const AddWarehouses = ({handleClose, openNext, value }) => {
+
+    const { setWareHouses } = useContext(Context)
+
 
     const handleCloseWrap = () => {
         formik.resetForm()
@@ -45,7 +50,7 @@ const AddWarehouses = ({handleClose, openNext, value }) => {
         },
         validationSchema: SignupSchema,
         onSubmit: values => {
-            addWarehouses(values)
+            addWarehouses(values, setWareHouses)
             handleCloseWrap();
             openNextModal()
         },
