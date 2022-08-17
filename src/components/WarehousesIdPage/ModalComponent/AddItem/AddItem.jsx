@@ -2,22 +2,22 @@ import React, {useContext} from 'react';
 
 import {useFormik} from "formik";
 import {ButtonStyled, FormStyled} from './AddItem.style';
-import style from './AddItem.module.css'
-import {addWarehouses} from "../../../../utils/logicAddingWarehouses";
 import {Context} from "../../../../App";
 import {Step, StepLabel, Stepper} from "@mui/material";
-import LogInForm from "../../../MainPage/AuthForm/LogInForm/LogInForm";
 import FirstStep from "./FirstStep/FirstStep";
 import SecondStep from "./SecondStep/SecondStep";
 import ThirdStep from "./ThirdStep/ThirdStep";
 import {AddItemSchema} from "./AddItemForm";
 import {useParams} from "react-router-dom";
+import {addItems} from "../../../../utils/logicAddingItems";
 
 const AddItem = ({handleClose, openNext, value}) => {
     const {warehouseId} = useParams();
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set());
     const steps = getSteps();
+
+    const {setItems} = useContext(Context)
 
     const handleNext = () => {
         let newSkipped = skipped;
@@ -37,21 +37,13 @@ const AddItem = ({handleClose, openNext, value}) => {
         },
         validationSchema: AddItemSchema,
         onSubmit: values => {
-            console.log(3333)
-
-            const newProduct = {
-                ...values,
-                warehouseId,
-                id: Date.now()
-            }
-            // addWarehouses(values, setItems) своя функция будет
+            console.log('1111111')
+            addItems(setItems, values, warehouseId)
             handleCloseWrap();
-            console.log(newProduct)
             // openNextModal()
 
         },
     });
-    console.log(formik.values)
 
     function getSteps() {
         return ["1", "2", "3"];
@@ -70,8 +62,6 @@ const AddItem = ({handleClose, openNext, value}) => {
         }
     }
 
-
-    const {setItems} = useContext(Context)
 
     const handleCloseWrap = () => {
         // formik.resetForm()

@@ -5,10 +5,10 @@ import TableCell from "@mui/material/TableCell";
 import Checkbox from "@mui/material/Checkbox";
 import TableBody from "@mui/material/TableBody";
 
-const ItemsTableBody = ({getRows, isSelected, handleClick, wareHouses}) => {
+const ItemsTableBody = ({warehouseId, getRows, isSelected, handleClick, wareHouses}) => {
     return (
         <TableBody>
-            {getRows(wareHouses).map((row, index) => {
+            {getRows(wareHouses,warehouseId).map((row, index) => {
                 const isItemSelected = isSelected(row.id);
                 const labelId = `enhanced-table-checkbox-${index}`;
 
@@ -18,7 +18,7 @@ const ItemsTableBody = ({getRows, isSelected, handleClick, wareHouses}) => {
                         role="checkbox"
                         aria-checked={isItemSelected}
                         tabIndex={-1}
-                        key={row.id}
+                        key={row.name}
                         selected={isItemSelected}
                         className={style.wrapRow}
                     >
@@ -41,17 +41,17 @@ const ItemsTableBody = ({getRows, isSelected, handleClick, wareHouses}) => {
                             {row.name}
                         </TableCell>
                         <TableCell align="left">
-                            {row.wirehousesNumber}
+                            {row.manufacturer}
                         </TableCell>
                         <TableCell
                             align="left">
-                            {row.length}
+                            {row.number}
                         </TableCell>
                         <TableCell align="left">
-                            {row.width}
+                            {row.purchasing}
                         </TableCell>
                         <TableCell align="left">
-                            {row.height}
+                            {row.delivery}
                         </TableCell>
                     </TableRow>
                 );

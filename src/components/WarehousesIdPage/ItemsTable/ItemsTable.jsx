@@ -3,7 +3,7 @@ import Table from "@mui/material/Table";
 import EnhancedItemsTableHead from "../EnhancedItemsTableHead/EnhancedItemsTableHead";
 import ItemsTableBody from "../ItemsTableBody/ItemsTableBody";
 
-const ItemsTable = ({selected,items, headCells, handleSelectAllClick, getItems, isSelected, handleClick}) => {
+const ItemsTable = ({warehouseId, selected,items, headCells, handleSelectAllClick, getItems, isSelected, handleClick}) => {
     return (
         <div>
             <Table>
@@ -14,6 +14,7 @@ const ItemsTable = ({selected,items, headCells, handleSelectAllClick, getItems, 
                     onSelectAllClick={handleSelectAllClick}
                 />
                 <ItemsTableBody
+                    warehouseId={warehouseId}
                     getRows={getItems}
                     isSelected={isSelected}
                     handleClick={handleClick}

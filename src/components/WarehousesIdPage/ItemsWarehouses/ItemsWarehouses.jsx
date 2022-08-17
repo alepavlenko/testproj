@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {Context} from "../../../App";
 import style from "./ItemsWarehouses.module.css";
 import Box from "@mui/material/Box";
@@ -8,18 +8,15 @@ import MyModal from "../../Common/MyModal/MyModal";
 import DownNavbar from "../../WarehousesPage/DownNavbar/DownNavbar";
 import {getItems} from "../../../utils/gettingItems";
 import EnhancedTableToolbar from "../../WarehousesPage/EnhancedTableToolbar/EnhancedTableToolbar";
-import WarehousesTable from "../../WarehousesPage/WarehousesTable/WarehousesTable";
 import ItemsTable from "../ItemsTable/ItemsTable";
 import AddItem from "../ModalComponent/AddItem/AddItem";
-
-
-
-
+import {useParams} from "react-router-dom";
 
 const headCells = ['All products', 'Manufacturer', 'Item number', 'Purchasing technology', 'Shipment method'];
 
-
 const ItemsWarehouses = () => {
+    const {warehouseId} = useParams();
+
     const {items} = useContext(Context)
 
     const [selected, setSelected] = useState([]);
@@ -30,7 +27,7 @@ const ItemsWarehouses = () => {
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
-            const newSelected = getItems(items).map((n) => n.id);
+            const newSelected = getItems(items, warehouseId).map((n) => n.id);
             setSelected(newSelected);
             return;
         }
@@ -55,7 +52,8 @@ const ItemsWarehouses = () => {
         }
         setSelected(newSelected);
     };
-
+    console.log('jaja', warehouseId)
+    console.log('number',getItems(items,  warehouseId).length)
     return (
         <div className={style.wrapTable}>
             <Box sx={{width: '100%'}}>
@@ -65,7 +63,7 @@ const ItemsWarehouses = () => {
                         setOpenAddWarehouses={setOpenAddProduct}
                     />
                     {/*//getItems(items).length*/}
-                    {getItems(items).length === 0
+                    {getItems(items, warehouseId).length === 0
                         ? <div className={style.wrapWarehouses}> Items dosnt have </div>
                         : <TableContainer className={(selected.length >= 1) ? style.wrapBodyUltra : style.wrapBody}>
                             <ItemsTable
@@ -76,6 +74,7 @@ const ItemsWarehouses = () => {
                                 isSelected={isSelected}
                                 handleClick={handleClick}
                                 items={items}
+                                warehouseId={warehouseId}
                             />
                         </TableContainer>
                     }

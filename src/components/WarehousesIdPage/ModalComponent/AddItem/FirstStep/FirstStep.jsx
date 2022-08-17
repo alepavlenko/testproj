@@ -1,9 +1,7 @@
 import React from 'react';
-import {useFormik} from "formik";
-import {AddWarehousesSchema} from "../AddItemForm";
-import {ButtonStyled, FormStyled} from "../AddItem.style";
+import {ButtonStyled} from "../AddItem.style";
 import style from "../AddItem.module.css";
-import {FormControl, FormControlLabel, FormLabel, Radio, RadioGroup} from "@mui/material";
+import { FormControlLabel, FormLabel, Radio, RadioGroup} from "@mui/material";
 
 const FirstStep = ({nextStep, formik}) => {
 
@@ -25,7 +23,7 @@ const FirstStep = ({nextStep, formik}) => {
             label: 'Item number',
         },
     ]
-    console.log(formik.errors)
+    // console.log(formik.errors)
 
     return (
         <>
