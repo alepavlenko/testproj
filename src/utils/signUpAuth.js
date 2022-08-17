@@ -16,25 +16,9 @@ export const signUpAuth = (values, setValidError) => {
         setValidError(false)
         user.password = values.password.trim()
         user.email = values.email.trim()
+        user.id = Math.random().toString(36).substring(2)
         localUsers.push(user)
         localStorage.setItem("users", JSON.stringify(localUsers))
         return true;
     }
-}
-
-export const loginAuth = (values) => {
-    let flag = false;
-    const userTemp = {};
-    userTemp.password = values.password.trim()
-    userTemp.email = values.email.trim()
-
-    let localUsers = JSON.parse(localStorage.getItem("users"))
-    localUsers.forEach((user) => {
-        if (user.email === values.email.trim() && user.password === values.password.trim()) {
-            localStorage.setItem("user", JSON.stringify(userTemp))
-            flag = true;
-        }
-    })
-
-    return flag
 }

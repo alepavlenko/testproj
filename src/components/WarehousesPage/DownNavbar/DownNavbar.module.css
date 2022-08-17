@@ -1,0 +1,42 @@
+.downBar{
+    position: absolute;
+    width: 100vw;
+    margin: auto;
+    left: 0;
+    bottom: 0;
+    z-index: 1201;
+    background-color: white;
+    height: 92px;
+    display: flex;
+    justify-content: center;
+}
+.innerWrap{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: calc(100vw - 64px);
+}
+.wrapButton{
+    background-color: white;
+    border: 1px solid red;
+    border-radius: 3px;
+    color: red;
+    width: 86px;
+    height: 44px;
+    font-family: 'Inter-semibold', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 12px;
+}
+.wrapButton:hover{
+    cursor: pointer;
+}
+.wrapSelected{
+    display: flex;
+    align-items: center;
+}
+.wrapText{
+    margin-left: 5px;
+    margin-top: 3px;
+}

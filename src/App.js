@@ -1,17 +1,20 @@
 import React, {useState} from "react";
 
 import {BrowserRouter} from "react-router-dom";
-import AppRouter from "./Router/AppRouter/AppRouter";
+import AppRouter from "./components/AppRouter/AppRouter";
 
 export const Context = React.createContext();
 
 
 function App() {
     const [isAuth, setIsAuth] = useState(Boolean(localStorage.getItem('user')))
+    const [wareHouses, setWareHouses] = useState(JSON.parse(localStorage.getItem('warehouses')))
 
     const values = {
         isAuth,
-        setIsAuth
+        setIsAuth,
+        wareHouses,
+        setWareHouses,
     }
     return (
         <Context.Provider value={values}>

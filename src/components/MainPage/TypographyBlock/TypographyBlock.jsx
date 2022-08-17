@@ -1,20 +1,23 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useState} from 'react';
+import {useNavigate} from "react-router-dom";
 
 import MyButton from "../../Common/MyButton/MyButton";
 import MyModal from "../../Common/MyModal/MyModal";
-import {loginAuth, signUpAuth} from "../../../Auth/checkAuth";
+import LogInForm from "../AuthForm/LogInForm/LogInForm";
 
 import {Context} from "../../../App";
 import style from './TypographyBlock.module.css'
-import {useNavigate} from "react-router-dom";
+import {loginAuth, signUpAuth} from "../../../utils";
+import {Routes} from '../../../constants/'
 
 const TypographyBlock = () => {
+    const navigate = useNavigate();
 
-    const {isAuth, setIsAuth} = useContext(Context)
+    const {isAuth} = useContext(Context)
+
     const [openSignUp, setOpenSignUp] = useState(false)
     const [openLogIn, setOpenLogIn] = useState(false)
     const [validError, setValidError] = useState(null)
-    let navigate = useNavigate();
 
     const handleClose1 = () => {
         setValidError(false)
@@ -29,11 +32,10 @@ const TypographyBlock = () => {
 
     const butGetStart = () => {
         if(isAuth){
-            navigate('/warehouses', {replace: true})
+            navigate(Routes.WAREHOUSES, {replace: true})
         } else{
             setOpenLogIn(true)
         }
-
     }
 
     return (
@@ -44,23 +46,26 @@ const TypographyBlock = () => {
                     So that with certainty we can provide the best service for your goods
                 </p>
                 <MyButton variant="contained" value="Get Started" onClick={butGetStart}/>
-                <MyModal
-                    open={openSignUp}
-                    openNext={setOpenLogIn}
-                    handleClose={handleClose1}
-                    checkAuth={signUpAuth}
-                    validError={validError}
-                    setValidError={setValidError}
-                    value="Sign up"
-                />
-                <MyModal open={openLogIn}
-                         openNext={setOpenSignUp}
-                         handleClose={handleClose}
-                         checkAuth={loginAuth}
-                         validError={validError}
-                         setValidError={setValidError}
-                         value="Log in"
-                />
+                <MyModal open={openSignUp} handleClose={handleClose1}>
+                    <LogInForm
+                        checkAuth={signUpAuth}
+                        handleClose={handleClose1}
+                        validError={validError}
+                        setValidError={setValidError}
+                        openNext={setOpenLogIn}
+                        value="Sign up"
+                    />
+                </MyModal>
+                <MyModal open={openLogIn} handleClose={handleClose}>
+                    <LogInForm
+                        checkAuth={loginAuth}
+                        handleClose={handleClose}
+                        validError={validError}
+                        setValidError={setValidError}
+                        openNext={setOpenSignUp}
+                        value="Log in"
+                    />
+                </MyModal>
             </div>
         </div>
     );
