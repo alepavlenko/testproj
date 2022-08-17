@@ -1,22 +1,18 @@
 import React from 'react';
 
 import ExitButton from "../Icons/ExitButton";
-import {DialogContentStyled, DialogStyled, DialogTitleStyled} from "./MyModal.styled";
 
 import style from './MyModal.module.css'
+import {DialogContentStyled, DialogStyled, DialogTitleStyled} from "./MyModal.styled";
 
-const MyModal = ({open, handleClose, content}) => {
+const MyModal = ({open, handleClose, children}) => {
 
     const handleCloseWrap = () => {
         handleClose(false);
     }
 
-
     return (
-        <DialogStyled
-            open={open}
-            onClose={handleCloseWrap}
-        >
+        <DialogStyled open={open} onClose={handleCloseWrap}>
             <DialogTitleStyled id="alert-dialog-title">
                 <div className={style.wrapDivBut}>
                     <button className={style.wrapClose} onClick={handleCloseWrap}>
@@ -24,11 +20,7 @@ const MyModal = ({open, handleClose, content}) => {
                     </button>
                 </div>
             </DialogTitleStyled>
-            <DialogContentStyled>
-
-                {content}
-
-            </DialogContentStyled>
+            <DialogContentStyled>{children}</DialogContentStyled>
         </DialogStyled>
     );
 };

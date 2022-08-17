@@ -9,16 +9,16 @@ const WarehousesTable = ({selected,wareHouses, headCells, handleSelectAllClick, 
     return (
         <Table>
             <EnhancedTableHead
-                wareHouses = {wareHouses}
-                selected ={selected}
+                wareHouses={wareHouses}
+                selected={selected}
                 headCells={headCells}
                 onSelectAllClick={handleSelectAllClick}
             />
             <WarehousesTableBody
-                getRows = {getRows}
-                isSelected = {isSelected}
-                handleClick = {handleClick}
-                wareHouses = {wareHouses}
+                getRows={getRows}
+                isSelected={isSelected}
+                handleClick={handleClick}
+                wareHouses={wareHouses}
             />
         </Table>
     );

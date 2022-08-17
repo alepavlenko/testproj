@@ -6,8 +6,12 @@ import Checkbox from "@mui/material/Checkbox";
 import TableBody from "@mui/material/TableBody";
 
 import style from "../Warehouses/Warehouses.module.css";
+import {useNavigate} from "react-router-dom";
 
 const WarehousesTableBody = ({getRows, isSelected, handleClick, wareHouses}) => {
+
+    const navigate = useNavigate()
+
     return (
         <TableBody>
             {getRows(wareHouses).map((row, index) => {
@@ -39,13 +43,34 @@ const WarehousesTableBody = ({getRows, isSelected, handleClick, wareHouses}) => 
                             id={labelId}
                             scope="row"
                             padding="none"
+                            onClick={() => {navigate(`/warehouses/${row.id}`, {replace: true})}}
                         >
                             {row.name}
                         </TableCell>
-                        <TableCell align="left">{row.wirehousesNumber}</TableCell>
-                        <TableCell align="left">{row.length}</TableCell>
-                        <TableCell align="left">{row.width}</TableCell>
-                        <TableCell align="left">{row.height}</TableCell>
+                        <TableCell
+                            align="left"
+                            onClick={() => {navigate(`/warehouses/${row.id}`, {replace: true})}}
+                        >
+                            {row.wirehousesNumber}
+                        </TableCell>
+                        <TableCell
+                            align="left"
+                            onClick={() => {navigate(`/warehouses/${row.id}`, {replace: true})}}
+                        >
+                            {row.length}
+                        </TableCell>
+                        <TableCell
+                            align="left"
+                            onClick={() => {navigate(`/warehouses/${row.id}`, {replace: true})}}
+                        >
+                            {row.width}
+                        </TableCell>
+                        <TableCell
+                            align="left"
+                            onClick={() => {navigate(`/warehouses/${row.id}`, {replace: true})}}
+                        >
+                            {row.height}
+                        </TableCell>
                     </TableRow>
                 );
             })}

@@ -7,8 +7,6 @@ import style from './SucksesModal.module.css'
 
 
 const SucksesModal = ({handleClose}) => {
-
-
     const handleSubmit = (event) => {
         event.preventDefault()
         handleClose(false)

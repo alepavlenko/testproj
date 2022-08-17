@@ -4,22 +4,23 @@ import MyButton from "../../../Common/MyButton/MyButton";
 import MyModal from "../../../Common/MyModal/MyModal";
 import LogInForm from "../../AuthForm/LogInForm/LogInForm";
 
-import {signUpAuth, loginAuth} from '../../../../Auth/checkAuth'
 import {Context} from "../../../../App";
 import style from './LoginGroup.module.css'
+import {loginAuth, signUpAuth} from "../../../../utils";
 
 
 const LoginGroup = () => {
+    const {isAuth, setIsAuth} = useContext(Context)
+
     const [openSignUp, setOpenSignUp] = useState(false)
     const [openLogIn, setOpenLogIn] = useState(false)
     const [validError, setValidError] = useState(null)
-    const {isAuth, setIsAuth} = useContext(Context)
 
 
-   const handleClose1 = () => {
+    const handleClose1 = () => {
         setValidError(false)
-       setOpenSignUp(false);
-       setOpenLogIn(false);
+        setOpenSignUp(false);
+        setOpenLogIn(false);
     };
 
     const handleClose = () => {
@@ -35,36 +36,32 @@ const LoginGroup = () => {
     return (
         <div className={style.button}>
             {isAuth
-                ?<MyButton variant="contained" value="Log out" onClick={logOut} />
+                ? <MyButton variant="contained" value="Log out" onClick={logOut}/>
                 : <>
-                    <MyButton variant="text" value="Log in" onClick={() => setOpenLogIn(true)}/>
+                    <MyButton variant="text" value="Log in" onClick={setOpenLogIn}/>
                     <MyButton variant="contained" value="Sign up" onClick={setOpenSignUp}/>
                 </>
             }
-            <MyModal
-                open={openSignUp}
-                handleClose={handleClose1}
-                content={<LogInForm
+            <MyModal open={openSignUp} handleClose={handleClose1}>
+                <LogInForm
                     checkAuth={signUpAuth}
                     handleClose={handleClose1}
                     validError={validError}
                     setValidError={setValidError}
                     openNext={setOpenLogIn}
                     value="Sign up"
-                />}
-            />
-            <MyModal open={openLogIn}
-                     handleClose={handleClose}
-                     content={<LogInForm
-                         checkAuth={loginAuth}
-                         handleClose={handleClose}
-                         validError={validError}
-                         setValidError={setValidError}
-                         openNext={setOpenSignUp}
-                         value="Log in"
-                     />}
-            />
-
+                />
+            </MyModal>
+            <MyModal open={openLogIn} handleClose={handleClose}>
+                <LogInForm
+                    checkAuth={loginAuth}
+                    handleClose={handleClose}
+                    validError={validError}
+                    setValidError={setValidError}
+                    openNext={setOpenSignUp}
+                    value="Log in"
+                />
+            </MyModal>
         </div>
     );
 };

@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 
 import {BrowserRouter} from "react-router-dom";
-import AppRouter from "./Router/AppRouter/AppRouter";
+import AppRouter from "./components/AppRouter/AppRouter";
 
 export const Context = React.createContext();
 

@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 
 import {Divider, Drawer, List, ListItem, ListItemButton, ListItemText} from "@mui/material";
-import {Link} from "react-router-dom";
-import Logo from "../../Common/Logo/Logo";
+import {Link, useNavigate} from "react-router-dom";
+import Logo from "../../Common/Icons/Logo";
 import Home from "../../Common/Icons/Home";
 import Warehouses from "../../Common/Icons/Warehouses";
 import Accounts from "../../Common/Icons/Accounts";
@@ -11,9 +11,7 @@ import Contacts from "../../Common/Icons/Contacts";
 import Chat from "../../Common/Icons/Chat";
 import {ListItemIconStyled} from "./CustomDrawer.style";
 
-
 import style from "./CustomDrawer.module.css";
-
 
 const listArray = [
     {
@@ -50,12 +48,11 @@ const listArray = [
 
 const drawerWidth = 240;
 
-
-
 const CustomDrawer = () => {
     const [selectedIndex, setSelectedIndex] = useState(2);
-
     const [mobileOpen, setMobileOpen] = useState(false);
+
+    const navigate = useNavigate();
 
     const container = window.document.body;
 
@@ -63,20 +60,20 @@ const CustomDrawer = () => {
         setMobileOpen(!mobileOpen);
     };
 
-    const test = (id) => {
-        setSelectedIndex(id)
-    }
-
-
-    const drawer = () => (
+    const renderDrawerContent = () => (
         <div className={style.wrapSideBar} >
-            <div className={style.wrapLogo}>
+            <div onClick={() => {navigate('/', {replace: true})}} className={style.wrapLogo}>
                 <Logo/>
             </div>
             <Divider/>
             <List className={style.wrapList}>
                 {listArray.map((item) => (
-                    <ListItem className={selectedIndex === item.id ? style.selectedMenu : ''} key={item.id} disablePadding onClick={() => test(item.id)}>
+                    <ListItem
+                        disablePadding
+                        key={item.id}
+                        className={selectedIndex === item.id ? style.selectedMenu : ''}
+                        onClick={() => setSelectedIndex(item.id)}
+                    >
                          <Link to={`/${item.label}`} className={style.wrapLink}>
                             <ListItemButton >
                                 <ListItemIconStyled className={selectedIndex === item.id ? style.selectIcon : style.wrapListItem}>
@@ -107,7 +104,7 @@ const CustomDrawer = () => {
                     '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWidth},
                 }}
             >
-                {drawer()}
+                {renderDrawerContent()}
             </Drawer>
             <Drawer
                 variant="permanent"
@@ -120,7 +117,7 @@ const CustomDrawer = () => {
                     '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWidth},
                 }}
             >
-                {drawer()}
+                {renderDrawerContent()}
             </Drawer>
         </>
     );

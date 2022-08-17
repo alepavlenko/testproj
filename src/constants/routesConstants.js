@@ -1,0 +1,6 @@
+export const WAREHOUSES = '/warehouses'
+export const HOME = '/home'
+export const ACCOUNTS = '/accounts'
+export const CARDS = '/cards'
+export const CONTACTS = '/contacts'
+export const CHAT = '/chat'

@@ -9,6 +9,10 @@
     margin-bottom: 145px;
 }
 
+.wrapLogo:hover{
+    cursor: pointer;
+}
+
 .wrapList{
     height: 100vh;
     overflow: hidden;

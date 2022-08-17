@@ -5,11 +5,10 @@ import TableCell from "@mui/material/TableCell";
 import Checkbox from "@mui/material/Checkbox";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import TableHead from "@mui/material/TableHead";
+import {getRows} from "../../../utils/gettingRowsWarehouses";
 
-import {getRows} from "../../../Logic/Warehouses/logicAddingWarehouses";
 
 const EnhancedTableHead = ({wareHouses,selected,onSelectAllClick, headCells}) => {
-
     return (
         <TableHead>
             <TableRow>
@@ -22,13 +21,8 @@ const EnhancedTableHead = ({wareHouses,selected,onSelectAllClick, headCells}) =>
                     />
                 </TableCell>
                 {headCells.map((headCell) => (
-                    <TableCell
-                        key={headCell.id}
-                        align={'left'}
-                    >
-                        <TableSortLabel>
-                            {headCell.label}
-                        </TableSortLabel>
+                    <TableCell key={headCell} align='left'>
+                        <TableSortLabel>{headCell}</TableSortLabel>
                     </TableCell>
                 ))}
             </TableRow>

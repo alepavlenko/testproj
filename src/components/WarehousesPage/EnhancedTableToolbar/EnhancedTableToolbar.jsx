@@ -20,9 +20,7 @@ const EnhancedTableToolbar = ({setOpenAddWarehouses}) => {
             >
                 Warehouses
             </Typography>
-            {/*FILTER BUTTON*/}
-
-            <ButtonStyled variant="contained" onClick={setOpenAddWarehouses}>Add Warehouses <PlusIcons/> </ButtonStyled>
+            <ButtonStyled variant="contained" onClick={setOpenAddWarehouses}>Add Warehouses <PlusIcons/></ButtonStyled>
         </Toolbar>
     );
 };

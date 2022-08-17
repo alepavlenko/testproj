@@ -16,7 +16,6 @@ export const MainPage = () => {
             <div className={style.regtac}>
                 <img src={regtac} alt="background track"/>
             </div>
-
             <div className={style.track}>
                 <img src={track} alt="track"/>
             </div>

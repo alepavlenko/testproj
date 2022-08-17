@@ -13,6 +13,11 @@
   src: url("/src/assets/fonts/Inter-semibold.ttf") format("ttf");
 }
 
+*{
+  margin: 0;
+  padding: 0;
+}
+
 body {
   margin: 0;
 }

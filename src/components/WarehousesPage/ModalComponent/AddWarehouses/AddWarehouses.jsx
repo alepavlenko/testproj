@@ -1,45 +1,25 @@
 import React, {useContext} from 'react';
-import * as Yup from "yup";
 
 import {useFormik} from "formik";
 import {ButtonStyled, FormStyled} from './AddWarehouses.style';
 import style from './AddWarehouses.module.css'
-import {addWarehouses} from "../../../../Logic/Warehouses/logicAddingWarehouses";
+import {addWarehouses} from "../../../../utils/logicAddingWarehouses";
 import {Context} from "../../../../App";
-
-const SignupSchema = Yup.object().shape({
-    nameWarehouses: Yup.string()
-        .min(2, 'Too Short!')
-        .max(50, 'Too Long!')
-        .required('Required'),
-    length: Yup.number()
-        .min(1, 'Too Short!')
-        .required('Required'),
-    width: Yup.number()
-        .min(1, 'Too Short!')
-        .required('Required'),
-    height: Yup.number()
-        .min(1, 'Too Short!')
-        .required('Required'),
-});
+import {AddWarehousesSchema} from "./AddWarehousesForm";
 
 const AddWarehouses = ({handleClose, openNext, value }) => {
-
     const { setWareHouses } = useContext(Context)
-
 
     const handleCloseWrap = () => {
         formik.resetForm()
         handleClose();
     }
 
-
     const openNextModal = () => {
         handleCloseWrap();
         formik.resetForm()
         openNext(true);
     }
-
 
     const formik = useFormik({
         initialValues: {
@@ -48,7 +28,7 @@ const AddWarehouses = ({handleClose, openNext, value }) => {
             width: '',
             height: '',
         },
-        validationSchema: SignupSchema,
+        validationSchema: AddWarehousesSchema,
         onSubmit: values => {
             addWarehouses(values, setWareHouses)
             handleCloseWrap();
@@ -56,74 +36,50 @@ const AddWarehouses = ({handleClose, openNext, value }) => {
         },
     });
 
+    const addWarehousesFormInputs = [
+        {
+            placeholder: 'Enter a name',
+            name: 'nameWarehouses',
+            label: 'Name of the warehouse',
+        },
+        {
+            placeholder: 'Enter the length',
+            name: 'length',
+            label: 'Length, m',
+        },
+        {
+            placeholder: 'Enter the width',
+            name: 'width',
+            label: 'Width, m',
+        },
+        {
+            placeholder: 'Enter the height',
+            name: 'height',
+            label: 'Height, m',
+        },
+    ]
 
     return (
         <>
             <h1>{value}</h1>
             <FormStyled onSubmit={formik.handleSubmit}>
-                <div className={style.wrapInput}>
-                    <label htmlFor="nameWarehouses">Name of the warehouse</label>
-                    <input
-                        className={style.wrapTextInput}
-                        placeholder='Enter a name'
-                        id="nameWarehouses"
-                        name="nameWarehouses"
-                        type="text"
-                        onChange={formik.handleChange}
-                        value={formik.values.nameWarehouses}
-                    />
-                    {formik.errors.nameWarehouses && formik.touched.nameWarehouses ? (
-                        <div className={style.wrapError}>{formik.errors.nameWarehouses}</div>
-                    ) : null}
-                </div>
-
-                <div className={style.wrapInput}>
-                    <label htmlFor="length">Length, m</label>
-                    <input
-                        className={style.wrapTextInput}
-                        placeholder='Enter the length'
-                        id="length"
-                        name="length"
-                        type="text"
-                        onChange={formik.handleChange}
-                        value={formik.values.length}
-                    />
-                    {formik.errors.length && formik.touched.length ? (
-                        <div className={style.wrapError}>{formik.errors.length}</div>
-                    ) : null}
-                </div>
-
-                <div className={style.wrapInput}>
-                    <label htmlFor="width">Width, m</label>
-                    <input
-                        className={style.wrapTextInput}
-                        placeholder='Enter the width'
-                        id="width"
-                        name="width"
-                        type="text"
-                        onChange={formik.handleChange}
-                        value={formik.values.width}
-                    />
-                    {formik.errors.width && formik.touched.width ? (
-                        <div className={style.wrapError}>{formik.errors.width}</div>
-                    ) : null}
-                </div>
-
-                <div className={style.wrapInput}>
-                    <label htmlFor="height">Height, m</label>
-                    <input
-                        className={style.wrapTextInput}
-                        placeholder='Enter the height'
-                        id="height"
-                        name="height"
-                        type="text"
-                        onChange={formik.handleChange}
-                        value={formik.values.height}
-                    />
-                    {formik.errors.height && formik.touched.height ? (
-                        <div className={style.wrapError}>{formik.errors.height}</div>
-                    ) : null}
-                </div>
+                {addWarehousesFormInputs.map(({ label, placeholder, name }) => (
+                    <div key={name} className={style.wrapInput}>
+                        <label htmlFor={name}>{label}</label>
+                        <input
+                            className={style.wrapTextInput}
+                            placeholder={placeholder}
+                            id={name}
+                            name={name}
+                            type="text"
+                            onChange={formik.handleChange}
+                            value={formik.values[name]}
+                        />
+                        {formik.errors[name] && formik.touched[name] ? (
+                            <div className={style.wrapError}>{formik.errors[name]}</div>
+                        ) : null}
+                    </div>
+                ))}
                 <div>
                     <ButtonStyled  type="submit" variant="contained">Add a warehouses</ButtonStyled>
                 </div>

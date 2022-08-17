@@ -1,47 +1,29 @@
 import React from 'react';
 
-import {Box, CssBaseline} from "@mui/material";
+import {CssBaseline} from "@mui/material";
 import CustomDrawer from "./Drawer/CustomDrawer";
 import NavBarWereHouses from './NavBarWereHouses/NavBarWereHouses';
+import Warehouses from "./Warehouses/Warehouses";
 
 import style from './WarehousesPage.module.css'
-import Warehouses from "./Warehouses/Warehouses";
-import DownNavbar from "./DownNavbar/DownNavbar";
-
-const drawerWidth = 240;
+import {BoxItemWrapper, BoxStyledInner} from "./WarehousesPage.style";
 
 const WarehousesPage = () => {
-
     return (
-        <Box sx={{
-            display: 'flex',
-            outline: "none"
-        }}>
-            {/*<DownNavbar/>*/}
+        <BoxItemWrapper>
             <CssBaseline/>
-            
-            {/*NavBar*/}
             <NavBarWereHouses/>
-
-            {/*side bar*/}
-            <Box
+            <BoxStyledInner
                 component="nav"
-                sx={{
-                    width: {sm: drawerWidth},
-                    flexShrink: {sm: 0},
-                    height: "100vh",
-                }}
                 aria-label="mailbox folders"
             >
                 <CustomDrawer/>
-            </Box>
-
-            {/* main content*/}
+            </BoxStyledInner>
             <div className={style.wrapContent}>
                 <Warehouses/>
             </div>
 
-        </Box>
+        </BoxItemWrapper>
 
     );
 };

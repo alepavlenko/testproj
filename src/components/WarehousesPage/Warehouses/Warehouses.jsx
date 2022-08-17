@@ -11,38 +11,19 @@ import WarehousesTable from "../WarehousesTable/WarehousesTable";
 
 import {Context} from "../../../App";
 import style from './Warehouses.module.css'
-import {getRows} from "../../../Logic/Warehouses/logicAddingWarehouses";
 import EnhancedTableToolbar from "../EnhancedTableToolbar/EnhancedTableToolbar";
+import {getRows} from "../../../utils/gettingRowsWarehouses";
 
-const headCells = [
-    {
-        id: '1',
-        label: 'All stores',
-    },
-    {
-        id: '2',
-        label: 'Number of products',
-    },
-    {
-        id: '3',
-        label: 'Length, m',
-    },
-    {
-        id: '4',
-        label: 'Width, m',
-    },
-    {
-        id: '5',
-        label: 'Height, m',
-    },
-];
+const headCells = ['All stores', 'Number of products', 'Length, m', 'Width, m', 'Height, m'];
 
 const Warehouses = () => {
-    const [selected, setSelected] = React.useState([]);
+    const {wareHouses} = useContext(Context)
+
+    const [selected, setSelected] = useState([]);
     const [openAddWarehouses, setOpenAddWarehouses] = useState(false)
     const [openSucksesWarehouses, setOpenSucksesWarehouses] = useState(false)
 
-    const { wareHouses } = useContext(Context)
+    const isSelected = (name) => selected.indexOf(name) !== -1;
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
@@ -72,53 +53,43 @@ const Warehouses = () => {
         setSelected(newSelected);
     };
 
-    const isSelected = (name) => selected.indexOf(name) !== -1;
-
     return (
         <div className={style.wrapTable}>
             <Box sx={{width: '100%'}}>
                 <Paper sx={{width: '100%', mb: 2, boxShadow: 'none'}}>
                     <EnhancedTableToolbar
                         numSelected={selected.length}
-                        setOpenAddWarehouses = {setOpenAddWarehouses}
+                        setOpenAddWarehouses={setOpenAddWarehouses}
                     />
-
                     {getRows(wareHouses).length === 0
-                        ?<div className={style.wrapWarehouses}> Warehouses dosnt have </div>
-                        :<TableContainer className={(selected.length >= 1) ?style.wrapBodyUltra : style.wrapBody} >
+                        ? <div className={style.wrapWarehouses}> Warehouses dosnt have </div>
+                        : <TableContainer className={(selected.length >= 1) ? style.wrapBodyUltra : style.wrapBody}>
                             <WarehousesTable
                                 selected={selected}
                                 headCells={headCells}
-                                handleSelectAllClick = {handleSelectAllClick}
-                                getRows = {getRows}
-                                isSelected = {isSelected}
-                                handleClick = {handleClick}
+                                handleSelectAllClick={handleSelectAllClick}
+                                getRows={getRows}
+                                isSelected={isSelected}
+                                handleClick={handleClick}
                                 wareHouses={wareHouses}
                             />
                         </TableContainer>
                     }
-
                 </Paper>
             </Box>
-            <MyModal
-                open={openAddWarehouses}
-                handleClose={setOpenAddWarehouses}
-                content={<AddWarehouses
+            <MyModal open={openAddWarehouses} handleClose={setOpenAddWarehouses}>
+                <AddWarehouses
                     handleClose={setOpenAddWarehouses}
                     openNext={setOpenSucksesWarehouses}
                     value="Adding a warehouses"
-                />}
-            />
-            <MyModal
-                open={openSucksesWarehouses}
-                handleClose={setOpenSucksesWarehouses}
-                content={<SucksesModal
-                    handleClose={setOpenSucksesWarehouses}
-                />}
-            />
+                />
+            </MyModal>
+            <MyModal open={openSucksesWarehouses} handleClose={setOpenSucksesWarehouses}>
+                <SucksesModal handleClose={setOpenSucksesWarehouses}/>
+            </MyModal>
             {selected.length >= 1
-                ?  <DownNavbar stateSelected={selected} setStateSelected={setSelected}  />
-                :   <div></div>
+                ? <DownNavbar stateSelected={selected} setStateSelected={setSelected}/>
+                : <div></div>
             }
         </div>
 

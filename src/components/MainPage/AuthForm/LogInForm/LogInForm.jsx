@@ -1,25 +1,13 @@
 import React, {useContext} from 'react';
-import * as Yup from "yup";
 import {Context} from "../../../../App";
 import {useNavigate} from "react-router-dom";
 import {useFormik} from "formik";
 import style from "./LogInForm.module.css";
 import {ButtonStyled, FormStyled} from "./LogInForm.style";
-
-const SignupSchema = Yup.object().shape({
-    password: Yup.string()
-        .min(2, 'Too Short!')
-        .max(50, 'Too Long!')
-        .required('Required'),
-    email: Yup.string()
-        .email('Invalid email')
-        .required('Required'),
-
-});
-
+import {LoginSchema} from "./LoginFormValidation";
+import {Routes} from '../../../../constants'
 
 const LogInForm = ({checkAuth, setValidError, handleClose, validError, openNext, value }) => {
-
     const {setIsAuth} = useContext(Context)
     let navigate = useNavigate();
 
@@ -28,27 +16,25 @@ const LogInForm = ({checkAuth, setValidError, handleClose, validError, openNext,
         handleClose();
     }
 
-
     const openNextModal = () => {
         handleCloseWrap();
         formik.resetForm()
         openNext(true);
     }
 
-
     const formik = useFormik({
         initialValues: {
             password: '',
             email: '',
         },
-        validationSchema: SignupSchema,
+        validationSchema: LoginSchema,
         onSubmit: values => {
             if (checkAuth(values, setValidError)) {
                 handleCloseWrap()
                 if ((value === "Sign up")) {
                     openNext(true)
                 } else if (value === "Log in") {
-                    navigate('/warehouses', {replace: true})
+                    navigate(Routes.WAREHOUSES, {replace: true})
                     setIsAuth(true)
                 }
             } else {
@@ -102,11 +88,9 @@ const LogInForm = ({checkAuth, setValidError, handleClose, validError, openNext,
                 <div className={style.wrapText}>
                     {value === "Sign up"
                         ?
-                        <p>Already have an account? <a className={style.wrapLink} onClick={openNextModal}>Log in</a>
-                        </p>
+                        <p>Already have an account? <a className={style.wrapLink} onClick={openNextModal}>Log in</a></p>
                         : <p> No account? <a className={style.wrapLink} onClick={openNextModal}>Create one</a></p>
                     }
-
                 </div>
             </FormStyled>
         </>
