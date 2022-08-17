@@ -12,6 +12,14 @@ const WarehousesTableBody = ({getRows, isSelected, handleClick, wareHouses}) => 
 
     const navigate = useNavigate()
 
+    // const openWarehouse = (row) => {
+    //
+    //     console.log("111111", row)
+    //     navigate(`/warehouses/${row.id}`, {replace: true})
+    //
+    //
+    // }
+
     return (
         <TableBody>
             {getRows(wareHouses).map((row, index) => {
@@ -43,39 +51,49 @@ const WarehousesTableBody = ({getRows, isSelected, handleClick, wareHouses}) => 
                             id={labelId}
                             scope="row"
                             padding="none"
-                            onClick={() => {navigate(`/warehouses/${row.id}`, {replace: true})}}
-                        >
+                            onClick={() => {
+                                navigate(`/warehouses/${row.id}`, {replace: true})
+                            }}
+                                >
                             {row.name}
-                        </TableCell>
-                        <TableCell
-                            align="left"
-                            onClick={() => {navigate(`/warehouses/${row.id}`, {replace: true})}}
-                        >
+                                </TableCell>
+                                <TableCell
+                                align="left"
+                                onClick={() => {
+                                navigate(`/warehouses/${row.id}`, {replace: true})
+                            }}
+                                >
                             {row.wirehousesNumber}
-                        </TableCell>
-                        <TableCell
-                            align="left"
-                            onClick={() => {navigate(`/warehouses/${row.id}`, {replace: true})}}
-                        >
+                                </TableCell>
+                                <TableCell
+                                align="left"
+                                onClick={() => {
+                                navigate(`/warehouses/${row.id}`, {replace: true})
+                            }}
+                                >
                             {row.length}
-                        </TableCell>
-                        <TableCell
-                            align="left"
-                            onClick={() => {navigate(`/warehouses/${row.id}`, {replace: true})}}
-                        >
+                                </TableCell>
+                                <TableCell
+                                align="left"
+                                onClick={() => {
+                                navigate(`/warehouses/${row.id}`, {replace: true})
+                            }}
+                                >
                             {row.width}
-                        </TableCell>
-                        <TableCell
-                            align="left"
-                            onClick={() => {navigate(`/warehouses/${row.id}`, {replace: true})}}
-                        >
+                                </TableCell>
+                                <TableCell
+                                align="left"
+                                onClick={() => {
+                                navigate(`/warehouses/${row.id}`, {replace: true})
+                            }}
+                                >
                             {row.height}
-                        </TableCell>
-                    </TableRow>
+                                </TableCell>
+                                </TableRow>
+                                );
+                            })}
+                    </TableBody>
                 );
-            })}
-        </TableBody>
-    );
-};
+            };
 
-export default WarehousesTableBody;
+                export default WarehousesTableBody;

@@ -9,6 +9,7 @@ export const Context = React.createContext();
 function App() {
     const [isAuth, setIsAuth] = useState(Boolean(localStorage.getItem('user')))
     const [wareHouses, setWareHouses] = useState(JSON.parse(localStorage.getItem('warehouses')))
+    const [items, setItems] = useState(JSON.parse(localStorage.getItem('items')))
 
     const values = {
         isAuth,
