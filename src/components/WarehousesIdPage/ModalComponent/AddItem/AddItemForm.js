@@ -3,18 +3,22 @@ import * as Yup from "yup";
 import {Validation} from "../../../../constants";
 
 
-export const AddWarehousesSchema = Yup.object().shape({
-    nameWarehouses: Yup.string()
+export const AddItemSchema = Yup.object().shape({
+    name: Yup.string()
         .min(2, Validation.SHORT_VALUE)
         .max(50, Validation.LONG_VALUE)
         .required(Validation.REQUIRED_VALUE),
-    length: Yup.number()
-        .min(1, Validation.SHORT_VALUE)
+    manufacturer: Yup.string()
+        .min(2, Validation.SHORT_VALUE)
+        .max(50, Validation.LONG_VALUE)
         .required(Validation.REQUIRED_VALUE),
-    width: Yup.number()
-        .min(1, Validation.SHORT_VALUE)
+    number: Yup.number()
+        .max(50, Validation.LONG_VALUE)
         .required(Validation.REQUIRED_VALUE),
-    height: Yup.number()
-        .min(1, Validation.SHORT_VALUE)
+    purchasing: Yup.string()
+        .required(Validation.REQUIRED_VALUE),
+    delivery: Yup.string()
+        .required(Validation.REQUIRED_VALUE),
+    payment: Yup.string()
         .required(Validation.REQUIRED_VALUE),
 });
