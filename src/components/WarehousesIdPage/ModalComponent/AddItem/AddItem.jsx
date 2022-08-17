@@ -111,6 +111,7 @@ const AddItem = ({handleClose, openNext, value }) => {
                             onChange={formik.handleChange}
                             value={formik.values[name]}
                         />
+
                         {formik.errors[name] && formik.touched[name] ? (
                             <div className={style.wrapError}>{formik.errors[name]}</div>
                         ) : null}
