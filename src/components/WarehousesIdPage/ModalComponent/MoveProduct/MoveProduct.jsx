@@ -1,48 +1,45 @@
 import React, {useContext, useState} from 'react';
-
-import {useFormik} from "formik";
-import {ButtonStyled, FormStyled} from './AddItem.style';
-import {Context} from "../../../../App";
-import {Step, StepLabel, Stepper} from "@mui/material";
-import FirstStep from "./FirstStep/FirstStep";
-import SecondStep from "./SecondStep/SecondStep";
-import ThirdStep from "./ThirdStep/ThirdStep";
-import {AddItemSchema} from "./AddItemForm";
 import {useParams} from "react-router-dom";
-import {addItems} from "../../../../utils/logicAddingItems";
+import {Context} from "../../../../App";
+import {useFormik} from "formik";
+import {Step, StepLabel, Stepper} from "@mui/material";
+import MoveFirstStep from "./MoveFirstStep/MoveFirstStep";
+import MoveSecondStep from "./MoveSecondStep/MoveSecondStep";
+import MoveThirdStep from "./MoveThirdStep/MoveThirdStep";
+import {ButtonStyled, FormStyled} from "./MoveProduct.style";
+import {MoveItemSchema} from "./MoveProductForm";
+import {moveProduct} from "../../../../utils/movingProducts";
 
-const AddItem = ({handleClose, openNext, value}) => {
+const MoveProduct = ({handleClose, openNext, value, stateSelected, setStateSelected}) => {
     const {warehouseId} = useParams();
     const [activeStep, setActiveStep] = useState(0);
     const steps = getSteps();
 
-    const {setItems} = useContext(Context)
+    const {items ,setItems} = useContext(Context)
 
     const handleNext = () => {
-
-        if(formik.values.name === ''){
-            formik.setError('name','error')
+        if(formik.values.selectWarehouses === ''){
+            formik.setError('selectWarehouses','error')
             return
         }
-        if(!formik.errors.name && !formik.errors.manufacturer && !formik.errors.number) {
+        else {
             setActiveStep(prevActiveStep => prevActiveStep + 1);
         }
     };
 
-
     const formik = useFormik({
         initialValues: {
-            name: '',
-            manufacturer: '',
-            number: '',
-            purchasing: '',
+            baseWarehouses:'',
+            selectWarehouses:'',
             delivery: '',
             payment: '',
         },
-        validationSchema: AddItemSchema,
+        validationSchema: MoveItemSchema,
         onSubmit: values => {
-            console.log()
-            addItems(setItems, values, warehouseId)
+            console.log('selected', stateSelected)
+
+            values.baseWarehouses = warehouseId;
+            moveProduct(items, setItems, values, warehouseId, stateSelected, setStateSelected)
             handleCloseWrap();
             // openNextModal()
 
@@ -55,11 +52,11 @@ const AddItem = ({handleClose, openNext, value}) => {
     function getStepContent(step) {
         switch (step) {
             case 0:
-                return <FirstStep nextStep={handleNext} formik={formik}/>;
+                return <MoveFirstStep nextStep={handleNext} formik={formik} warehouseId={warehouseId}/>;
             case 1:
-                return <SecondStep nextStep={handleNext} formik={formik}/>;
+                return <MoveSecondStep nextStep={handleNext} formik={formik}/>;
             case 2:
-                return <ThirdStep formik={formik}/>;
+                return <MoveThirdStep formik={formik}/>;
             default:
                 return "unknown step";
         }
@@ -102,4 +99,5 @@ const AddItem = ({handleClose, openNext, value}) => {
     );
 };
 
-export default AddItem;
+
+export default MoveProduct;

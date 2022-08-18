@@ -5,6 +5,7 @@ export const getRows = (wareHouses) => {
     if(!wareHouses){
         const array = []
         localStorage.setItem('warehouses', JSON.stringify(array))
+        return localRows
     }
     const thisWare = JSON.parse(localStorage.getItem('warehouses'))
 

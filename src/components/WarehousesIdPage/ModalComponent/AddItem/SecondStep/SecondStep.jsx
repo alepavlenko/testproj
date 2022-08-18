@@ -18,7 +18,7 @@ const SecondStep = ({formik, nextStep}) => {
             </RadioGroup>
 
             <div>
-                <ButtonStyled onClick={nextStep} type="submit" variant="contained">Add a warehouses</ButtonStyled>
+                <ButtonStyled onClick={nextStep} type="submit" variant="contained">Next step</ButtonStyled>
             </div>
         </FormControl>
     );

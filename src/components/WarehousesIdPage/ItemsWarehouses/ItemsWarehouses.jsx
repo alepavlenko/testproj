@@ -5,12 +5,12 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import TableContainer from "@mui/material/TableContainer";
 import MyModal from "../../Common/MyModal/MyModal";
-import DownNavbar from "../../WarehousesPage/DownNavbar/DownNavbar";
 import {getItems} from "../../../utils/gettingItems";
 import EnhancedTableToolbar from "../../WarehousesPage/EnhancedTableToolbar/EnhancedTableToolbar";
 import ItemsTable from "../ItemsTable/ItemsTable";
 import AddItem from "../ModalComponent/AddItem/AddItem";
 import {useParams} from "react-router-dom";
+import DownItemNavbar from "../DownItemNavbar/DownItemNavbar";
 
 const headCells = ['All products', 'Manufacturer', 'Item number', 'Purchasing technology', 'Shipment method'];
 
@@ -52,8 +52,6 @@ const ItemsWarehouses = () => {
         }
         setSelected(newSelected);
     };
-    console.log('jaja', warehouseId)
-    console.log('number',getItems(items,  warehouseId).length)
     return (
         <div className={style.wrapTable}>
             <Box sx={{width: '100%'}}>
@@ -91,7 +89,7 @@ const ItemsWarehouses = () => {
                 {/*<SucksesModal handleClose={setOpenSucksesWarehouses}/>*/}
             </MyModal>
             {selected.length >= 1
-                ? <DownNavbar stateSelected={selected} setStateSelected={setSelected}/>
+                ? <DownItemNavbar stateSelected={selected} setStateSelected={setSelected}/>
                 : <div></div>
             }
         </div>

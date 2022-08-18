@@ -6,7 +6,6 @@ export const addWarehouses = (values, setWareHouses) => {
         localStorage.setItem('warehouses', JSON.stringify(array))
     }
     const localWarehouses = JSON.parse(localStorage.getItem('warehouses'))
-    console.log('111', localWarehouses)
     if(!localStorage.getItem('user')){
         flag = false
     }
@@ -24,8 +23,6 @@ export const addWarehouses = (values, setWareHouses) => {
     localWarehouses.push(warehouses)
     localStorage.setItem("warehouses", JSON.stringify(localWarehouses))
     setWareHouses(localWarehouses)
-    const localWarehouses2 = JSON.parse(localStorage.getItem('warehouses'))
-    console.log('22', localWarehouses2)
 
     return flag;
 }
