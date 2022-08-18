@@ -1,0 +1,24 @@
+.wrapSelected{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 300px;
+    height: 50px;
+    color: #3E4C5966;
+    /*border: 1px solid #EE950F;*/
+}
+.wrapLeftSide{
+    gap: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: rgba(238, 149, 15, 0.28);
+
+}
+
+p{
+
+    color: #3E4C5966;
+    font-size: 16px;
+}

@@ -4,3 +4,9 @@
 .wrapButton{
     margin-top: 30px;
 }
+.test{
+    width: 300px;
+    height: 45px;
+    border:  1px solid #EE950F;
+    color: red;
+}
