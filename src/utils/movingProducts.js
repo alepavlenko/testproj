@@ -20,5 +20,6 @@ export const moveProduct = (
 
     })
 const finishProducts = [...tempLocalItems, ...tempLocalSelectedItems]
+    localStorage.setItem("items", JSON.stringify(finishProducts))
     setItems(finishProducts)
 }
