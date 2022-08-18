@@ -52,7 +52,7 @@ const MoveProduct = ({handleClose, openNext, value, stateSelected, setStateSelec
     function getStepContent(step) {
         switch (step) {
             case 0:
-                return <MoveFirstStep nextStep={handleNext} formik={formik} warehouseId={warehouseId}/>;
+                return <MoveFirstStep stateSelected={stateSelected} nextStep={handleNext} formik={formik} warehouseId={warehouseId}/>;
             case 1:
                 return <MoveSecondStep nextStep={handleNext} formik={formik}/>;
             case 2:

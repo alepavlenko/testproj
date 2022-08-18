@@ -1,9 +1,10 @@
 import React, {useContext, useState} from 'react';
 import {Context} from "../../../App";
-import style from "../../WarehousesPage/DownNavbar/DownNavbar.module.css";
+import style from "./DownItemNavbar.module.css";
 import Selected from "../../Common/Icons/Selected";
 import MyModal from "../../Common/MyModal/MyModal";
 import MoveProduct from "../ModalComponent/MoveProduct/MoveProduct";
+import Move from "../../Common/Icons/Move";
 
 const DownItemNavbar = ({stateSelected, setStateSelected}) => {
 
@@ -25,9 +26,12 @@ const DownItemNavbar = ({stateSelected, setStateSelected}) => {
                     <Selected/>
                     <div className={style.wrapText}>Selected: {stateSelected.length}</div>
                 </div>
-                <div>
+                <div className={style.wrapButtonGroup}>
                     <button className={style.wrapButton} onClick={removeSelected} >Delete</button>
-                    <button className={style.wrapButton} onClick={setOpenMoveProduct} >Move</button>
+                    <button className={style.wrapButtonMove} onClick={setOpenMoveProduct}>
+                        Move
+                        <Move/>
+                    </button>
                 </div>
             </div>
 

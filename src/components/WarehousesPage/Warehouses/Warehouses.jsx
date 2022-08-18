@@ -59,7 +59,7 @@ const Warehouses = () => {
             <Box sx={{width: '100%'}}>
                 <Paper sx={{width: '100%', mb: 2, boxShadow: 'none'}}>
                     <EnhancedTableToolbar
-                        numSelected={selected.length}
+                        // numSelected={selected.length}
                         setOpenAddWarehouses={setOpenAddWarehouses}
                     />
                     {getRows(wareHouses).length === 0

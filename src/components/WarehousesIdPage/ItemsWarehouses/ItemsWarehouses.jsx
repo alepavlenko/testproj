@@ -11,6 +11,7 @@ import ItemsTable from "../ItemsTable/ItemsTable";
 import AddItem from "../ModalComponent/AddItem/AddItem";
 import {useParams} from "react-router-dom";
 import DownItemNavbar from "../DownItemNavbar/DownItemNavbar";
+import EnhancedTableToolbarItem from "../EnhancedTableToolbarItem/EnhancedTableToolbarItem";
 
 const headCells = ['All products', 'Manufacturer', 'Item number', 'Purchasing technology', 'Shipment method'];
 
@@ -56,8 +57,8 @@ const ItemsWarehouses = () => {
         <div className={style.wrapTable}>
             <Box sx={{width: '100%'}}>
                 <Paper sx={{width: '100%', mb: 2, boxShadow: 'none'}}>
-                    <EnhancedTableToolbar
-                        numSelected={selected.length}
+                    <EnhancedTableToolbarItem
+                        warehouseId={warehouseId}
                         setOpenAddWarehouses={setOpenAddProduct}
                     />
                     {/*//getItems(items).length*/}

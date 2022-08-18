@@ -4,11 +4,12 @@ import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 import Move from "../../../../Common/Icons/Move";
 import style from './MoveFirstStep.module.css'
 
-const MoveFirstStep = ({nextStep, formik, warehouseId}) => {
+const MoveFirstStep = ({stateSelected, nextStep, formik, warehouseId}) => {
 
     const selectWarehouses = JSON.parse(localStorage.getItem('warehouses'))
     const basedWarehourses = selectWarehouses.filter((ware) => ware.warehousesid === warehouseId)
     const nameBasedWare = basedWarehourses[0].nameWarehouses;
+    const anotherWarehourses = selectWarehouses.filter((ware) =>  !warehouseId.includes(ware.warehousesid) )
 
     return (
             <div className={style.wrapForm}>
@@ -39,7 +40,7 @@ const MoveFirstStep = ({nextStep, formik, warehouseId}) => {
                         id={warehouseId}
                         name='selectWarehouses'
                     >
-                        {selectWarehouses.map((warehouses) =>
+                        {anotherWarehourses.map((warehouses) =>
                             (<MenuItem
                                 key={warehouses.warehousesid}
                                 value={warehouses.warehousesid}

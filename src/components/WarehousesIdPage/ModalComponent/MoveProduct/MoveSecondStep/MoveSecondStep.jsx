@@ -1,32 +1,70 @@
-import React from 'react';
-import {FormControl, FormControlLabel, FormLabel, Radio, RadioGroup} from "@mui/material";
+import React, {useState} from 'react';
+import {
+    Box,
+    List,
+    ListItemButton,
+    ListItemText,
+} from "@mui/material";
 import {ButtonStyled} from "../MoveProduct.style";
 import style from './MoveSecondStep.module.css'
-import Checkbox from "@mui/material/Checkbox";
+import Typography from "@mui/material/Typography";
+import AirPlane from "../../../../Common/Icons/AirPlane";
+import Ship from "../../../../Common/Icons/Ship";
+import Car from "../../../../Common/Icons/Car";
 
 
 const MoveSecondStep = ({formik, nextStep}) => {
-    return (
-        <div className={style.wrapForm}>
-            <FormControl>
-                <FormLabel id="demo-controlled-radio-buttons-group">Select delivery method</FormLabel>
-                <RadioGroup
-                    aria-labelledby="demo-controlled-radio-buttons-group"
-                    name="delivery"
-                    value={formik.values.delivery}
-                    onChange={formik.handleChange}
-                >
-                    <FormControlLabel value="Air" control={<Checkbox />} label="Air" />
-                    <FormControlLabel value="Sea" control={<Radio />} label="Sea" />
-                    <FormControlLabel value="Car" control={<Radio />} label="Car" />
-                </RadioGroup>
 
-                <div className={style.wrapButton}>
-                    <ButtonStyled onClick={nextStep} type="submit" variant="contained">Next step</ButtonStyled>
-                </div>
-            </FormControl>
-        </div>
+    const [selectedIndex, setSelectedIndex] = useState('');
+    const handleListItemClick = (index) => {
+
+        setSelectedIndex(index);
+        formik.values.delivery = index;
+    };
+
+    return (
+        <>
+            <Box sx={{width: '100%', maxWidth: 360, bgcolor: 'background.paper'}}>
+                <List component="nav" aria-label="main mailbox folders">
+                    <div className={style.wrapText}>
+                        <Typography variant="h6" component="h2" >Select delivery method</Typography>
+                    </div>
+                    <ListItemButton
+                        className={selectedIndex === 'AIR' ? style.activeSelected : style.passivSelected }
+                        selected={selectedIndex === 'AIR'}
+                        onChange={formik.handleChange}
+                        onClick={() => handleListItemClick('AIR')}
+                    >
+                        <AirPlane/>
+                        <ListItemText primary="By air transport"/>
+                    </ListItemButton>
+
+                    <ListItemButton
+                        onChange={formik.handleChange}
+                        className={selectedIndex === 'SEA' ? style.activeSelected : style.passivSelected }
+                        selected={selectedIndex === 'SEA'}
+                        onClick={() => handleListItemClick('SEA')}
+                    >
+                        <Ship/>
+                        <ListItemText primary="By sea"/>
+                    </ListItemButton>
+
+                    <ListItemButton
+                        onChange={formik.handleChange}
+                        className={selectedIndex === 'CAR' ? style.activeSelected : style.passivSelected }
+                        selected={selectedIndex === 'CAR'}
+                        onClick={() => handleListItemClick('CAR')}
+                    >
+                        <Car/>
+                        <ListItemText primary="By Car"/>
+                    </ListItemButton>
+                </List>
+            </Box>
+
+            <div>
+                <ButtonStyled onClick={nextStep} type="submit" variant="contained">Next step</ButtonStyled>
+            </div>
+        </>
     );
 };
-
 export default MoveSecondStep;

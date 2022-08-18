@@ -40,3 +40,28 @@
     margin-left: 5px;
     margin-top: 3px;
 }
+.wrapButtonGroup{
+    display: flex;
+    gap: 16px
+}
+.wrapButtonMove{
+    background-color: #EE950F;
+    border-color: #EE950F;
+    border-radius: 3px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 86px;
+    height: 44px;
+
+    font-family: 'Inter-semibold', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 12px;
+}
+.wrapButtonMove:hover{
+    cursor: pointer;
+}
