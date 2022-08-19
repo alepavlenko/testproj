@@ -44,7 +44,7 @@ const AddItem = ({handleClose, openNext, value}) => {
             console.log()
             addItems(setItems, values, warehouseId)
             handleCloseWrap();
-            // openNextModal()
+            openNextModal()
 
         },
     });

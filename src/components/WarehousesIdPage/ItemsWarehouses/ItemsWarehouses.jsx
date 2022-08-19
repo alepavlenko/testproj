@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Context} from "../../../App";
 import style from "./ItemsWarehouses.module.css";
 import Box from "@mui/material/Box";
@@ -6,12 +6,14 @@ import Paper from "@mui/material/Paper";
 import TableContainer from "@mui/material/TableContainer";
 import MyModal from "../../Common/MyModal/MyModal";
 import {getItems} from "../../../utils/gettingItems";
-import EnhancedTableToolbar from "../../WarehousesPage/EnhancedTableToolbar/EnhancedTableToolbar";
 import ItemsTable from "../ItemsTable/ItemsTable";
 import AddItem from "../ModalComponent/AddItem/AddItem";
 import {useParams} from "react-router-dom";
 import DownItemNavbar from "../DownItemNavbar/DownItemNavbar";
 import EnhancedTableToolbarItem from "../EnhancedTableToolbarItem/EnhancedTableToolbarItem";
+import SucksesModalAdding from "../ModalComponent/SucksesModalAdding/SucksesModalAdding";
+import MoveProduct from "../ModalComponent/MoveProduct/MoveProduct";
+import SucsessfulModalMove from "../ModalComponent/SucsessfulModalMove/SucsessfulModalMove";
 
 const headCells = ['All products', 'Manufacturer', 'Item number', 'Purchasing technology', 'Shipment method'];
 
@@ -23,6 +25,13 @@ const ItemsWarehouses = () => {
     const [selected, setSelected] = useState([]);
     const [openAddProduct, setOpenAddProduct] = useState(false)
     const [openSucksesWarehouses, setOpenSucksesWarehouses] = useState(false)
+
+    const [openMoveProduct, setOpenMoveProduct] = useState(false)
+    const [suckModal, setSuckModal] = useState(false)
+
+    useEffect(()=>{
+        console.log('nen',openSucksesWarehouses)
+    },[openSucksesWarehouses])
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
 
@@ -87,10 +96,23 @@ const ItemsWarehouses = () => {
                 />
             </MyModal>
             <MyModal open={openSucksesWarehouses} handleClose={setOpenSucksesWarehouses}>
-                {/*<SucksesModal handleClose={setOpenSucksesWarehouses}/>*/}
+                <SucksesModalAdding handleClose={setOpenSucksesWarehouses}/>
+            </MyModal>
+
+            <MyModal open={openMoveProduct} handleClose={setOpenMoveProduct}>
+                <MoveProduct
+                    handleClose={setOpenMoveProduct}
+                    openNext={setSuckModal}
+                    value="Move cargo"
+                    stateSelected={selected}
+                    setStateSelected={setSelected}
+                />
+            </MyModal>
+            <MyModal open={suckModal} handleClose={setSuckModal} >
+                <SucsessfulModalMove handleClose={setSuckModal} />
             </MyModal>
             {selected.length >= 1
-                ? <DownItemNavbar stateSelected={selected} setStateSelected={setSelected}/>
+                ? <DownItemNavbar setOpenMoveProduct={setOpenMoveProduct} stateSelected={selected} setStateSelected={setSelected}/>
                 : <div></div>
             }
         </div>

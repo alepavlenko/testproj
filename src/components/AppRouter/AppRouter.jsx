@@ -11,6 +11,7 @@ const AppRouter = () => {
             <Routes>
                 {privateRoutes.map(route =>
                     <Route
+                        key={route.path}
                         path={route.path}
                         element={route.element}
                     />
@@ -21,6 +22,7 @@ const AppRouter = () => {
             <Routes>
                 {publicRoutes.map(route =>
                     <Route
+                        key={route.path}
                         path={route.path}
                         element={route.element}
                     />

@@ -4,8 +4,24 @@ import style from "../../WarehousesPage/Warehouses/Warehouses.module.css";
 import TableCell from "@mui/material/TableCell";
 import Checkbox from "@mui/material/Checkbox";
 import TableBody from "@mui/material/TableBody";
+import AirPlane from "../../Common/Icons/AirPlane";
+import Ship from "../../Common/Icons/Ship";
+import Car from "../../Common/Icons/Car";
 
 const ItemsTableBody = ({warehouseId, getRows, isSelected, handleClick, wareHouses}) => {
+
+   function rowIcons(row) {
+       switch (row) {
+           case 'AIR':
+               return <AirPlane/>;
+           case 'SEA':
+               return <Ship/>;
+           case 'CAR':
+               return <Car/>
+       }
+
+   }
+
     return (
         <TableBody>
             {getRows(wareHouses,warehouseId).map((row, index) => {
@@ -18,7 +34,7 @@ const ItemsTableBody = ({warehouseId, getRows, isSelected, handleClick, wareHous
                         role="checkbox"
                         aria-checked={isItemSelected}
                         tabIndex={-1}
-                        key={row.name}
+                        key={row.id}
                         selected={isItemSelected}
                         className={style.wrapRow}
                     >
@@ -51,7 +67,10 @@ const ItemsTableBody = ({warehouseId, getRows, isSelected, handleClick, wareHous
                             {row.purchasing}
                         </TableCell>
                         <TableCell align="left">
-                            {row.delivery}
+                            <div className={style.wrapRowIcons}>
+                                {rowIcons(row.delivery.toUpperCase())}
+                                {row.delivery.toUpperCase()}
+                            </div>
                         </TableCell>
                     </TableRow>
                 );

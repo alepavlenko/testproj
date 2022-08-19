@@ -20,7 +20,7 @@ const MoveProduct = ({ handleClose, openNext, value, stateSelected, setStateSele
     const handleNext = () => {
         if(formik.values.selectWarehouses === ''){
             formik.setError('selectWarehouses','error')
-            return
+            // return
         }
         else {
             setActiveStep(prevActiveStep => prevActiveStep + 1);
@@ -36,12 +36,10 @@ const MoveProduct = ({ handleClose, openNext, value, stateSelected, setStateSele
         },
         validationSchema: MoveItemSchema,
         onSubmit: values => {
-            console.log('selected', stateSelected)
-
+            openNext(true);
             values.baseWarehouses = warehouseId;
             moveProduct(items, setItems, values, warehouseId, stateSelected, setStateSelected)
-            handleCloseWrap();
-            // openNextModal()
+            openNextModal();
 
         },
     });
@@ -63,15 +61,11 @@ const MoveProduct = ({ handleClose, openNext, value, stateSelected, setStateSele
     }
 
 
-    const handleCloseWrap = () => {
-        // formik.resetForm()
-        handleClose();
-    }
 
     const openNextModal = () => {
-        handleCloseWrap();
-        // formik.resetForm()
-        openNext(true);
+        console.log(11)
+        // openNext(true);
+        handleClose(false);
     }
 
 
