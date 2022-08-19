@@ -10,6 +10,7 @@ import Typography from "@mui/material/Typography";
 import Visa from "../../../../Common/Icons/Visa";
 import PayPal from "../../../../Common/Icons/PayPal";
 import Cash from "../../../../Common/Icons/Cash";
+import {ListItemButtonStyled} from "../MoveProduct.style";
 
 const MoveThirdStep = ({formik}) => {
 
@@ -26,35 +27,41 @@ const MoveThirdStep = ({formik}) => {
                 <div className={style.wrapText}>
                     <Typography variant="h6" component="h2" >Choose a payment method</Typography>
                 </div>
-                <ListItemButton
-                    className={selectedIndex === 'VISA' ? style.activeSelected : style.passivSelected }
+                <ListItemButtonStyled
                     selected={selectedIndex === 'VISA'}
                     onChange={formik.handleChange}
                     onClick={() => handleListItemClick('VISA')}
                 >
-                    <Visa/>
-                    <ListItemText primary="Visa, Mastercard"/>
-                </ListItemButton>
+                    <div className={selectedIndex === 'VISA' ? style.activeSelected : style.passivSelected } >
+                        <Visa/>
+                        <ListItemText primary="Visa, Mastercard"/>
+                    </div>
+                </ListItemButtonStyled>
 
-                <ListItemButton
+                <ListItemButtonStyled
                     onChange={formik.handleChange}
                     className={selectedIndex === 'PAYPAL' ? style.activeSelected : style.passivSelected }
                     selected={selectedIndex === 'PAYPAL'}
                     onClick={() => handleListItemClick('PAYPAL')}
                 >
-                    <PayPal/>
-                    <ListItemText primary="PayPal"/>
-                </ListItemButton>
 
-                <ListItemButton
+                    <div className={selectedIndex === 'PAYPAL' ? style.activeSelected : style.passivSelected } >
+                        <PayPal/>
+                        <ListItemText primary="PayPal"/>
+                    </div>
+                </ListItemButtonStyled>
+
+                <ListItemButtonStyled
                     onChange={formik.handleChange}
                     className={selectedIndex === 'CASH' ? style.activeSelected : style.passivSelected }
                     selected={selectedIndex === 'CASH'}
                     onClick={() => handleListItemClick('CASH')}
                 >
-                    <Cash/>
-                    <ListItemText primary="Cash"/>
-                </ListItemButton>
+                    <div className={selectedIndex === 'CASH' ? style.activeSelected : style.passivSelected } >
+                        <Cash/>
+                        <ListItemText primary="Cash"/>
+                    </div>
+                </ListItemButtonStyled>
             </List>
         </Box>
     );

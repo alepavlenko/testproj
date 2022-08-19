@@ -46,7 +46,8 @@
 }
 .wrapButtonMove{
     background-color: #EE950F;
-    border-color: #EE950F;
+    border: none;
+    /*border-color: #EE950F;*/
     border-radius: 3px;
     color: white;
     display: flex;

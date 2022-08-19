@@ -1,5 +1,5 @@
 import {styled} from '@mui/material/styles'
-import {Button} from "@mui/material";
+import {Button, ListItemButton} from "@mui/material";
 
 
 export const ButtonStyled = styled(Button)(({theme}) => ({
@@ -18,4 +18,11 @@ export const ButtonStyled = styled(Button)(({theme}) => ({
 export const FormStyled = styled('form')(({theme}) => ({
     marginTop:40,
     width: 300
+}))
+
+export const ListItemButtonStyled = styled(ListItemButton)(({theme}) => ({
+    marginTop:20,
+    marginBottom:20,
+    backgroundColor: '#F8F9F9',
+
 }))

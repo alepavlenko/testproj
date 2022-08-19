@@ -10,7 +10,7 @@ import {ButtonStyled, FormStyled} from "./MoveProduct.style";
 import {MoveItemSchema} from "./MoveProductForm";
 import {moveProduct} from "../../../../utils/movingProducts";
 
-const MoveProduct = ({handleClose, openNext, value, stateSelected, setStateSelected}) => {
+const MoveProduct = ({ handleClose, openNext, value, stateSelected, setStateSelected}) => {
     const {warehouseId} = useParams();
     const [activeStep, setActiveStep] = useState(0);
     const steps = getSteps();

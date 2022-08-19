@@ -4,7 +4,7 @@ import {
     List, ListItemButton,
     ListItemText,
 } from "@mui/material";
-import {ButtonStyled} from "../AddItem.style";
+import {ButtonStyled, ListItemButtonStyled} from "../AddItem.style";
 import AirPlane from "../../../../Common/Icons/AirPlane";
 import Typography from "@mui/material/Typography";
 import Ship from "../../../../Common/Icons/Ship";
@@ -27,35 +27,41 @@ const SecondStep = ({formik, nextStep}) => {
                     <div className={style.wrapText}>
                         <Typography variant="h6" component="h2" >Select delivery method</Typography>
                     </div>
-                    <ListItemButton
-                        className={selectedIndex === 'AIR' ? style.activeSelected : style.passivSelected }
+                    <ListItemButtonStyled
+                        // className={selectedIndex === 'AIR' ? style.activeSelected : style.passivSelected }
                         selected={selectedIndex === 'AIR'}
                         onChange={formik.handleChange}
                         onClick={() => handleListItemClick('AIR')}
                     >
-                        <AirPlane/>
-                        <ListItemText primary="By air transport"/>
-                    </ListItemButton>
+                        <div className={selectedIndex === 'AIR' ? style.activeSelected : style.passivSelected } >
+                            <AirPlane/>
+                            <ListItemText primary="By air transport"/>
+                        </div>
+                    </ListItemButtonStyled>
 
-                    <ListItemButton
+                    <ListItemButtonStyled
                         onChange={formik.handleChange}
-                        className={selectedIndex === 'SEA' ? style.activeSelected : style.passivSelected }
+                        // className={selectedIndex === 'SEA' ? style.activeSelected : style.passivSelected }
                         selected={selectedIndex === 'SEA'}
                         onClick={() => handleListItemClick('SEA')}
                     >
-                        <Ship/>
-                        <ListItemText primary="By sea"/>
-                    </ListItemButton>
+                        <div className={selectedIndex === 'SEA' ? style.activeSelected : style.passivSelected } >
+                            <Ship/>
+                            <ListItemText primary="By sea"/>
+                        </div>
+                    </ListItemButtonStyled>
 
-                    <ListItemButton
+                    <ListItemButtonStyled
                         onChange={formik.handleChange}
-                        className={selectedIndex === 'CAR' ? style.activeSelected : style.passivSelected }
+                        // className={selectedIndex === 'CAR' ? style.activeSelected : style.passivSelected }
                         selected={selectedIndex === 'CAR'}
                         onClick={() => handleListItemClick('CAR')}
                     >
-                        <Car/>
-                        <ListItemText primary="By Car"/>
-                    </ListItemButton>
+                        <div className={selectedIndex === 'CAR' ? style.activeSelected : style.passivSelected } >
+                            <Car/>
+                            <ListItemText primary="By Car"/>
+                        </div>
+                    </ListItemButtonStyled>
                 </List>
             </Box>
 

@@ -1,17 +1,15 @@
 .activeSelected{
-
     color: #EE950F;
     gap: 20px;
-    margin-bottom: 24px;
-    color: red;
-    border: 1px solid black;
+    display: flex;
+    align-items: center;
 }
 
 .passivSelected{
+    display: flex;
+    align-items: center;
     color: #3E4C5966;
-    background-color: #F8F9F9;
     gap: 20px;
-    margin-bottom: 24px;
 }
 .wrapText{
     margin-bottom: 32px;
