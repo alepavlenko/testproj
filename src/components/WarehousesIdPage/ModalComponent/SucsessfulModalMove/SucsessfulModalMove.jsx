@@ -1,7 +1,7 @@
 import React from 'react';
 import {ButtonStyled, FormStyled} from "../../../WarehousesPage/ModalComponent/SucksesModal/SucksesModal.style";
 import CargoMoving from "../../../Common/Icons/CargoMoving";
-import style from "../SucksesModalMove/SucksesModalMove.module.css";
+import style from "./SucsessfulModalMove.module.css";
 
 const SucsessfulModalMove = ({handleClose}) => {
     const handleSubmit = (event) => {
