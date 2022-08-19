@@ -1,11 +1,11 @@
 export const addWarehouses = (values, setWareHouses) => {
     let flag = true
+
     if(!localStorage.getItem('warehouses')){
         const array = []
         localStorage.setItem('warehouses', JSON.stringify(array))
     }
     const localWarehouses = JSON.parse(localStorage.getItem('warehouses'))
-
     if(!localStorage.getItem('user')){
         flag = false
     }

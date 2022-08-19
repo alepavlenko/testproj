@@ -1,5 +1,12 @@
 .wrapTable{
     display: flex;
+}
+.wrapRowIcons{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+    color: #3E4C59;
 
 }
 .wrapTableHead{

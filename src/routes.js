@@ -15,7 +15,7 @@ export const privateRoutes = [
     {path: Routes.CARDS, element: <BlockPage/>},
     {path: Routes.CONTACTS, element: <BlockPage/>},
     {path: Routes.CHAT, element: <BlockPage/>},
-    {path: "/warehouses/:id", element: <WarehousesIdPage/>},
+    {path: Routes.WAREHOUSE, element: <WarehousesIdPage/>},
 ]
 
 export const publicRoutes = [
