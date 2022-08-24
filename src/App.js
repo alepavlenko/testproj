@@ -8,9 +8,10 @@ export const Context = React.createContext();
 
 function App() {
 
-    const [isAuth, setIsAuth] = useState(Boolean(localStorage.getItem('user')))
+    const [isAuth, setIsAuth] = useState(Boolean(localStorage.getItem('auth')))
     const [wareHouses, setWareHouses] = useState(JSON.parse(localStorage.getItem('warehouses')))
     const [items, setItems] = useState(JSON.parse(localStorage.getItem('items')))
+    const [token, setToken] = useState('')
 
     const values = {
         isAuth,
@@ -18,7 +19,9 @@ function App() {
         wareHouses,
         setWareHouses,
         items,
-        setItems
+        setItems,
+        token,
+        setToken
     }
     return (
         <Context.Provider value={values}>

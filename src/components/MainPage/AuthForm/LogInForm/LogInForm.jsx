@@ -8,7 +8,7 @@ import {LoginSchema} from "./LoginFormValidation";
 import {Routes} from '../../../../constants'
 
 const LogInForm = ({checkAuth, setValidError, handleClose, validError, openNext, value }) => {
-    const {setIsAuth} = useContext(Context)
+    const {setIsAuth, token, setToken} = useContext(Context)
     let navigate = useNavigate();
 
     const handleCloseWrap = () => {
@@ -28,8 +28,8 @@ const LogInForm = ({checkAuth, setValidError, handleClose, validError, openNext,
             email: '',
         },
         validationSchema: LoginSchema,
-        onSubmit: values => {
-            if (checkAuth(values, setValidError)) {
+        onSubmit: async (values) => {
+            if ( await checkAuth(values, setValidError, token, setToken)) {
                 handleCloseWrap()
                 if ((value === "Sign up")) {
                     openNext(true)

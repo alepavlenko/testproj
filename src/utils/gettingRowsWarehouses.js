@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export const getRows = (wareHouses) => {
     const localRows = [];
     const thisUser = JSON.parse(localStorage.getItem('user'))
@@ -26,4 +28,15 @@ export const getRows = (wareHouses) => {
         }
     })
     return localRows;
+
+//     await axios.post('http://localhost:5000/api/auth/login',
+//         {
+//             password: 123
+//         }).then((res) => {
+//
+//     })
+//         .catch(e => {
+//
+//         })
+// }
 }

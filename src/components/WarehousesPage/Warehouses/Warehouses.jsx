@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 
 import Box from '@mui/material/Box';
 import TableContainer from '@mui/material/TableContainer';
@@ -21,6 +21,7 @@ const Warehouses = () => {
     const {wareHouses} = useContext(Context)
 
     const [selected, setSelected] = useState([]);
+    const [rows, setRows] = useState([]);
     const [openAddWarehouses, setOpenAddWarehouses] = useState(false)
     const [openSucksesWarehouses, setOpenSucksesWarehouses] = useState(false)
 
@@ -53,6 +54,12 @@ const Warehouses = () => {
         }
         setSelected(newSelected);
     };
+
+    useEffect(() => {
+        getRows(wareHouses).then((result) => {
+            setRows(result)
+        })
+    }, [])
 
     return (
         <div className={style.wrapTable}>
