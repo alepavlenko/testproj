@@ -16,7 +16,7 @@ const AddItem = ({handleClose, openNext, value}) => {
     const [activeStep, setActiveStep] = useState(0);
     const steps = getSteps();
 
-    const {setItems} = useContext(Context)
+    const {setItems, items, token} = useContext(Context)
 
     const handleNext = () => {
 
@@ -42,7 +42,7 @@ const AddItem = ({handleClose, openNext, value}) => {
         validationSchema: AddItemSchema,
         onSubmit: values => {
             console.log()
-            addItems(setItems, values, warehouseId)
+            addItems(token, values, items, setItems, warehouseId)
             handleCloseWrap();
             openNextModal()
 

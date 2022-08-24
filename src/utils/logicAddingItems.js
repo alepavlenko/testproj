@@ -1,24 +1,27 @@
-export const addItems = (setItems, values, warehouseId) => {
-    const {name, manufacturer, number, purchasing, delivery} = values
+import axios from "axios";
 
-    if(!localStorage.getItem('items')){
-        const array = []
-        localStorage.setItem('items', JSON.stringify(array))
-    }
-    const localItem = JSON.parse(localStorage.getItem('items'))
-    const item = {
-        warehouseId,
-        id: Math.random().toString(36).substring(2),
-        name,
-        manufacturer,
-        number,
-        purchasing,
-        delivery,
-    }
+export const addItems = async (token, values, items, setItems, warehouseId) => {
+    return await axios.post(`http://localhost:5000/api/products/${warehouseId}`,
+        {
+            name: values.name.trim() ,
+            manufacturer: values.manufacturer.trim(),
+            itemNumber: values.number.trim(),
+            purchasing: values.purchasing.trim(),
+            shipment: values.delivery.trim(),
+        },
+        {
+            headers: {
+                'Authorization': token
+            }
+        })
+        .then((res) => {
+            setItems([...items, {...res.data}])
+            return true;
+        })
+        .catch(e => {
+            console.log(e)
+            return false
 
-    localItem.push(item)
-    localStorage.setItem("items", JSON.stringify(localItem))
-    setItems(localItem)
+        })
 
-    return;
 }

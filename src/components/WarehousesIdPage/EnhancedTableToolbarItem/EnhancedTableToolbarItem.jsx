@@ -24,7 +24,7 @@ const EnhancedTableToolbarItem = ({setOpenAddWarehouses, warehouseId}) => {
                 component="div"
             >
                 {
-                    <div>Warehouses: {localWare[0].name}</div>
+                    // <div>Warehouses: {localWare[0].}</div>
                 }
             </Typography>
             <ButtonStyled variant="contained" onClick={setOpenAddWarehouses}>Add Cargo <PlusIcons/></ButtonStyled>

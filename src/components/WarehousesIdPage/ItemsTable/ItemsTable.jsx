@@ -8,17 +8,17 @@ const ItemsTable = ({warehouseId, selected,items, headCells, handleSelectAllClic
         <div>
             <Table>
                 <EnhancedItemsTableHead
-                    wareHouses={items}
+                    items={items}
                     selected={selected}
                     headCells={headCells}
                     onSelectAllClick={handleSelectAllClick}
                 />
                 <ItemsTableBody
-                    warehouseId={warehouseId}
-                    getRows={getItems}
+                    // warehouseId={warehouseId}
+                    // getRows={getItems}
                     isSelected={isSelected}
                     handleClick={handleClick}
-                    wareHouses={items}
+                    items={items}
                 />
             </Table>
         </div>

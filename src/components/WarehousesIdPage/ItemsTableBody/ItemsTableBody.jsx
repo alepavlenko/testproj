@@ -8,7 +8,7 @@ import AirPlane from "../../Common/Icons/AirPlane";
 import Ship from "../../Common/Icons/Ship";
 import Car from "../../Common/Icons/Car";
 
-const ItemsTableBody = ({warehouseId, getRows, isSelected, handleClick, wareHouses}) => {
+const ItemsTableBody = ({isSelected, handleClick, items}) => {
 
    function rowIcons(row) {
        switch (row) {
@@ -24,8 +24,8 @@ const ItemsTableBody = ({warehouseId, getRows, isSelected, handleClick, wareHous
 
     return (
         <TableBody>
-            {getRows(wareHouses,warehouseId).map((row, index) => {
-                const isItemSelected = isSelected(row.id);
+            {items.map((row, index) => {
+                const isItemSelected = isSelected(row._id);
                 const labelId = `enhanced-table-checkbox-${index}`;
 
                 return (
@@ -34,13 +34,13 @@ const ItemsTableBody = ({warehouseId, getRows, isSelected, handleClick, wareHous
                         role="checkbox"
                         aria-checked={isItemSelected}
                         tabIndex={-1}
-                        key={row.id}
+                        key={row._id}
                         selected={isItemSelected}
                         className={style.wrapRow}
                     >
                         <TableCell padding="checkbox">
                             <Checkbox
-                                onClick={(event) => handleClick(event, row.id)}
+                                onClick={(event) => handleClick(event, row._id)}
                                 color="primary"
                                 checked={isItemSelected}
                                 inputProps={{
@@ -61,15 +61,15 @@ const ItemsTableBody = ({warehouseId, getRows, isSelected, handleClick, wareHous
                         </TableCell>
                         <TableCell
                             align="left">
-                            {row.number}
+                            {row.itemNumber}
                         </TableCell>
                         <TableCell align="left">
                             {row.purchasing}
                         </TableCell>
                         <TableCell align="left">
                             <div className={style.wrapRowIcons}>
-                                {rowIcons(row.delivery.toUpperCase())}
-                                {row.delivery.toUpperCase()}
+                                {rowIcons(row.shipment.toUpperCase())}
+                                {row.shipment.toUpperCase()}
                             </div>
                         </TableCell>
                     </TableRow>

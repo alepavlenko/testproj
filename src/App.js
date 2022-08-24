@@ -10,7 +10,7 @@ function App() {
 
     const [isAuth, setIsAuth] = useState(Boolean(localStorage.getItem('auth')))
     const [wareHouses, setWareHouses] = useState([])
-    const [items, setItems] = useState(JSON.parse(localStorage.getItem('items')))
+    const [items, setItems] = useState([])
     const [token, setToken] = useState(localStorage.getItem('token'))
 
     const values = {

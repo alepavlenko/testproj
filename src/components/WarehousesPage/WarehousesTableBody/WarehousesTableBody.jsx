@@ -12,13 +12,6 @@ const WarehousesTableBody = ({wareHouses, isSelected, handleClick, }) => {
 
     const navigate = useNavigate()
 
-    // const openWarehouse = (row) => {
-    //
-    //     console.log("111111", row)
-    //     navigate(`/warehouses/${row.id}`, {replace: true})
-    //
-    //
-    // }
 
     return (
         <TableBody>

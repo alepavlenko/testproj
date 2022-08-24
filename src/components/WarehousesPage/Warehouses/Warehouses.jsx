@@ -18,11 +18,17 @@ const headCells = ['All stores', 'Number of products', 'Length, m', 'Width, m', 
 
 const Warehouses = () => {
 
-    const {wareHouses, setWareHouses , token, setIsAuth} = useContext(Context)
+    const {wareHouses, setWareHouses, token, setIsAuth} = useContext(Context)
 
     const [selected, setSelected] = useState([]);
     const [openAddWarehouses, setOpenAddWarehouses] = useState(false)
     const [openSucksesWarehouses, setOpenSucksesWarehouses] = useState(false)
+
+    useEffect(() => {
+        getRows(token, setIsAuth).then((result) => {
+            setWareHouses(result)
+        })
+    }, [])
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
 
@@ -54,13 +60,6 @@ const Warehouses = () => {
         setSelected(newSelected);
     };
 
-    useEffect(() => {
-        getRows(token, setIsAuth).then((result) => {
-            setWareHouses(result)
-        })
-    }, [])
-
-    console.log(wareHouses)
     return (
         <div className={style.wrapTable}>
             <Box sx={{width: '100%'}}>
