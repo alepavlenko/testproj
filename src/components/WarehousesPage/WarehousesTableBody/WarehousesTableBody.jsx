@@ -8,7 +8,7 @@ import TableBody from "@mui/material/TableBody";
 import style from "../Warehouses/Warehouses.module.css";
 import {useNavigate} from "react-router-dom";
 
-const WarehousesTableBody = ({getRows, isSelected, handleClick, wareHouses}) => {
+const WarehousesTableBody = ({wareHouses, isSelected, handleClick, }) => {
 
     const navigate = useNavigate()
 
@@ -20,10 +20,11 @@ const WarehousesTableBody = ({getRows, isSelected, handleClick, wareHouses}) => 
     //
     // }
 
+    console.log('warehouses in tablebody' ,wareHouses)
     return (
         <TableBody>
-            {getRows(wareHouses).map((row, index) => {
-                const isItemSelected = isSelected(row.id);
+            {wareHouses.map((row, index) => {
+                const isItemSelected = isSelected(row._id);
                 const labelId = `enhanced-table-checkbox-${index}`;
 
                 return (
@@ -32,7 +33,7 @@ const WarehousesTableBody = ({getRows, isSelected, handleClick, wareHouses}) => 
                         role="checkbox"
                         aria-checked={isItemSelected}
                         tabIndex={-1}
-                        key={row.id}
+                        key={row._id}
                         selected={isItemSelected}
                         className={style.wrapRow}
                     >
@@ -52,7 +53,7 @@ const WarehousesTableBody = ({getRows, isSelected, handleClick, wareHouses}) => 
                             scope="row"
                             padding="none"
                             onClick={() => {
-                                navigate(`/warehouses/${row.id}`, {replace: true})
+                                navigate(`/warehouses/${row._id}`, {replace: true})
                             }}
                                 >
                             {row.name}
@@ -60,15 +61,15 @@ const WarehousesTableBody = ({getRows, isSelected, handleClick, wareHouses}) => 
                                 <TableCell
                                 align="left"
                                 onClick={() => {
-                                navigate(`/warehouses/${row.id}`, {replace: true})
+                                navigate(`/warehouses/${row._id}`, {replace: true})
                             }}
                                 >
-                            {row.wirehousesNumber}
+                            {row.numberProduct}
                                 </TableCell>
                                 <TableCell
                                 align="left"
                                 onClick={() => {
-                                navigate(`/warehouses/${row.id}`, {replace: true})
+                                navigate(`/warehouses/${row._id}`, {replace: true})
                             }}
                                 >
                             {row.length}
@@ -76,7 +77,7 @@ const WarehousesTableBody = ({getRows, isSelected, handleClick, wareHouses}) => 
                                 <TableCell
                                 align="left"
                                 onClick={() => {
-                                navigate(`/warehouses/${row.id}`, {replace: true})
+                                navigate(`/warehouses/${row._id}`, {replace: true})
                             }}
                                 >
                             {row.width}
@@ -84,7 +85,7 @@ const WarehousesTableBody = ({getRows, isSelected, handleClick, wareHouses}) => 
                                 <TableCell
                                 align="left"
                                 onClick={() => {
-                                navigate(`/warehouses/${row.id}`, {replace: true})
+                                navigate(`/warehouses/${row._id}`, {replace: true})
                             }}
                                 >
                             {row.height}

@@ -18,21 +18,20 @@ const headCells = ['All stores', 'Number of products', 'Length, m', 'Width, m', 
 
 const Warehouses = () => {
 
-    const {wareHouses} = useContext(Context)
+    const {wareHouses, setWareHouses , token} = useContext(Context)
 
     const [selected, setSelected] = useState([]);
-    const [rows, setRows] = useState([]);
     const [openAddWarehouses, setOpenAddWarehouses] = useState(false)
     const [openSucksesWarehouses, setOpenSucksesWarehouses] = useState(false)
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
 
     const handleSelectAllClick = (event) => {
-        if (event.target.checked) {
-            const newSelected = getRows(wareHouses).map((n) => n.id);
-            setSelected(newSelected);
-            return;
-        }
+        // if (event.target.checked) {
+        //     const newSelected = wareHouses.map((n) => n.id);
+        //     setSelected(newSelected);
+        //     return;
+        // }
         setSelected([]);
     };
 
@@ -56,10 +55,13 @@ const Warehouses = () => {
     };
 
     useEffect(() => {
-        getRows(wareHouses).then((result) => {
-            setRows(result)
+        console.log('token in ', token)
+        getRows(token).then((result) => {
+            setWareHouses(result)
         })
     }, [])
+
+    console.log('warehouses', wareHouses)
 
     return (
         <div className={style.wrapTable}>
@@ -69,17 +71,16 @@ const Warehouses = () => {
                         // numSelected={selected.length}
                         setOpenAddWarehouses={setOpenAddWarehouses}
                     />
-                    {getRows(wareHouses).length === 0
+                    {wareHouses.length === 0
                         ? <div className={style.wrapWarehouses}> Warehouses dosnt have </div>
                         : <TableContainer className={(selected.length >= 1) ? style.wrapBodyUltra : style.wrapBody}>
                             <WarehousesTable
                                 selected={selected}
                                 headCells={headCells}
                                 handleSelectAllClick={handleSelectAllClick}
-                                getRows={getRows}
+                                wareHouses={wareHouses}
                                 isSelected={isSelected}
                                 handleClick={handleClick}
-                                wareHouses={wareHouses}
                             />
                         </TableContainer>
                     }

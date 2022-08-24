@@ -1,28 +1,28 @@
-export const addWarehouses = (values, setWareHouses) => {
-    let flag = true
+import axios from "axios";
 
-    if(!localStorage.getItem('warehouses')){
-        const array = []
-        localStorage.setItem('warehouses', JSON.stringify(array))
-    }
-    const localWarehouses = JSON.parse(localStorage.getItem('warehouses'))
-    if(!localStorage.getItem('user')){
-        flag = false
-    }
-    const thisUser = JSON.parse(localStorage.getItem('user'))
+export const addWarehouses = async (token, values, wareHouses, setWareHouses) => {
+const num = '1'
+    return await axios.post('http://localhost:5000/api/warehouses/',
+        {
+                name: values.nameWarehouses.trim() ,
+                numberProduct: num,
+                length: values.length.trim(),
+                width: values.width.trim(),
+                height: values.height.trim(),
 
-    const warehouses = {
-        userid: thisUser.id,
-        warehousesid: Math.random().toString(36).substring(2),
-        nameWarehouses: values.nameWarehouses.trim(),
-        length: values.length.trim(),
-        width: values.width.trim(),
-        height: values.height.trim(),
-    }
+        },
+        {
+            headers: {
+                'Authorization': token
+            }
+        })
+        .then((res) => {
+            setWareHouses([...wareHouses, ...res.data])
+            return true;
+        })
+        .catch(e => {
+            console.log(e)
+            return false
 
-    localWarehouses.push(warehouses)
-    localStorage.setItem("warehouses", JSON.stringify(localWarehouses))
-    setWareHouses(localWarehouses)
-
-    return flag;
+        })
 }

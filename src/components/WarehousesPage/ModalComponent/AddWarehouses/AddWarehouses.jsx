@@ -8,7 +8,7 @@ import {Context} from "../../../../App";
 import {AddWarehousesSchema} from "./AddWarehousesForm";
 
 const AddWarehouses = ({handleClose, openNext, value }) => {
-    const { setWareHouses } = useContext(Context)
+    const { wareHouses, setWareHouses, token } = useContext(Context)
 
     const handleCloseWrap = () => {
         formik.resetForm()
@@ -30,7 +30,7 @@ const AddWarehouses = ({handleClose, openNext, value }) => {
         },
         validationSchema: AddWarehousesSchema,
         onSubmit: values => {
-            addWarehouses(values, setWareHouses)
+            addWarehouses(token, values, wareHouses, setWareHouses)
             handleCloseWrap();
             openNextModal()
         },
