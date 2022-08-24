@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const getRows = async (token) => {
+export const getRows = async (token, setIsAuth) => {
     // const localRows = [];
 
     return await axios.get('http://localhost:5000/api/warehouses/',
@@ -15,8 +15,11 @@ export const getRows = async (token) => {
         })
         .catch(e => {
             console.log('inner',token)
-            // let emptyArr =[]
             console.log(e)
+
+            if(e.response.data === 'Unauthorized'){
+                setIsAuth(false)
+            }
             return false
 
         })

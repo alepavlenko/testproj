@@ -20,7 +20,6 @@ const WarehousesTableBody = ({wareHouses, isSelected, handleClick, }) => {
     //
     // }
 
-    console.log('warehouses in tablebody' ,wareHouses)
     return (
         <TableBody>
             {wareHouses.map((row, index) => {
@@ -39,7 +38,7 @@ const WarehousesTableBody = ({wareHouses, isSelected, handleClick, }) => {
                     >
                         <TableCell padding="checkbox">
                             <Checkbox
-                                onClick={(event) => handleClick(event, row.id)}
+                                onClick={(event) => handleClick(event, row._id)}
                                 color="primary"
                                 checked={isItemSelected}
                                 inputProps={{

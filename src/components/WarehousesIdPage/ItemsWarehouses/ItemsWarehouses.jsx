@@ -18,8 +18,8 @@ import SucsessfulModalMove from "../ModalComponent/SucsessfulModalMove/Sucsessfu
 const headCells = ['All products', 'Manufacturer', 'Item number', 'Purchasing technology', 'Shipment method'];
 
 const ItemsWarehouses = () => {
-    const {warehouseId} = useParams();
 
+    const {warehouseId} = useParams();
     const {items} = useContext(Context)
 
     const [selected, setSelected] = useState([]);

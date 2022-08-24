@@ -18,7 +18,7 @@ const headCells = ['All stores', 'Number of products', 'Length, m', 'Width, m', 
 
 const Warehouses = () => {
 
-    const {wareHouses, setWareHouses , token} = useContext(Context)
+    const {wareHouses, setWareHouses , token, setIsAuth} = useContext(Context)
 
     const [selected, setSelected] = useState([]);
     const [openAddWarehouses, setOpenAddWarehouses] = useState(false)
@@ -27,11 +27,11 @@ const Warehouses = () => {
     const isSelected = (name) => selected.indexOf(name) !== -1;
 
     const handleSelectAllClick = (event) => {
-        // if (event.target.checked) {
-        //     const newSelected = wareHouses.map((n) => n.id);
-        //     setSelected(newSelected);
-        //     return;
-        // }
+        if (event.target.checked) {
+            const newSelected = wareHouses.map((n) => n._id);
+            setSelected(newSelected);
+            return;
+        }
         setSelected([]);
     };
 
@@ -55,13 +55,10 @@ const Warehouses = () => {
     };
 
     useEffect(() => {
-        console.log('token in ', token)
-        getRows(token).then((result) => {
+        getRows(token, setIsAuth).then((result) => {
             setWareHouses(result)
         })
     }, [])
-
-    console.log('warehouses', wareHouses)
 
     return (
         <div className={style.wrapTable}>
