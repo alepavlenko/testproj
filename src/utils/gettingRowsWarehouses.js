@@ -1,7 +1,6 @@
 import axios from "axios";
 
 export const getRows = async (token, setIsAuth) => {
-    // const localRows = [];
 
     return await axios.get('http://localhost:5000/api/warehouses/',
         {
@@ -23,5 +22,4 @@ export const getRows = async (token, setIsAuth) => {
             return false
 
         })
-    // return localRows;
 }

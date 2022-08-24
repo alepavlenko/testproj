@@ -29,10 +29,6 @@ const ItemsWarehouses = () => {
     const [openMoveProduct, setOpenMoveProduct] = useState(false)
     const [suckModal, setSuckModal] = useState(false)
 
-    useEffect(()=>{
-        console.log('nen',openSucksesWarehouses)
-    },[openSucksesWarehouses])
-
     const isSelected = (name) => selected.indexOf(name) !== -1;
 
     const handleSelectAllClick = (event) => {
@@ -62,6 +58,9 @@ const ItemsWarehouses = () => {
         }
         setSelected(newSelected);
     };
+
+    console.log('id ',warehouseId)
+
     return (
         <div className={style.wrapTable}>
             <Box sx={{width: '100%'}}>
@@ -70,7 +69,6 @@ const ItemsWarehouses = () => {
                         warehouseId={warehouseId}
                         setOpenAddWarehouses={setOpenAddProduct}
                     />
-                    {/*//getItems(items).length*/}
                     {getItems(items, warehouseId).length === 0
                         ? <div className={style.wrapWarehouses}> Items dosnt have </div>
                         : <TableContainer className={(selected.length >= 1) ? style.wrapBodyUltra : style.wrapBody}>

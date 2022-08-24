@@ -60,6 +60,7 @@ const Warehouses = () => {
         })
     }, [])
 
+    console.log(wareHouses)
     return (
         <div className={style.wrapTable}>
             <Box sx={{width: '100%'}}>
