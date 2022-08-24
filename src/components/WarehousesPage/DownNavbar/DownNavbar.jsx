@@ -11,10 +11,8 @@ const DownNavbar = ({stateSelected, setStateSelected}) => {
 
 
     const removeSelected = () => {
-        removeSelectedRow(stateSelected, setStateSelected, wareHouses, setWareHouses, token)
-        // const tempWarehouses = wareHouses.filter((warehouse) => !stateSelected.includes(warehouse.warehousesid))
-        // setWareHouses(tempWarehouses)
-        // setStateSelected([])
+        const categoy = 'warehouses'
+        removeSelectedRow(categoy, stateSelected, setStateSelected, wareHouses, setWareHouses, token)
     }
     console.log('selected ',stateSelected)
 

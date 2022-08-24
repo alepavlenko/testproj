@@ -3,15 +3,15 @@ import {Context} from "../../../App";
 import style from "./DownItemNavbar.module.css";
 import Selected from "../../Common/Icons/Selected";
 import Move from "../../Common/Icons/Move";
+import {removeSelectedRow} from "../../../utils/deletedSelectedWarehouses";
 
 const DownItemNavbar = ({setOpenMoveProduct, stateSelected, setStateSelected}) => {
 
-    const { items, setItems } = useContext(Context)
+    const { items, setItems, token } = useContext(Context)
 
     const removeSelected = () => {
-        const tempWarehouses = items.filter((item) => !stateSelected.includes(item.id))
-        setItems(tempWarehouses)
-        setStateSelected([])
+        const categoy = 'products'
+        removeSelectedRow(categoy, stateSelected, setStateSelected, items, setItems, token)
     }
 
     return (

@@ -1,24 +1,32 @@
-export const moveProduct = (
-        items,
-        setItems,
-        values,
-        warehouseId,
-        stateSelected,
-        setStateSelected,
+import axios from "axios";
+import {getItems} from "./gettingItems";
 
-    ) => {
+export  const moveProduct = async (values ,warehouseId ,stateSelected, setStateSelected,  token, items, setItems, setIsAuth) => {
 
-    const localItem = JSON.parse(localStorage.getItem('items'))
+    for (const select of stateSelected) {
+        await axios.patch(`http://localhost:5000/api/products/${select}/${values.selectWarehouses}`,
+            {
 
-    const tempLocalItems = localItem.filter((item) =>  !stateSelected.includes(item.id) )
+            },{
+                headers: {
+                    'Authorization': token
+                }
+            })
+            .then((res) => {
+                // const tempWarehouses = wareHouses.filter((warehouse) => !stateSelected.includes(warehouse._id))
+                // setWareHouses(tempWarehouses)
+                // setItems(items)
+                return true;
+            })
+            .catch(e => {
+                console.log(e)
+                return false
 
-    const tempLocalSelectedItems = localItem.filter((item) =>  stateSelected.includes(item.id) )
-
-    tempLocalSelectedItems.forEach((item) => {
-        item.warehouseId = values.selectWarehouses;
-    })
-const finishProducts = [...tempLocalItems, ...tempLocalSelectedItems]
-    localStorage.setItem("items", JSON.stringify(finishProducts))
-    setItems(finishProducts)
+            });
+    }
     setStateSelected([])
+     await getItems(token, setIsAuth, warehouseId).then((res) => {
+         setItems(res)
+     })
+
 }

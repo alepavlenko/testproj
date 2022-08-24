@@ -1,9 +1,9 @@
 import axios from "axios";
 
-export  const removeSelectedRow = async (stateSelected, setStateSelected, wareHouses, setWareHouses, token) => {
+export  const removeSelectedRow = async (categoy ,stateSelected, setStateSelected, wareHouses, setWareHouses, token) => {
 
     for (const select of stateSelected) {
-        await axios.delete(`http://localhost:5000/api/warehouses/${select}`,
+        await axios.delete(`http://localhost:5000/api/${categoy}/${select}`,
             {
                 headers: {
                     'Authorization': token

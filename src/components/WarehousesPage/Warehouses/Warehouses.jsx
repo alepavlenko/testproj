@@ -28,6 +28,9 @@ const Warehouses = () => {
         getRows(token, setIsAuth).then((result) => {
             setWareHouses(result)
         })
+        // getRows(token, setIsAuth).then((result) => {
+        //     setWareHouses(result)
+        // })
     }, [])
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
