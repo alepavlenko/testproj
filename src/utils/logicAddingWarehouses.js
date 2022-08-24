@@ -17,7 +17,7 @@ const num = '1'
             }
         })
         .then((res) => {
-            setWareHouses([...wareHouses, ...res.data])
+            setWareHouses([...wareHouses, {...res.data}])
             return true;
         })
         .catch(e => {
@@ -25,4 +25,5 @@ const num = '1'
             return false
 
         })
+
 }
