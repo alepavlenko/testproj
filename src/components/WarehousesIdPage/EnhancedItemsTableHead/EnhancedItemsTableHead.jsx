@@ -6,15 +6,15 @@ import Checkbox from "@mui/material/Checkbox";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import {getItems} from "../../../utils/gettingItems";
 
-const EnhancedItemsTableHead = ({wareHouses,selected,onSelectAllClick, headCells}) => {
+const EnhancedItemsTableHead = ({items,selected,onSelectAllClick, headCells}) => {
     return (
         <TableHead>
             <TableRow>
                 <TableCell padding="checkbox">
                     <Checkbox
                         color="primary"
-                        indeterminate={selected.length > 0 && selected.length < getItems(wareHouses).length}
-                        checked={getItems(wareHouses).length > 0 && selected.length === getItems(wareHouses).length }
+                        indeterminate={selected.length > 0 && selected.length < items.length}
+                        checked={items.length > 0 && selected.length === items.length }
                         onChange={onSelectAllClick}
                     />
                 </TableCell>

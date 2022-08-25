@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 
 import Box from '@mui/material/Box';
 import TableContainer from '@mui/material/TableContainer';
@@ -18,17 +18,26 @@ const headCells = ['All stores', 'Number of products', 'Length, m', 'Width, m', 
 
 const Warehouses = () => {
 
-    const {wareHouses} = useContext(Context)
+    const {wareHouses, setWareHouses, token, setIsAuth} = useContext(Context)
 
     const [selected, setSelected] = useState([]);
     const [openAddWarehouses, setOpenAddWarehouses] = useState(false)
     const [openSucksesWarehouses, setOpenSucksesWarehouses] = useState(false)
 
+    useEffect(() => {
+        getRows(token, setIsAuth).then((result) => {
+            setWareHouses(result)
+        })
+        // getRows(token, setIsAuth).then((result) => {
+        //     setWareHouses(result)
+        // })
+    }, [])
+
     const isSelected = (name) => selected.indexOf(name) !== -1;
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
-            const newSelected = getRows(wareHouses).map((n) => n.id);
+            const newSelected = wareHouses.map((n) => n._id);
             setSelected(newSelected);
             return;
         }
@@ -62,17 +71,16 @@ const Warehouses = () => {
                         // numSelected={selected.length}
                         setOpenAddWarehouses={setOpenAddWarehouses}
                     />
-                    {getRows(wareHouses).length === 0
+                    {wareHouses.length === 0
                         ? <div className={style.wrapWarehouses}> Warehouses dosnt have </div>
                         : <TableContainer className={(selected.length >= 1) ? style.wrapBodyUltra : style.wrapBody}>
                             <WarehousesTable
                                 selected={selected}
                                 headCells={headCells}
                                 handleSelectAllClick={handleSelectAllClick}
-                                getRows={getRows}
+                                wareHouses={wareHouses}
                                 isSelected={isSelected}
                                 handleClick={handleClick}
-                                wareHouses={wareHouses}
                             />
                         </TableContainer>
                     }

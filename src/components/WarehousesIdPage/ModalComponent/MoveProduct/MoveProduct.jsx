@@ -15,7 +15,7 @@ const MoveProduct = ({ handleClose, openNext, value, stateSelected, setStateSele
     const [activeStep, setActiveStep] = useState(0);
     const steps = getSteps();
 
-    const {items ,setItems} = useContext(Context)
+    const {token, items, setItems, setIsAuth} = useContext(Context)
 
     const handleNext = () => {
         if(formik.values.selectWarehouses === ''){
@@ -36,9 +36,10 @@ const MoveProduct = ({ handleClose, openNext, value, stateSelected, setStateSele
         },
         validationSchema: MoveItemSchema,
         onSubmit: values => {
-            openNext(true);
+            // openNext(true);
+            console.log(token)
             values.baseWarehouses = warehouseId;
-            moveProduct(items, setItems, values, warehouseId, stateSelected, setStateSelected)
+            moveProduct(values ,warehouseId ,stateSelected, setStateSelected,  token, items, setItems, setIsAuth)
             openNextModal();
 
         },
@@ -64,7 +65,7 @@ const MoveProduct = ({ handleClose, openNext, value, stateSelected, setStateSele
 
     const openNextModal = () => {
         console.log(11)
-        // openNext(true);
+        openNext(true);
         handleClose(false);
     }
 

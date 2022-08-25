@@ -1,15 +1,18 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {ButtonStyled} from "../MoveProduct.style";
 import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 import Move from "../../../../Common/Icons/Move";
 import style from './MoveFirstStep.module.css'
+import {Context} from "../../../../../App";
 
 const MoveFirstStep = ({stateSelected, nextStep, formik, warehouseId}) => {
 
-    const selectWarehouses = JSON.parse(localStorage.getItem('warehouses'))
-    const basedWarehourses = selectWarehouses.filter((ware) => ware.warehousesid === warehouseId)
-    const nameBasedWare = basedWarehourses[0].nameWarehouses;
-    const anotherWarehourses = selectWarehouses.filter((ware) =>  !warehouseId.includes(ware.warehousesid) )
+
+    const {wareHouses} = useContext(Context)
+
+    const basedWarehourses = wareHouses.filter((ware) => ware._id === warehouseId)
+    const nameBasedWare = basedWarehourses[0].name;
+    const anotherWarehourses = wareHouses.filter((ware) =>  !warehouseId.includes(ware._id) )
 
     return (
             <div className={style.wrapForm}>
@@ -42,10 +45,10 @@ const MoveFirstStep = ({stateSelected, nextStep, formik, warehouseId}) => {
                     >
                         {anotherWarehourses.map((warehouses) =>
                             (<MenuItem
-                                key={warehouses.warehousesid}
-                                value={warehouses.warehousesid}
+                                key={warehouses._id}
+                                value={warehouses._id}
                             >
-                                {warehouses.nameWarehouses}
+                                {warehouses.name}
                             </MenuItem>)
                         )}
 

@@ -1,17 +1,20 @@
-export const loginAuth = (values) => {
-    let flag = false;
-    const userTemp = {};
-    userTemp.password = values.password.trim()
-    userTemp.email = values.email.trim()
+import axios from "axios";
 
-    let localUsers = JSON.parse(localStorage.getItem("users"))
-    localUsers.forEach((user) => {
-        if (user.email === values.email.trim() && user.password === values.password.trim()) {
-            userTemp.id = user.id;
-            localStorage.setItem("user", JSON.stringify(userTemp))
-            flag = true;
-        }
+export const loginAuth = async (values, validErr ,token, setToken) => {
+
+return await axios.post('http://localhost:5000/api/auth/login',
+        {
+            email: values.email.trim(),
+            password: values.password.trim()
+        }).then((res) => {
+    setToken(res.data.token)
+    localStorage.setItem('auth', 'true')
+    localStorage.setItem('token', res.data.token)
+    console.log('tik tok',token)
+        return true
     })
-
-    return flag
+        .catch(e => {
+            validErr(true)
+            return false
+        })
 }

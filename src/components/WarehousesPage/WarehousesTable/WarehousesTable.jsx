@@ -4,7 +4,7 @@ import WarehousesTableBody from "../WarehousesTableBody/WarehousesTableBody";
 import Table from "@mui/material/Table";
 import EnhancedTableHead from "../EnhancedTableHead/EnhancedTableHead";
 
-const WarehousesTable = ({selected,wareHouses, headCells, handleSelectAllClick, getRows, isSelected, handleClick}) => {
+const WarehousesTable = ({selected, headCells, handleSelectAllClick, wareHouses, isSelected, handleClick}) => {
 
     return (
         <Table>
@@ -15,10 +15,9 @@ const WarehousesTable = ({selected,wareHouses, headCells, handleSelectAllClick, 
                 onSelectAllClick={handleSelectAllClick}
             />
             <WarehousesTableBody
-                getRows={getRows}
+                wareHouses={wareHouses}
                 isSelected={isSelected}
                 handleClick={handleClick}
-                wareHouses={wareHouses}
             />
         </Table>
     );

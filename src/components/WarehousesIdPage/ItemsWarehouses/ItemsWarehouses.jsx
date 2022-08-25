@@ -14,13 +14,14 @@ import EnhancedTableToolbarItem from "../EnhancedTableToolbarItem/EnhancedTableT
 import SucksesModalAdding from "../ModalComponent/SucksesModalAdding/SucksesModalAdding";
 import MoveProduct from "../ModalComponent/MoveProduct/MoveProduct";
 import SucsessfulModalMove from "../ModalComponent/SucsessfulModalMove/SucsessfulModalMove";
+import {getRows} from "../../../utils/gettingRowsWarehouses";
 
 const headCells = ['All products', 'Manufacturer', 'Item number', 'Purchasing technology', 'Shipment method'];
 
 const ItemsWarehouses = () => {
-    const {warehouseId} = useParams();
 
-    const {items} = useContext(Context)
+    const {warehouseId} = useParams();
+    const {items, setItems, token, setIsAuth, setWareHouses} = useContext(Context)
 
     const [selected, setSelected] = useState([]);
     const [openAddProduct, setOpenAddProduct] = useState(false)
@@ -29,15 +30,21 @@ const ItemsWarehouses = () => {
     const [openMoveProduct, setOpenMoveProduct] = useState(false)
     const [suckModal, setSuckModal] = useState(false)
 
-    useEffect(()=>{
-        console.log('nen',openSucksesWarehouses)
-    },[openSucksesWarehouses])
+    useEffect(() => {
+        getItems(token, setIsAuth, warehouseId).then((result) => {
+            setItems(result)
+        })
+        getRows(token, setIsAuth, warehouseId).then((result) => {
+            setWareHouses(result)
+        })
+
+    }, [])
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
-            const newSelected = getItems(items, warehouseId).map((n) => n.id);
+            const newSelected = items.map((n) => n._id);
             setSelected(newSelected);
             return;
         }
@@ -62,6 +69,7 @@ const ItemsWarehouses = () => {
         }
         setSelected(newSelected);
     };
+
     return (
         <div className={style.wrapTable}>
             <Box sx={{width: '100%'}}>
@@ -70,19 +78,16 @@ const ItemsWarehouses = () => {
                         warehouseId={warehouseId}
                         setOpenAddWarehouses={setOpenAddProduct}
                     />
-                    {/*//getItems(items).length*/}
-                    {getItems(items, warehouseId).length === 0
+                    {items.length === 0
                         ? <div className={style.wrapWarehouses}> Items dosnt have </div>
                         : <TableContainer className={(selected.length >= 1) ? style.wrapBodyUltra : style.wrapBody}>
                             <ItemsTable
                                 selected={selected}
                                 headCells={headCells}
                                 handleSelectAllClick={handleSelectAllClick}
-                                getItems={getItems}
                                 isSelected={isSelected}
                                 handleClick={handleClick}
                                 items={items}
-                                warehouseId={warehouseId}
                             />
                         </TableContainer>
                     }

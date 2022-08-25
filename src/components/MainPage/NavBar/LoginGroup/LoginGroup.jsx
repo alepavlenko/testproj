@@ -10,7 +10,7 @@ import {loginAuth, signUpAuth} from "../../../../utils";
 
 
 const LoginGroup = () => {
-    const {isAuth, setIsAuth} = useContext(Context)
+    const {isAuth, setIsAuth, setToken} = useContext(Context)
 
     const [openSignUp, setOpenSignUp] = useState(false)
     const [openLogIn, setOpenLogIn] = useState(false)
@@ -30,7 +30,8 @@ const LoginGroup = () => {
 
     const logOut = () => {
         setIsAuth(false)
-        localStorage.removeItem('user')
+        localStorage.removeItem('auth')
+        setToken('')
     }
 
     return (

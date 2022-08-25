@@ -3,16 +3,18 @@ import React, {useContext} from 'react';
 import style from './DownNavbar.module.css'
 import {Context} from "../../../App";
 import Selected from "../../Common/Icons/Selected";
+import {removeSelectedRow} from "../../../utils/deletedSelectedWarehouses";
 
 const DownNavbar = ({stateSelected, setStateSelected}) => {
 
-    const { wareHouses, setWareHouses } = useContext(Context)
+    const { wareHouses, setWareHouses, token } = useContext(Context)
+
 
     const removeSelected = () => {
-        const tempWarehouses = wareHouses.filter((warehouse) => !stateSelected.includes(warehouse.warehousesid))
-        setWareHouses(tempWarehouses)
-        setStateSelected([])
+        const categoy = 'warehouses'
+        removeSelectedRow(categoy, stateSelected, setStateSelected, wareHouses, setWareHouses, token)
     }
+    console.log('selected ',stateSelected)
 
     return (
         <div className={style.downBar}>

@@ -1,29 +1,25 @@
-export const getRows = (wareHouses) => {
-    const localRows = [];
-    const thisUser = JSON.parse(localStorage.getItem('user'))
-    
-    if(!wareHouses){
-        const array = []
-        localStorage.setItem('warehouses', JSON.stringify(array))
-        return localRows
-    }
-    const thisWare = JSON.parse(localStorage.getItem('warehouses'))
+import axios from "axios";
 
-    if(wareHouses.length !== thisWare.length){
-        localStorage.setItem('warehouses', JSON.stringify(wareHouses))
-    }
+export const getRows = async (token, setIsAuth) => {
 
-    wareHouses.forEach((warehouses) => {
-        if (thisUser.id === warehouses.userid) {
-            localRows.push({
-                id: warehouses.warehousesid,
-                name: warehouses.nameWarehouses,
-                wirehousesNumber: 1,
-                length: warehouses.length,
-                width: warehouses.width,
-                height: warehouses.height,
-            })
-        }
-    })
-    return localRows;
+    return await axios.get('http://localhost:5000/api/warehouses/',
+        {
+            headers: {
+                'Authorization': token
+            }
+        })
+        .then((res) => {
+            console.log('ware', res.data)
+            return res.data;
+        })
+        .catch(e => {
+            console.log('inner',token)
+            console.log(e)
+
+            if(e.response.data === 'Unauthorized'){
+                setIsAuth(false)
+            }
+            return false
+
+        })
 }
