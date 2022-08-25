@@ -7,17 +7,9 @@ import {Context} from "../../../App";
 import {getRows} from "../../../utils/gettingRowsWarehouses";
 
 const EnhancedTableToolbarItem = ({setOpenAddWarehouses, warehouseId}) => {
-    const {wareHouses, setWareHouses, setIsAuth, token} = useContext(Context)
+    const {wareHouses} = useContext(Context)
 
-    // useEffect(() => {
-    //
-    // }, [])
     const localWare = wareHouses.filter((item) =>  item._id === warehouseId)
-
-    // const {wareHouses} = useContext(Context)
-    // const localWare = wareHouses.filter((item) =>  item._id === warehouseId)
-    // console.log('localWare[0].name',localWare)
-    // console.log('wareHouses',wareHouses)
 
     return (
         <Toolbar
@@ -33,7 +25,7 @@ const EnhancedTableToolbarItem = ({setOpenAddWarehouses, warehouseId}) => {
                 component="div"
             >
                 {
-                    <div>Warehouses: {localWare[0].name}</div>
+                    <div>Warehouses: {localWare[0]?.name}</div>
                 }
             </Typography>
             <ButtonStyled variant="contained" onClick={setOpenAddWarehouses}>Add Cargo <PlusIcons/></ButtonStyled>

@@ -21,7 +21,7 @@ const headCells = ['All products', 'Manufacturer', 'Item number', 'Purchasing te
 const ItemsWarehouses = () => {
 
     const {warehouseId} = useParams();
-    const {items, setItems, token, setIsAuth} = useContext(Context)
+    const {items, setItems, token, setIsAuth, setWareHouses} = useContext(Context)
 
     const [selected, setSelected] = useState([]);
     const [openAddProduct, setOpenAddProduct] = useState(false)
@@ -34,6 +34,10 @@ const ItemsWarehouses = () => {
         getItems(token, setIsAuth, warehouseId).then((result) => {
             setItems(result)
         })
+        getRows(token, setIsAuth, warehouseId).then((result) => {
+            setWareHouses(result)
+        })
+
     }, [])
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
