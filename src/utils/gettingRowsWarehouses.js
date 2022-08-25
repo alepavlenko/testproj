@@ -13,10 +13,10 @@ export const getRows = async (token, setIsAuth) => {
             return res.data;
         })
         .catch(e => {
-            console.log('inner',token)
+            console.log('inner', token)
             console.log(e)
 
-            if(e.response.data === 'Unauthorized'){
+            if (e.response.data === 'Unauthorized') {
                 setIsAuth(false)
             }
             return false

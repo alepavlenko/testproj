@@ -1,8 +1,10 @@
 import React from 'react';
+
 import {ListItemButtonStyled} from "../../WarehousesIdPage/ModalComponent/MoveProduct/MoveProduct.style";
-import style from "../../WarehousesIdPage/ModalComponent/MoveProduct/MoveThirdStep/MoveThirdStep.module.css";
 import {ListItemText} from "@mui/material";
-import {deliveryArray, paymentArray} from "./arrayModal";
+
+import style from "../../WarehousesIdPage/ModalComponent/MoveProduct/MoveThirdStep/MoveThirdStep.module.css";
+import {deliveryArray} from "./arrayModal";
 
 const StepModalSec = ({selectedIndex, formik, handleListItemClick}) => {
 

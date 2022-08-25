@@ -9,5 +9,4 @@ const MyButton = ({variant, value, onClick}) => {
         </div>
     );
 };
-
 export default MyButton;

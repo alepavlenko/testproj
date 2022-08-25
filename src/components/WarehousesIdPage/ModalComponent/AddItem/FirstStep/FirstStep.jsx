@@ -1,7 +1,9 @@
 import React from 'react';
+
 import {ButtonStyled} from "../AddItem.style";
-import style from "../AddItem.module.css";
 import {FormControlLabel, FormLabel, Radio, RadioGroup} from "@mui/material";
+
+import style from "../AddItem.module.css";
 
 const FirstStep = ({nextStep, formik}) => {
     const addWarehousesFormInputs = [
@@ -37,7 +39,6 @@ const FirstStep = ({nextStep, formik}) => {
                         onChange={formik.handleChange}
                         value={formik.values[name]}
                     />
-
                     {formik.errors[name] && formik.touched[name] ? (
                         <div className={style.wrapError}>{formik.errors[name]}</div>
                     ) : null}

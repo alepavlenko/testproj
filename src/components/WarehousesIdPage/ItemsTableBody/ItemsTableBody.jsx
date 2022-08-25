@@ -1,12 +1,13 @@
 import React from 'react';
+
 import TableBody from "@mui/material/TableBody";
+import ProductsTableRow from "./ProductsTableRow/ProductsTableRow";
+
 import AirPlane from "../../Common/Icons/AirPlane";
 import Ship from "../../Common/Icons/Ship";
 import Car from "../../Common/Icons/Car";
-import ProductsTableRow from "./ProductsTableRow/ProductsTableRow";
 
 const ItemsTableBody = ({isSelected, handleClick, items}) => {
-
     function rowIcons(row) {
         switch (row) {
             case 'AIR':
@@ -16,7 +17,6 @@ const ItemsTableBody = ({isSelected, handleClick, items}) => {
             case 'CAR':
                 return <Car/>
         }
-
     }
 
     return (
@@ -24,7 +24,6 @@ const ItemsTableBody = ({isSelected, handleClick, items}) => {
             {items.map((row, index) => {
                 const isItemSelected = isSelected(row._id);
                 const labelId = `enhanced-table-checkbox-${index}`;
-
                 return (
                     <ProductsTableRow
                         isItemSelected={isItemSelected}

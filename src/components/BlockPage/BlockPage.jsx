@@ -1,7 +1,7 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
 import NavBar from "../MainPage/NavBar/NavBar";
-import {Link} from "react-router-dom";
 import {Button} from "@mui/material";
 
 import style from './BlockPage.module.css'

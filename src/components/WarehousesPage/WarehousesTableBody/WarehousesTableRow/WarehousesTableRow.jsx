@@ -1,8 +1,10 @@
 import React from 'react';
-import style from "../../Warehouses/Warehouses.module.css";
+
 import TableCell from "@mui/material/TableCell";
 import Checkbox from "@mui/material/Checkbox";
 import TableRow from "@mui/material/TableRow";
+
+import style from "../../Warehouses/Warehouses.module.css";
 
 const WarehousesTableRow = ({isItemSelected, row, handleClick, labelId, redirect}) => {
     return (

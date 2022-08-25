@@ -1,14 +1,15 @@
 import React, {useContext} from 'react';
-
-import {useFormik} from "formik";
-import {ButtonStyled, FormStyled} from './AddWarehouses.style';
-import style from './AddWarehouses.module.css'
-import {addWarehouses} from "../../../../utils/logicAddingWarehouses";
 import {Context} from "../../../../App";
+import {useFormik} from "formik";
+
+import {ButtonStyled, FormStyled} from './AddWarehouses.style';
+import {addWarehouses} from "../../../../utils/logicAddingWarehouses";
 import {AddWarehousesSchema} from "./AddWarehousesForm";
 
-const AddWarehouses = ({handleClose, openNext, value }) => {
-    const { wareHouses, setWareHouses, token } = useContext(Context)
+import style from './AddWarehouses.module.css'
+
+const AddWarehouses = ({handleClose, openNext, value}) => {
+    const {wareHouses, setWareHouses, token} = useContext(Context)
 
     const handleCloseWrap = () => {
         formik.resetForm()
@@ -63,7 +64,7 @@ const AddWarehouses = ({handleClose, openNext, value }) => {
         <>
             <h1>{value}</h1>
             <FormStyled onSubmit={formik.handleSubmit}>
-                {addWarehousesFormInputs.map(({ label, placeholder, name }) => (
+                {addWarehousesFormInputs.map(({label, placeholder, name}) => (
                     <div key={name} className={style.wrapInput}>
                         <label htmlFor={name}>{label}</label>
                         <input
@@ -81,7 +82,7 @@ const AddWarehouses = ({handleClose, openNext, value }) => {
                     </div>
                 ))}
                 <div>
-                    <ButtonStyled  type="submit" variant="contained">Add a warehouses</ButtonStyled>
+                    <ButtonStyled type="submit" variant="contained">Add a warehouses</ButtonStyled>
                 </div>
             </FormStyled>
         </>

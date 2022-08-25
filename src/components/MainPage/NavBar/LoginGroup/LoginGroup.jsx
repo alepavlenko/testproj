@@ -1,12 +1,12 @@
 import React, {useContext, useState} from 'react';
+import {Context} from "../../../../App";
 
 import MyButton from "../../../Common/MyButton/MyButton";
 import MyModal from "../../../Common/MyModal/MyModal";
 import LogInForm from "../../AuthForm/LogInForm/LogInForm";
-
-import {Context} from "../../../../App";
-import style from './LoginGroup.module.css'
 import {loginAuth, signUpAuth} from "../../../../utils";
+
+import style from './LoginGroup.module.css'
 
 
 const LoginGroup = () => {
@@ -15,7 +15,6 @@ const LoginGroup = () => {
     const [openSignUp, setOpenSignUp] = useState(false)
     const [openLogIn, setOpenLogIn] = useState(false)
     const [validError, setValidError] = useState(null)
-
 
     const handleClose1 = () => {
         setValidError(false)

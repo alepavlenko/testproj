@@ -1,4 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
+import {Context} from "../../../App";
 
 import Box from '@mui/material/Box';
 import TableContainer from '@mui/material/TableContainer';
@@ -7,11 +8,10 @@ import MyModal from "../../Common/MyModal/MyModal";
 import AddWarehouses from "../ModalComponent/AddWarehouses/AddWarehouses";
 import SucksesModal from "../ModalComponent/SucksesModal/SucksesModal";
 import DownNavbar from "../DownNavbar/DownNavbar";
+import EnhancedTableToolbar from "../EnhancedTableToolbar/EnhancedTableToolbar";
 import WarehousesTable from "../WarehousesTable/WarehousesTable";
 
-import {Context} from "../../../App";
 import style from './Warehouses.module.css'
-import EnhancedTableToolbar from "../EnhancedTableToolbar/EnhancedTableToolbar";
 import {getRows} from "../../../utils/gettingRowsWarehouses";
 
 const headCells = ['All stores', 'Number of products', 'Length, m', 'Width, m', 'Height, m'];

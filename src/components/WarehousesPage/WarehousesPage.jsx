@@ -4,9 +4,9 @@ import {CssBaseline} from "@mui/material";
 import CustomDrawer from "./Drawer/CustomDrawer";
 import NavBarWereHouses from './NavBarWereHouses/NavBarWereHouses';
 import Warehouses from "./Warehouses/Warehouses";
+import {BoxItemWrapper, BoxStyledInner} from "./WarehousesPage.style";
 
 import style from './WarehousesPage.module.css'
-import {BoxItemWrapper, BoxStyledInner} from "./WarehousesPage.style";
 
 const WarehousesPage = () => {
     return (

@@ -2,10 +2,11 @@ import React, {useState} from 'react';
 
 import {BoxItemWrapper, BoxStyledInner} from "./WarehousesIdPage.style";
 import {CssBaseline} from "@mui/material";
-import style from './WarehousesIdPage.module.css'
 import NavBarWereHouses from "../WarehousesPage/NavBarWereHouses/NavBarWereHouses";
 import CustomDrawer from "../WarehousesPage/Drawer/CustomDrawer";
 import ItemsWarehouses from "./ItemsWarehouses/ItemsWarehouses";
+
+import style from './WarehousesIdPage.module.css'
 
 const WarehousesIdPage = () => {
     const [ii, setIi] = useState(0)

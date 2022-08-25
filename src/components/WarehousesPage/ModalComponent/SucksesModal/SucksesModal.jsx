@@ -1,8 +1,8 @@
 import React from 'react';
 
 import SucksesWarehouses from "../../../Common/Icons/SucksesWarehouses";
-
 import {ButtonStyled, FormStyled} from './SucksesModal.style';
+
 import style from './SucksesModal.module.css'
 
 
@@ -20,7 +20,7 @@ const SucksesModal = ({handleClose}) => {
                     <h1>Warehouse successfully added</h1>
                 </div>
                 <div>
-                    <ButtonStyled  type="submit" variant="contained">Continue</ButtonStyled>
+                    <ButtonStyled type="submit" variant="contained">Continue</ButtonStyled>
                 </div>
             </FormStyled>
         </>

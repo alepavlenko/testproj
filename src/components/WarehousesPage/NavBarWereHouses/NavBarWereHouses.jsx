@@ -3,9 +3,9 @@ import React, {memo} from 'react';
 import Person from "../../Common/Icons/Person";
 import Settings from "../../Common/Icons/Settings";
 import Notification from "../../Common/Icons/Notification";
+import {AppBarStyled, TextFieldStyled} from "./NavBarWereHouses.style";
 
 import style from './NavBarWereHouses.module.css'
-import {AppBarStyled, TextFieldStyled} from "./NavBarWereHouses.style";
 
 const NavBarWereHouses = memo(() => {
 

@@ -7,7 +7,7 @@ import TableSortLabel from "@mui/material/TableSortLabel";
 import TableHead from "@mui/material/TableHead";
 
 
-const EnhancedTableHead = ({wareHouses ,selected,onSelectAllClick, headCells}) => {
+const EnhancedTableHead = ({wareHouses, selected, onSelectAllClick, headCells}) => {
     return (
         <TableHead>
             <TableRow>
@@ -15,7 +15,7 @@ const EnhancedTableHead = ({wareHouses ,selected,onSelectAllClick, headCells}) =
                     <Checkbox
                         color="primary"
                         indeterminate={selected.length > 0 && selected.length < wareHouses.length}
-                        checked={wareHouses.length > 0 && selected.length === wareHouses.length }
+                        checked={wareHouses.length > 0 && selected.length === wareHouses.length}
                         onChange={onSelectAllClick}
                     />
                 </TableCell>

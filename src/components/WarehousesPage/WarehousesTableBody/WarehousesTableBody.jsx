@@ -1,8 +1,7 @@
 import React from 'react';
+import {useNavigate} from "react-router-dom";
 
 import TableBody from "@mui/material/TableBody";
-
-import {useNavigate} from "react-router-dom";
 import WarehousesTableRow from "./WarehousesTableRow/WarehousesTableRow";
 
 const WarehousesTableBody = ({wareHouses, isSelected, handleClick,}) => {

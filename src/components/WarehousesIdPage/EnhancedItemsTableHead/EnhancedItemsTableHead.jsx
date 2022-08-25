@@ -1,12 +1,12 @@
 import React from 'react';
+
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import Checkbox from "@mui/material/Checkbox";
 import TableSortLabel from "@mui/material/TableSortLabel";
-import {getItems} from "../../../utils/gettingItems";
 
-const EnhancedItemsTableHead = ({items,selected,onSelectAllClick, headCells}) => {
+const EnhancedItemsTableHead = ({items, selected, onSelectAllClick, headCells}) => {
     return (
         <TableHead>
             <TableRow>
@@ -14,7 +14,7 @@ const EnhancedItemsTableHead = ({items,selected,onSelectAllClick, headCells}) =>
                     <Checkbox
                         color="primary"
                         indeterminate={selected.length > 0 && selected.length < items.length}
-                        checked={items.length > 0 && selected.length === items.length }
+                        checked={items.length > 0 && selected.length === items.length}
                         onChange={onSelectAllClick}
                     />
                 </TableCell>
