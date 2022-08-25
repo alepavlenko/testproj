@@ -9,49 +9,49 @@ import MoveThirdStep from "./MoveThirdStep/MoveThirdStep";
 import {ButtonStyled, FormStyled} from "./MoveProduct.style";
 import {MoveItemSchema} from "./MoveProductForm";
 import {moveProduct} from "../../../../utils/movingProducts";
+import ModalStepper from "../../../Common/ModalStepper/ModalStepper";
 
-const MoveProduct = ({ handleClose, openNext, value, stateSelected, setStateSelected}) => {
+const MoveProduct = ({handleClose, openNext, value, stateSelected, setStateSelected}) => {
     const {warehouseId} = useParams();
     const [activeStep, setActiveStep] = useState(0);
-    const steps = getSteps();
+    const steps = ["1", "2", "3"];
 
     const {token, items, setItems, setIsAuth} = useContext(Context)
 
     const handleNext = () => {
-        if(formik.values.selectWarehouses === ''){
-            formik.setError('selectWarehouses','error')
-            // return
-        }
-        else {
+        if (formik.values.selectWarehouses === '') {
+            formik.setError('selectWarehouses', 'error')
+        } else {
             setActiveStep(prevActiveStep => prevActiveStep + 1);
         }
     };
 
     const formik = useFormik({
         initialValues: {
-            baseWarehouses:'',
-            selectWarehouses:'',
+            baseWarehouses: '',
+            selectWarehouses: '',
             delivery: '',
             payment: '',
         },
         validationSchema: MoveItemSchema,
         onSubmit: values => {
-            // openNext(true);
             console.log(token)
             values.baseWarehouses = warehouseId;
-            moveProduct(values ,warehouseId ,stateSelected, setStateSelected,  token, items, setItems, setIsAuth)
+            moveProduct(values, warehouseId, stateSelected, setStateSelected, token, items, setItems, setIsAuth)
             openNextModal();
 
         },
     });
-    function getSteps() {
-        return ["1", "2", "3"];
-    }
 
     function getStepContent(step) {
         switch (step) {
             case 0:
-                return <MoveFirstStep stateSelected={stateSelected} nextStep={handleNext} formik={formik} warehouseId={warehouseId}/>;
+                return <MoveFirstStep
+                    stateSelected={stateSelected}
+                    nextStep={handleNext}
+                    formik={formik}
+                    warehouseId={warehouseId}
+                />;
             case 1:
                 return <MoveSecondStep nextStep={handleNext} formik={formik}/>;
             case 2:
@@ -61,29 +61,17 @@ const MoveProduct = ({ handleClose, openNext, value, stateSelected, setStateSele
         }
     }
 
-
-
     const openNextModal = () => {
         console.log(11)
         openNext(true);
         handleClose(false);
     }
 
-
     return (
         <>
             <h1>{value}</h1>
             <FormStyled onSubmit={formik.handleSubmit}>
-
-                <Stepper activeStep={activeStep}>
-                    {steps.map((label) => {
-                        return (
-                            <Step key={label}>
-                                <StepLabel></StepLabel>
-                            </Step>
-                        );
-                    })}
-                </Stepper>
+                <ModalStepper activeStep={activeStep} steps={steps} />
                 {getStepContent(activeStep)}
                 {activeStep === 2
                     ? <ButtonStyled type="submit" variant="contained">Choose</ButtonStyled>

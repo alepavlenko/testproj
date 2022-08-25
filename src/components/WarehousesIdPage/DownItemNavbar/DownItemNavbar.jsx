@@ -31,7 +31,6 @@ const DownItemNavbar = ({setOpenMoveProduct, stateSelected, setStateSelected}) =
             </div>
 
 
-
         </div>
     );
 };

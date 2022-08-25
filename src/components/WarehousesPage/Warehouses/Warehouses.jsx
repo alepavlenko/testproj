@@ -28,9 +28,6 @@ const Warehouses = () => {
         getRows(token, setIsAuth).then((result) => {
             setWareHouses(result)
         })
-        // getRows(token, setIsAuth).then((result) => {
-        //     setWareHouses(result)
-        // })
     }, [])
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
@@ -68,11 +65,10 @@ const Warehouses = () => {
             <Box sx={{width: '100%'}}>
                 <Paper sx={{width: '100%', mb: 2, boxShadow: 'none'}}>
                     <EnhancedTableToolbar
-                        // numSelected={selected.length}
                         setOpenAddWarehouses={setOpenAddWarehouses}
                     />
                     {wareHouses.length === 0
-                        ? <div className={style.wrapWarehouses}> Warehouses dosnt have </div>
+                        ? <div className={style.wrapWarehouses}> Warehouses doesn't have </div>
                         : <TableContainer className={(selected.length >= 1) ? style.wrapBodyUltra : style.wrapBody}>
                             <WarehousesTable
                                 selected={selected}

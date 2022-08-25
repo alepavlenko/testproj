@@ -5,7 +5,6 @@ import Table from "@mui/material/Table";
 import EnhancedTableHead from "../EnhancedTableHead/EnhancedTableHead";
 
 const WarehousesTable = ({selected, headCells, handleSelectAllClick, wareHouses, isSelected, handleClick}) => {
-
     return (
         <Table>
             <EnhancedTableHead

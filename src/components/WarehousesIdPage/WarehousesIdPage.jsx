@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import {BoxItemWrapper, BoxStyledInner} from "./WarehousesIdPage.style";
 import {CssBaseline} from "@mui/material";
@@ -8,6 +8,8 @@ import CustomDrawer from "../WarehousesPage/Drawer/CustomDrawer";
 import ItemsWarehouses from "./ItemsWarehouses/ItemsWarehouses";
 
 const WarehousesIdPage = () => {
+    const [ii, setIi] = useState(0)
+    console.log(ii)
     return (
         <BoxItemWrapper>
             <CssBaseline/>
@@ -21,7 +23,6 @@ const WarehousesIdPage = () => {
             <div className={style.wrapContent}>
                 <ItemsWarehouses/>
             </div>
-
         </BoxItemWrapper>
     );
 };
