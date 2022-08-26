@@ -1,15 +1,17 @@
-import React, {useContext, useEffect} from 'react';
+import React, {memo, useContext} from 'react';
+import {Context} from "../../../App";
+
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import {ButtonStyled} from "../../WarehousesPage/EnhancedTableToolbar/EnhancedTableToolbar.style";
-import PlusIcons from "../../Common/Icons/PlusIcons";
-import {Context} from "../../../App";
-import {getRows} from "../../../utils/gettingRowsWarehouses";
 
-const EnhancedTableToolbarItem = ({setOpenAddWarehouses, warehouseId}) => {
+import PlusIcons from "../../Common/Icons/PlusIcons";
+
+const EnhancedTableToolbarItem = memo(({setOpenAddWarehouses, warehouseId}) => {
+
     const {wareHouses} = useContext(Context)
 
-    const localWare = wareHouses.filter((item) =>  item._id === warehouseId)
+    const localWare = wareHouses.filter((item) => item._id === warehouseId)
 
     return (
         <Toolbar
@@ -31,6 +33,6 @@ const EnhancedTableToolbarItem = ({setOpenAddWarehouses, warehouseId}) => {
             <ButtonStyled variant="contained" onClick={setOpenAddWarehouses}>Add Cargo <PlusIcons/></ButtonStyled>
         </Toolbar>
     );
-};
+});
 
 export default EnhancedTableToolbarItem;

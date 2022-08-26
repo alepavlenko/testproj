@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
+import {Link, useNavigate} from "react-router-dom";
 
 import {Divider, Drawer, List, ListItem, ListItemButton, ListItemText} from "@mui/material";
-import {Link, useNavigate} from "react-router-dom";
 import Logo from "../../Common/Icons/Logo";
 import Home from "../../Common/Icons/Home";
 import Warehouses from "../../Common/Icons/Warehouses";
@@ -48,12 +48,10 @@ const listArray = [
 
 const drawerWidth = 240;
 
-const CustomDrawer = () => {
-    const [selectedIndex, setSelectedIndex] = useState(2);
-    const [mobileOpen, setMobileOpen] = useState(false);
-
+const CustomDrawer = ({mobileOpen, setMobileOpen}) => {
     const navigate = useNavigate();
 
+    const [selectedIndex, setSelectedIndex] = useState(2);
     const container = window.document.body;
 
     const handleDrawerToggle = () => {
@@ -61,8 +59,10 @@ const CustomDrawer = () => {
     };
 
     const renderDrawerContent = () => (
-        <div className={style.wrapSideBar} >
-            <div onClick={() => {navigate('/', {replace: true})}} className={style.wrapLogo}>
+        <div className={style.wrapSideBar}>
+            <div onClick={() => {
+                navigate('/', {replace: true})
+            }} className={style.wrapLogo}>
                 <Logo/>
             </div>
             <Divider/>
@@ -74,14 +74,15 @@ const CustomDrawer = () => {
                         className={selectedIndex === item.id ? style.selectedMenu : ''}
                         onClick={() => setSelectedIndex(item.id)}
                     >
-                         <Link to={`/${item.label}`} className={style.wrapLink}>
-                            <ListItemButton >
-                                <ListItemIconStyled className={selectedIndex === item.id ? style.selectIcon : style.wrapListItem}>
+                        <Link to={`/${item.label}`} className={style.wrapLink}>
+                            <ListItemButton>
+                                <ListItemIconStyled
+                                    className={selectedIndex === item.id ? style.selectIcon : style.wrapListItem}>
                                     {item.icon}
                                 </ListItemIconStyled>
-                                <ListItemText  primary={item.label}/>
+                                <ListItemText primary={item.label}/>
                             </ListItemButton>
-                         </Link>
+                        </Link>
                     </ListItem>
                 ))}
             </List>
@@ -97,7 +98,7 @@ const CustomDrawer = () => {
                 open={mobileOpen}
                 onClose={handleDrawerToggle}
                 ModalProps={{
-                    keepMounted: true, // Better open performance on mobile.
+                    keepMounted: true,
                 }}
                 sx={{
                     display: {xs: 'block', sm: 'none'},

@@ -1,9 +1,9 @@
 import React from 'react';
 
 import ExitButton from "../Icons/ExitButton";
+import {DialogContentStyled, DialogStyled, DialogTitleStyled} from "./MyModal.styled";
 
 import style from './MyModal.module.css'
-import {DialogContentStyled, DialogStyled, DialogTitleStyled} from "./MyModal.styled";
 
 const MyModal = ({open, handleClose, children}) => {
 

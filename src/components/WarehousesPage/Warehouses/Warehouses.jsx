@@ -1,4 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
+import {Context} from "../../../App";
 
 import Box from '@mui/material/Box';
 import TableContainer from '@mui/material/TableContainer';
@@ -7,11 +8,10 @@ import MyModal from "../../Common/MyModal/MyModal";
 import AddWarehouses from "../ModalComponent/AddWarehouses/AddWarehouses";
 import SucksesModal from "../ModalComponent/SucksesModal/SucksesModal";
 import DownNavbar from "../DownNavbar/DownNavbar";
+import EnhancedTableToolbar from "../EnhancedTableToolbar/EnhancedTableToolbar";
 import WarehousesTable from "../WarehousesTable/WarehousesTable";
 
-import {Context} from "../../../App";
 import style from './Warehouses.module.css'
-import EnhancedTableToolbar from "../EnhancedTableToolbar/EnhancedTableToolbar";
 import {getRows} from "../../../utils/gettingRowsWarehouses";
 
 const headCells = ['All stores', 'Number of products', 'Length, m', 'Width, m', 'Height, m'];
@@ -28,9 +28,6 @@ const Warehouses = () => {
         getRows(token, setIsAuth).then((result) => {
             setWareHouses(result)
         })
-        // getRows(token, setIsAuth).then((result) => {
-        //     setWareHouses(result)
-        // })
     }, [])
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
@@ -68,11 +65,10 @@ const Warehouses = () => {
             <Box sx={{width: '100%'}}>
                 <Paper sx={{width: '100%', mb: 2, boxShadow: 'none'}}>
                     <EnhancedTableToolbar
-                        // numSelected={selected.length}
                         setOpenAddWarehouses={setOpenAddWarehouses}
                     />
                     {wareHouses.length === 0
-                        ? <div className={style.wrapWarehouses}> Warehouses dosnt have </div>
+                        ? <div className={style.wrapWarehouses}> Warehouses doesn't have </div>
                         : <TableContainer className={(selected.length >= 1) ? style.wrapBodyUltra : style.wrapBody}>
                             <WarehousesTable
                                 selected={selected}

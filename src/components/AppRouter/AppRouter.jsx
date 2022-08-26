@@ -1,5 +1,6 @@
 import React, {useContext} from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import {Navigate, Route, Routes} from 'react-router-dom';
+
 import {Context} from "../../App";
 import {privateRoutes, publicRoutes} from "../../routes";
 
@@ -16,7 +17,7 @@ const AppRouter = () => {
                         element={route.element}
                     />
                 )}
-                <Route path="*" element={<Navigate replace to='/' />} />
+                <Route path="*" element={<Navigate replace to='/'/>}/>
             </Routes>
             :
             <Routes>
@@ -27,9 +28,8 @@ const AppRouter = () => {
                         element={route.element}
                     />
                 )}
-                <Route path="*" element={<Navigate replace to='/' />} />
+                <Route path="*" element={<Navigate replace to='/'/>}/>
             </Routes>
-
     );
 };
 

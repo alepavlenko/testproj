@@ -1,22 +1,92 @@
-.smallText{
-    max-width: 333px;
-    font-family: 'Inter', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 24px;
-    color: #3E4C5966;
+@media (min-width: 768px) {
+
+    .smallText{
+        max-width: 333px;
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        color: #3E4C5966;
+    }
+
+    .bigText{
+        margin-top: 200px;
+        margin-bottom: 30px;
+        max-width: 575px;
+        max-height: 261px;
+        font-family: 'Inter-bold', sans-serif;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 72px;
+        line-height: 87px;
+        color: #3E4C59;
+    }
+
+}
+@media (min-width: 480px) and (max-width: 768px) {
+    .smallText{
+        max-width: 400px;
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 14px;
+        color: #3E4C5966;
+        text-align: center;
+
+    }
+
+    .bigText{
+        text-align: center;
+        margin-top: 200px;
+        margin-bottom: 30px;
+        max-width: 575px;
+        max-height: 261px;
+        font-family: 'Inter-bold', sans-serif;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 72px;
+        line-height: 87px;
+        color: #3E4C59;
+    }
+    .wrapText{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+}
+@media (min-width: 0px) and (max-width: 550px) {
+    .wrapText{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+    .smallText{
+        max-width: 333px;
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        color: #3E4C5966;
+        text-align: center;
+
+    }
+
+    .bigText{
+        margin-top: 200px;
+        margin-bottom: 30px;
+        max-width: 575px;
+        max-height: 261px;
+        font-family: 'Inter-bold', sans-serif;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 42px;
+        line-height: 47px;
+        color: #3E4C59;
+        text-align: center;
+
+    }
 }
 
-.bigText{
-    margin-top: 200px;
-    margin-bottom: 30px;
-    max-width: 575px;
-    max-height: 261px;
-    font-family: 'Inter-bold', sans-serif;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 72px;
-    line-height: 87px;
-    color: #3E4C59;
-}

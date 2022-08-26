@@ -1,18 +1,17 @@
 import React, {useContext, useState} from 'react';
 import {useNavigate} from "react-router-dom";
+import {Context} from "../../../App";
 
 import MyButton from "../../Common/MyButton/MyButton";
 import MyModal from "../../Common/MyModal/MyModal";
 import LogInForm from "../AuthForm/LogInForm/LogInForm";
 
-import {Context} from "../../../App";
 import style from './TypographyBlock.module.css'
 import {loginAuth, signUpAuth} from "../../../utils";
 import {Routes} from '../../../constants/'
 
 const TypographyBlock = () => {
     const navigate = useNavigate();
-
     const {isAuth} = useContext(Context)
 
     const [openSignUp, setOpenSignUp] = useState(false)
@@ -31,17 +30,17 @@ const TypographyBlock = () => {
     };
 
     const butGetStart = () => {
-        if(isAuth){
+        if (isAuth) {
             navigate(Routes.WAREHOUSES, {replace: true})
-        } else{
+        } else {
             setOpenLogIn(true)
         }
     }
 
     return (
         <div>
-            <div>
-                <p className={style.bigText} >We will deliver your cargo exactly on time</p>
+            <div className={style.wrapText}>
+                <p className={style.bigText}>We will deliver your cargo exactly on time</p>
                 <p className={style.smallText}>For us, goods are our most valuable assets.
                     So that with certainty we can provide the best service for your goods
                 </p>

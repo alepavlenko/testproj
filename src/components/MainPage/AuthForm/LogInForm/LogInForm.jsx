@@ -1,13 +1,15 @@
 import React, {useContext} from 'react';
-import {Context} from "../../../../App";
 import {useNavigate} from "react-router-dom";
 import {useFormik} from "formik";
-import style from "./LogInForm.module.css";
+
+import {Context} from "../../../../App";
 import {ButtonStyled, FormStyled} from "./LogInForm.style";
 import {LoginSchema} from "./LoginFormValidation";
+
+import style from "./LogInForm.module.css";
 import {Routes} from '../../../../constants'
 
-const LogInForm = ({checkAuth, setValidError, handleClose, validError, openNext, value }) => {
+const LogInForm = ({checkAuth, setValidError, handleClose, validError, openNext, value}) => {
     const {setIsAuth, token, setToken} = useContext(Context)
     let navigate = useNavigate();
 
@@ -29,7 +31,7 @@ const LogInForm = ({checkAuth, setValidError, handleClose, validError, openNext,
         },
         validationSchema: LoginSchema,
         onSubmit: async (values) => {
-            if ( await checkAuth(values, setValidError, token, setToken)) {
+            if (await checkAuth(values, setValidError, token, setToken)) {
                 handleCloseWrap()
                 if ((value === "Sign up")) {
                     openNext(true)
@@ -44,8 +46,6 @@ const LogInForm = ({checkAuth, setValidError, handleClose, validError, openNext,
             }
         },
     });
-
-
 
     return (
         <>

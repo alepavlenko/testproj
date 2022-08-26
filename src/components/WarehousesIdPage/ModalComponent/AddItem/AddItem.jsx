@@ -1,34 +1,33 @@
 import React, {useContext, useState} from 'react';
-
 import {useFormik} from "formik";
-import {ButtonStyled, FormStyled} from './AddItem.style';
 import {Context} from "../../../../App";
-import {Step, StepLabel, Stepper} from "@mui/material";
+import {useParams} from "react-router-dom";
+
+import {ButtonStyled, FormStyled} from './AddItem.style';
 import FirstStep from "./FirstStep/FirstStep";
 import SecondStep from "./SecondStep/SecondStep";
 import ThirdStep from "./ThirdStep/ThirdStep";
 import {AddItemSchema} from "./AddItemForm";
-import {useParams} from "react-router-dom";
+import ModalStepper from "../../../Common/ModalStepper/ModalStepper";
+
 import {addItems} from "../../../../utils/logicAddingItems";
 
 const AddItem = ({handleClose, openNext, value}) => {
     const {warehouseId} = useParams();
     const [activeStep, setActiveStep] = useState(0);
-    const steps = getSteps();
+    const steps = ['1', '2', '3'];
 
     const {setItems, items, token} = useContext(Context)
 
     const handleNext = () => {
-
-        if(formik.values.name === ''){
-            formik.setError('name','error')
+        if (formik.values.name === '') {
+            formik.setError('name', 'error')
             return
         }
-        if(!formik.errors.name && !formik.errors.manufacturer && !formik.errors.number) {
+        if (!formik.errors.name && !formik.errors.manufacturer && !formik.errors.number) {
             setActiveStep(prevActiveStep => prevActiveStep + 1);
         }
     };
-
 
     const formik = useFormik({
         initialValues: {
@@ -41,16 +40,11 @@ const AddItem = ({handleClose, openNext, value}) => {
         },
         validationSchema: AddItemSchema,
         onSubmit: values => {
-            console.log()
             addItems(token, values, items, setItems, warehouseId)
             handleCloseWrap();
             openNextModal()
-
         },
     });
-    function getSteps() {
-        return ["1", "2", "3"];
-    }
 
     function getStepContent(step) {
         switch (step) {
@@ -65,33 +59,20 @@ const AddItem = ({handleClose, openNext, value}) => {
         }
     }
 
-
     const handleCloseWrap = () => {
-        // formik.resetForm()
         handleClose();
     }
 
     const openNextModal = () => {
         handleCloseWrap();
-        // formik.resetForm()
         openNext(true);
     }
-
 
     return (
         <>
             <h1>{value}</h1>
             <FormStyled onSubmit={formik.handleSubmit}>
-
-                <Stepper activeStep={activeStep}>
-                    {steps.map((label) => {
-                        return (
-                            <Step key={label}>
-                                <StepLabel></StepLabel>
-                            </Step>
-                        );
-                    })}
-                </Stepper>
+                <ModalStepper activeStep={activeStep} steps={steps}/>
                 {getStepContent(activeStep)}
                 {activeStep === 2
                     ? <ButtonStyled type="submit" variant="contained">Choose</ButtonStyled>

@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {memo} from 'react';
+
 import Typography from "@mui/material/Typography";
 import {ButtonStyled} from "./EnhancedTableToolbar.style";
 import PlusIcons from "../../Common/Icons/PlusIcons";
 import Toolbar from "@mui/material/Toolbar";
 
-const EnhancedTableToolbar = ({setOpenAddWarehouses}) => {
+const EnhancedTableToolbar = memo(({setOpenAddWarehouses}) => {
     return (
         <Toolbar
             sx={{
@@ -23,6 +24,6 @@ const EnhancedTableToolbar = ({setOpenAddWarehouses}) => {
             <ButtonStyled variant="contained" onClick={setOpenAddWarehouses}>Add Warehouses <PlusIcons/></ButtonStyled>
         </Toolbar>
     );
-};
+});
 
 export default EnhancedTableToolbar;

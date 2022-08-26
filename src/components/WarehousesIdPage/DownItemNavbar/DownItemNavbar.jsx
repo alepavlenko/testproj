@@ -1,13 +1,15 @@
 import React, {useContext} from 'react';
 import {Context} from "../../../App";
-import style from "./DownItemNavbar.module.css";
+
 import Selected from "../../Common/Icons/Selected";
 import Move from "../../Common/Icons/Move";
+
+import style from "./DownItemNavbar.module.css";
 import {removeSelectedRow} from "../../../utils/deletedSelectedWarehouses";
 
 const DownItemNavbar = ({setOpenMoveProduct, stateSelected, setStateSelected}) => {
 
-    const { items, setItems, token } = useContext(Context)
+    const {items, setItems, token} = useContext(Context)
 
     const removeSelected = () => {
         const categoy = 'products'
@@ -22,16 +24,13 @@ const DownItemNavbar = ({setOpenMoveProduct, stateSelected, setStateSelected}) =
                     <div className={style.wrapText}>Selected: {stateSelected.length}</div>
                 </div>
                 <div className={style.wrapButtonGroup}>
-                    <button className={style.wrapButton} onClick={removeSelected} >Delete</button>
+                    <button className={style.wrapButton} onClick={removeSelected}>Delete</button>
                     <button className={style.wrapButtonMove} onClick={setOpenMoveProduct}>
                         Move
                         <Move/>
                     </button>
                 </div>
             </div>
-
-
-
         </div>
     );
 };

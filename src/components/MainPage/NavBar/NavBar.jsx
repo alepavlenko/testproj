@@ -1,11 +1,11 @@
 import React from 'react';
+import {useNavigate} from "react-router-dom";
 
 import Logo from "../../Common/Icons/Logo";
 import BarItem from "./BarItem/BarItem";
 import LoginGroup from "./LoginGroup/LoginGroup";
 
 import style from './NavBar.module.css'
-import {useNavigate} from "react-router-dom";
 
 const NavBar = () => {
 
