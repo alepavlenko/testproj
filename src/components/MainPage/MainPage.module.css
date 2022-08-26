@@ -1,3 +1,68 @@
+@media (min-width: 1024px) and (max-width: 1250px) {
+    .regtac{
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 300px;
+        max-height: 100vh;
+        overflow: hidden;
+    }
+    .track{
+        position: absolute;
+        top: 50px;
+        right: 0;
+        width: 600px;
+        overflow: hidden;
+
+    }
+}
+
+@media (min-width: 920px) and (max-width: 1024px) {
+    .regtac{
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 300px;
+        max-height: 100vh;
+        overflow: hidden;
+    }
+    .track{
+        position: absolute;
+        top: 50px;
+        right: 0;
+        width: 500px;
+        overflow: hidden;
+
+    }
+}
+@media (min-width: 768px) and (max-width: 920px) {
+    .regtac{
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 200px;
+        max-height: 100vh;
+        overflow: hidden;
+    }
+    .track{
+        position: absolute;
+        top: 50px;
+        right: 0;
+        width: 350px;
+        overflow: hidden;
+
+    }
+}
+
+@media (min-width: 0px) and (max-width: 768px) {
+    .regtac{
+        display: none;
+    }
+    .track{
+        display: none;
+    }
+}
+
 .main{
     max-width: 1200px;
     height: 100vh;
@@ -10,7 +75,7 @@
 }
 
 .regtac{
-    position: absolute;
+    position: fixed;
     right: 0;
     top: 0;
     max-height: 100vh;

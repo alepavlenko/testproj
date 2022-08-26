@@ -39,7 +39,7 @@ const TypographyBlock = () => {
 
     return (
         <div>
-            <div>
+            <div className={style.wrapText}>
                 <p className={style.bigText}>We will deliver your cargo exactly on time</p>
                 <p className={style.smallText}>For us, goods are our most valuable assets.
                     So that with certainty we can provide the best service for your goods

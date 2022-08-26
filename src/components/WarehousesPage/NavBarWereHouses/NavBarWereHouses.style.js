@@ -11,6 +11,5 @@ export const AppBarStyled = styled(AppBar)(({theme}) => ({
     borderBottom: 1,
     borderColor: "#ECEFF2",
     height: 112,
-    width: `calc(100% - 240px)`,
     ml: `240px`,
 }))
