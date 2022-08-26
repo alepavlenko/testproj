@@ -10,7 +10,6 @@ export const signUpAuth = async (values, setValidError) => {
         return true
     })
         .catch(e => {
-            console.log(e)
             setValidError(true)
             return false
         })

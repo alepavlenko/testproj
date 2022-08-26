@@ -9,8 +9,6 @@ export const getItems = async (token, setIsAuth, warehouseId) => {
             }
         })
         .then((res) => {
-            console.log('iddd', warehouseId)
-            console.log('ware', res.data)
             return res.data;
         })
         .catch(e => {

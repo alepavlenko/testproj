@@ -14,8 +14,6 @@ const DownNavbar = ({stateSelected, setStateSelected}) => {
         const categoy = 'warehouses'
         removeSelectedRow(categoy, stateSelected, setStateSelected, wareHouses, setWareHouses, token)
     }
-    console.log('selected ', stateSelected)
-
     return (
         <div className={style.downBar}>
             <div className={style.innerWrap}>

@@ -9,11 +9,9 @@ export const getRows = async (token, setIsAuth) => {
             }
         })
         .then((res) => {
-            console.log('ware', res.data)
             return res.data;
         })
         .catch(e => {
-            console.log('inner', token)
             console.log(e)
 
             if (e.response.data === 'Unauthorized') {

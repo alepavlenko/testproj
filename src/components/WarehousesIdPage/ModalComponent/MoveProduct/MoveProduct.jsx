@@ -2,7 +2,6 @@ import React, {useContext, useState} from 'react';
 import {useParams} from "react-router-dom";
 import {Context} from "../../../../App";
 import {useFormik} from "formik";
-import {Step, StepLabel, Stepper} from "@mui/material";
 import MoveFirstStep from "./MoveFirstStep/MoveFirstStep";
 import MoveSecondStep from "./MoveSecondStep/MoveSecondStep";
 import MoveThirdStep from "./MoveThirdStep/MoveThirdStep";
@@ -35,7 +34,6 @@ const MoveProduct = ({handleClose, openNext, value, stateSelected, setStateSelec
         },
         validationSchema: MoveItemSchema,
         onSubmit: values => {
-            console.log(token)
             values.baseWarehouses = warehouseId;
             moveProduct(values, warehouseId, stateSelected, setStateSelected, token, items, setItems, setIsAuth)
             openNextModal();
@@ -62,7 +60,6 @@ const MoveProduct = ({handleClose, openNext, value, stateSelected, setStateSelec
     }
 
     const openNextModal = () => {
-        console.log(11)
         openNext(true);
         handleClose(false);
     }

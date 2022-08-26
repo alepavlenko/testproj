@@ -40,16 +40,11 @@ const AddItem = ({handleClose, openNext, value}) => {
         },
         validationSchema: AddItemSchema,
         onSubmit: values => {
-            console.log()
             addItems(token, values, items, setItems, warehouseId)
             handleCloseWrap();
             openNextModal()
         },
     });
-
-    function getSteps() {
-        return ["1", "2", "3"];
-    }
 
     function getStepContent(step) {
         switch (step) {

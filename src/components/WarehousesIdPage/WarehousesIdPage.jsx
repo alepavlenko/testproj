@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 import {BoxItemWrapper, BoxStyledInner} from "./WarehousesIdPage.style";
 import {CssBaseline} from "@mui/material";
@@ -9,8 +9,6 @@ import ItemsWarehouses from "./ItemsWarehouses/ItemsWarehouses";
 import style from './WarehousesIdPage.module.css'
 
 const WarehousesIdPage = () => {
-    const [ii, setIi] = useState(0)
-    console.log(ii)
     return (
         <BoxItemWrapper>
             <CssBaseline/>

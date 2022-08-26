@@ -16,7 +16,6 @@ export const ButtonStyled = styled(Button)(({theme}) => ({
 }))
 
 export const FormStyled = styled('form')(({theme}) => ({
-    // paddingTop: 30,
     width: 300
 }))
 
