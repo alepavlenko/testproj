@@ -13,6 +13,8 @@ import WarehousesTable from "../WarehousesTable/WarehousesTable";
 
 import style from './Warehouses.module.css'
 import {getRows} from "../../../utils/gettingRowsWarehouses";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchWarehouses} from "../../../redux/store/warehousesReducer";
 
 const headCells = ['All stores', 'Number of products', 'Length, m', 'Width, m', 'Height, m'];
 
@@ -24,17 +26,28 @@ const Warehouses = () => {
     const [openAddWarehouses, setOpenAddWarehouses] = useState(false)
     const [openSucksesWarehouses, setOpenSucksesWarehouses] = useState(false)
 
+    const warehouses = useSelector(state => state.warehousesReducer.warehouses)
+    const dispatch = useDispatch()
+
+    console.log('after', warehouses)
+
     useEffect(() => {
-        getRows(token, setIsAuth).then((result) => {
-            setWareHouses(result)
-        })
+        dispatch(fetchWarehouses('qweqweqwe'))
     }, [])
+
+    console.log('before', warehouses)
+
+    // useEffect(() => {
+    //     getRows(token, setIsAuth).then((result) => {
+    //         setWareHouses(result)
+    //     })
+    // }, [])
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
-            const newSelected = wareHouses.map((n) => n._id);
+            const newSelected = warehouses.map((n) => n._id);
             setSelected(newSelected);
             return;
         }
@@ -67,14 +80,14 @@ const Warehouses = () => {
                     <EnhancedTableToolbar
                         setOpenAddWarehouses={setOpenAddWarehouses}
                     />
-                    {wareHouses.length === 0
+                    {warehouses.length === 0
                         ? <div className={style.wrapWarehouses}> Warehouses doesn't have </div>
                         : <TableContainer className={(selected.length >= 1) ? style.wrapBodyUltra : style.wrapBody}>
                             <WarehousesTable
                                 selected={selected}
                                 headCells={headCells}
                                 handleSelectAllClick={handleSelectAllClick}
-                                wareHouses={wareHouses}
+                                wareHouses={warehouses}
                                 isSelected={isSelected}
                                 handleClick={handleClick}
                             />

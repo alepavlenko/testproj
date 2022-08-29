@@ -1,11 +1,11 @@
 import axios from "axios";
 
-export const getRows = async (token, setIsAuth) => {
+export const getRows = async (payload) => {
 
     return await axios.get('http://localhost:5000/api/warehouses/',
         {
             headers: {
-                'Authorization': token
+                'Authorization': payload.token
             }
         })
         .then((res) => {
@@ -15,7 +15,7 @@ export const getRows = async (token, setIsAuth) => {
             console.log(e)
 
             if (e.response.data === 'Unauthorized') {
-                setIsAuth(false)
+                payload.setIsAuth(false)
             }
             return false
 
