@@ -1,5 +1,4 @@
 import axios from "axios";
-import {getItems} from "./gettingItems";
 
 export const moveProduct = async (values, warehouseId, stateSelected, setStateSelected, token, items, setItems, setIsAuth) => {
 
@@ -20,7 +19,7 @@ export const moveProduct = async (values, warehouseId, stateSelected, setStateSe
             });
     }
     setStateSelected([])
-    await getItems(token, setIsAuth, warehouseId).then((res) => {
-        setItems(res)
-    })
+    // await getItems(token, setIsAuth, warehouseId).then((res) => {
+    //     setItems(res)
+    // })
 }

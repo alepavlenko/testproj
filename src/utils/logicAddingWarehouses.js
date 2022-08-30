@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const addWarehouses = async (token, values, wareHouses, setWareHouses) => {
+export const addWarehouses = async (token, values) => {
     const num = '1'
     return await axios.post('http://localhost:5000/api/warehouses/',
         {
@@ -17,12 +17,11 @@ export const addWarehouses = async (token, values, wareHouses, setWareHouses) =>
             }
         })
         .then((res) => {
-            setWareHouses([...wareHouses, {...res.data}])
-            return true;
+            return res;
         })
         .catch(e => {
             console.log(e)
-            return false
+            return e
 
         })
 

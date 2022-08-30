@@ -1,7 +1,8 @@
 import axios from "axios";
 
-export const removeSelectedRow = async (categoy, stateSelected, setStateSelected, wareHouses, setWareHouses, token) => {
+export const removeSelectedRow = async (categoy, stateSelected, setStateSelected, token, product) => {
 
+    let tempArray = []
     for (const select of stateSelected) {
         await axios.delete(`http://localhost:5000/api/${categoy}/${select}`,
             {
@@ -10,8 +11,9 @@ export const removeSelectedRow = async (categoy, stateSelected, setStateSelected
                 }
             })
             .then((res) => {
-                const tempWarehouses = wareHouses.filter((warehouse) => !stateSelected.includes(warehouse._id))
-                setWareHouses(tempWarehouses)
+                const tempProduct = product.filter((warehouse) => !stateSelected.includes(warehouse._id))
+                // setWareHouses(tempWarehouses)
+                tempArray = tempProduct
                 return true;
             })
             .catch(e => {
@@ -21,4 +23,5 @@ export const removeSelectedRow = async (categoy, stateSelected, setStateSelected
             });
     }
     setStateSelected([])
+    return tempArray
 }

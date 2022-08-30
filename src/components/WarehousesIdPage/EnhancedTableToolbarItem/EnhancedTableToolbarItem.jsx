@@ -1,17 +1,16 @@
-import React, {memo, useContext} from 'react';
-import {Context} from "../../../App";
+import React, {memo} from 'react';
 
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import {ButtonStyled} from "../../WarehousesPage/EnhancedTableToolbar/EnhancedTableToolbar.style";
 
 import PlusIcons from "../../Common/Icons/PlusIcons";
+import {useSelector} from "react-redux";
 
 const EnhancedTableToolbarItem = memo(({setOpenAddWarehouses, warehouseId}) => {
 
-    const {wareHouses} = useContext(Context)
-
-    const localWare = wareHouses.filter((item) => item._id === warehouseId)
+    const warehouses = useSelector(state => state.warehousesReducer.warehouses)
+    const localWare = warehouses.filter((item) => item._id === warehouseId)
 
     return (
         <Toolbar

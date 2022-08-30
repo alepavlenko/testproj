@@ -15,29 +15,29 @@ import MoveProduct from "../ModalComponent/MoveProduct/MoveProduct";
 import SucsessfulModalMove from "../ModalComponent/SucsessfulModalMove/SucsessfulModalMove";
 
 import style from "./ItemsWarehouses.module.css";
-import {getItems} from "../../../utils/gettingItems";
-import {getRows} from "../../../utils/gettingRowsWarehouses";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchProducts} from "../../../redux/store/productsReducer";
+import {fetchWarehouses} from "../../../redux/store/warehousesReducer";
 
 const headCells = ['All products', 'Manufacturer', 'Item number', 'Purchasing technology', 'Shipment method'];
 
 const ItemsWarehouses = () => {
 
     const {warehouseId} = useParams();
-    const {items, setItems, token, setIsAuth, setWareHouses} = useContext(Context)
+    const {token, setIsAuth} = useContext(Context)
 
     const [selected, setSelected] = useState([]);
     const [openAddProduct, setOpenAddProduct] = useState(false)
     const [openSucksesWarehouses, setOpenSucksesWarehouses] = useState(false)
     const [openMoveProduct, setOpenMoveProduct] = useState(false)
     const [suckModal, setSuckModal] = useState(false)
+    const items = useSelector(state => state.productsReducer.products)
+
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        getItems(token, setIsAuth, warehouseId).then((result) => {
-            setItems(result)
-        })
-        getRows(token, setIsAuth, warehouseId).then((result) => {
-            setWareHouses(result)
-        })
+        dispatch(fetchProducts({token, setIsAuth, warehouseId}))
+        dispatch(fetchWarehouses({token, setIsAuth}))
     }, [])
 
     const isSelected = (name) => selected.indexOf(name) !== -1;

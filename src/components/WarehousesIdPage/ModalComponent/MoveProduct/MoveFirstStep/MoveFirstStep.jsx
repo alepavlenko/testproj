@@ -1,16 +1,17 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {ButtonStyled} from "../MoveProduct.style";
 import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 import Move from "../../../../Common/Icons/Move";
 import style from './MoveFirstStep.module.css'
-import {Context} from "../../../../../App";
+import {useSelector} from "react-redux";
 
 const MoveFirstStep = ({nextStep, formik, warehouseId}) => {
-    const {wareHouses} = useContext(Context)
+    const warehouses = useSelector(state => state.warehousesReducer.warehouses)
+    console.log('warehouses', warehouses)
 
-    const basedWarehourses = wareHouses.find((ware) => ware._id === warehouseId)
+    const basedWarehourses = warehouses.find((ware) => ware._id === warehouseId)
     const nameBasedWare = basedWarehourses.name;
-    const anotherWarehourses = wareHouses.filter((ware) => !warehouseId.includes(ware._id))
+    const anotherWarehourses = warehouses.filter((ware) => !warehouseId.includes(ware._id))
 
     return (
         <div className={style.wrapForm}>

@@ -7,8 +7,9 @@ import MoveSecondStep from "./MoveSecondStep/MoveSecondStep";
 import MoveThirdStep from "./MoveThirdStep/MoveThirdStep";
 import {ButtonStyled, FormStyled} from "./MoveProduct.style";
 import {MoveItemSchema} from "./MoveProductForm";
-import {moveProduct} from "../../../../utils/movingProducts";
 import ModalStepper from "../../../Common/ModalStepper/ModalStepper";
+import {useDispatch} from "react-redux";
+import {moveProducts} from "../../../../redux/store/productsReducer";
 
 const MoveProduct = ({handleClose, openNext, value, stateSelected, setStateSelected}) => {
     const {warehouseId} = useParams();
@@ -16,6 +17,8 @@ const MoveProduct = ({handleClose, openNext, value, stateSelected, setStateSelec
     const steps = ["1", "2", "3"];
 
     const {token, items, setItems, setIsAuth} = useContext(Context)
+    const dispatch = useDispatch()
+
 
     const handleNext = () => {
         if (formik.values.selectWarehouses === '') {
@@ -35,7 +38,8 @@ const MoveProduct = ({handleClose, openNext, value, stateSelected, setStateSelec
         validationSchema: MoveItemSchema,
         onSubmit: values => {
             values.baseWarehouses = warehouseId;
-            moveProduct(values, warehouseId, stateSelected, setStateSelected, token, items, setItems, setIsAuth)
+            dispatch(moveProducts({values, warehouseId, stateSelected, setStateSelected, token, items, setItems, setIsAuth}))
+            // moveProduct(values, warehouseId, stateSelected, setStateSelected, token, items, setItems, setIsAuth)
             openNextModal();
 
         },

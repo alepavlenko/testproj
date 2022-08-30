@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const addItems = async (token, values, items, setItems, warehouseId) => {
+export const addItems = async (token, values, warehouseId) => {
     return await axios.post(`http://localhost:5000/api/products/${warehouseId}`,
         {
             name: values.name.trim(),
@@ -15,8 +15,8 @@ export const addItems = async (token, values, items, setItems, warehouseId) => {
             }
         })
         .then((res) => {
-            setItems([...items, {...res.data}])
-            return true;
+            // setItems([...items, {...res.data}])
+            return res;
         })
         .catch(e => {
             console.log(e)
