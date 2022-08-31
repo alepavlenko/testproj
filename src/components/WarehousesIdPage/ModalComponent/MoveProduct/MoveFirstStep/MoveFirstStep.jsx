@@ -7,7 +7,6 @@ import {useSelector} from "react-redux";
 
 const MoveFirstStep = ({nextStep, formik, warehouseId}) => {
     const warehouses = useSelector(state => state.warehousesReducer.warehouses)
-    console.log('warehouses', warehouses)
 
     const basedWarehourses = warehouses.find((ware) => ware._id === warehouseId)
     const nameBasedWare = basedWarehourses.name;

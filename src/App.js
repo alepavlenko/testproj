@@ -1,8 +1,6 @@
 import React, {useState} from "react";
 import {Provider} from "react-redux";
 
-
-
 import {BrowserRouter} from "react-router-dom";
 import AppRouter from "./components/AppRouter/AppRouter";
 import {store} from "./redux/store";
@@ -11,19 +9,11 @@ export const Context = React.createContext();
 
 
 function App() {
-
-    const [isAuth, setIsAuth] = useState(Boolean(localStorage.getItem('auth')))
-    const [wareHouses, setWareHouses] = useState([])
-    const [items, setItems] = useState([])
     const [token, setToken] = useState(localStorage.getItem('token'))
 
+    // отслеживание токена , чтобы его убить
+
     const values = {
-        isAuth,
-        setIsAuth,
-        wareHouses,
-        setWareHouses,
-        items,
-        setItems,
         token,
         setToken
     }

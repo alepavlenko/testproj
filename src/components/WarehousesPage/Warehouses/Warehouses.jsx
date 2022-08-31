@@ -14,22 +14,24 @@ import WarehousesTable from "../WarehousesTable/WarehousesTable";
 import style from './Warehouses.module.css'
 import {useDispatch, useSelector} from "react-redux";
 import {fetchWarehouses} from "../../../redux/store/warehousesReducer";
+import Loader from "../../Common/Loader/Loader";
 
 const headCells = ['All stores', 'Number of products', 'Length, m', 'Width, m', 'Height, m'];
 
 const Warehouses = () => {
 
-    const {token, setIsAuth} = useContext(Context)
+    const {setToken, token} = useContext(Context)
 
     const [selected, setSelected] = useState([]);
     const [openAddWarehouses, setOpenAddWarehouses] = useState(false)
     const [openSucksesWarehouses, setOpenSucksesWarehouses] = useState(false)
 
     const warehouses = useSelector(state => state.warehousesReducer.warehouses)
+    const loading = useSelector(state => state.warehousesReducer.loading)
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(fetchWarehouses({token, setIsAuth}))
+        dispatch(fetchWarehouses({setToken, token}))
 
     }, [])
     const isSelected = (name) => selected.indexOf(name) !== -1;
@@ -69,19 +71,28 @@ const Warehouses = () => {
                     <EnhancedTableToolbar
                         setOpenAddWarehouses={setOpenAddWarehouses}
                     />
-                    {warehouses.length === 0
-                        ? <div className={style.wrapWarehouses}> Warehouses doesn't have </div>
-                        : <TableContainer className={(selected.length >= 1) ? style.wrapBodyUltra : style.wrapBody}>
-                            <WarehousesTable
-                                selected={selected}
-                                headCells={headCells}
-                                handleSelectAllClick={handleSelectAllClick}
-                                wareHouses={warehouses}
-                                isSelected={isSelected}
-                                handleClick={handleClick}
-                            />
-                        </TableContainer>
+
+                    {loading
+                        ? <div className={style.wrapLoader}><Loader/></div>
+                        :
+                        <>
+                            {warehouses.length === 0
+                                ? <div className={style.wrapWarehouses}> Warehouses doesn't have </div>
+                                : <TableContainer
+                                    className={(selected.length >= 1) ? style.wrapBodyUltra : style.wrapBody}>
+                                    <WarehousesTable
+                                        selected={selected}
+                                        headCells={headCells}
+                                        handleSelectAllClick={handleSelectAllClick}
+                                        wareHouses={warehouses}
+                                        isSelected={isSelected}
+                                        handleClick={handleClick}
+                                    />
+                                </TableContainer>
+                            }
+                        </>
                     }
+
                 </Paper>
             </Box>
             <MyModal open={openAddWarehouses} handleClose={setOpenAddWarehouses}>

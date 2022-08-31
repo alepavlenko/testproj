@@ -34,7 +34,6 @@ const AddWarehouses = ({handleClose, openNext, value}) => {
         validationSchema: AddWarehousesSchema,
         onSubmit: values => {
             dispatch(addWarehouses({token, values}))
-            // addWarehouses(token, values, wareHouses, setWareHouses)
             handleCloseWrap();
             openNextModal()
         },

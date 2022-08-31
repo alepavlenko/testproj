@@ -10,13 +10,14 @@ import {MoveItemSchema} from "./MoveProductForm";
 import ModalStepper from "../../../Common/ModalStepper/ModalStepper";
 import {useDispatch} from "react-redux";
 import {moveProducts} from "../../../../redux/store/productsReducer";
+import {setAuth} from "../../../../redux/store/authReducer";
 
 const MoveProduct = ({handleClose, openNext, value, stateSelected, setStateSelected}) => {
     const {warehouseId} = useParams();
     const [activeStep, setActiveStep] = useState(0);
     const steps = ["1", "2", "3"];
 
-    const {token, items, setItems, setIsAuth} = useContext(Context)
+    const {token, items, setItems} = useContext(Context)
     const dispatch = useDispatch()
 
 
@@ -32,14 +33,13 @@ const MoveProduct = ({handleClose, openNext, value, stateSelected, setStateSelec
         initialValues: {
             baseWarehouses: '',
             selectWarehouses: '',
-            delivery: '',
-            payment: '',
+            delivery: 'AIR',
+            payment: 'CASH',
         },
         validationSchema: MoveItemSchema,
         onSubmit: values => {
             values.baseWarehouses = warehouseId;
-            dispatch(moveProducts({values, warehouseId, stateSelected, setStateSelected, token, items, setItems, setIsAuth}))
-            // moveProduct(values, warehouseId, stateSelected, setStateSelected, token, items, setItems, setIsAuth)
+            dispatch(moveProducts({values, warehouseId, stateSelected, setStateSelected, token, items, setItems, setAuth}))
             openNextModal();
 
         },

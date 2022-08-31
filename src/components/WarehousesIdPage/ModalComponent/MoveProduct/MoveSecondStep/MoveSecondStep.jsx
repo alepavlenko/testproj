@@ -2,15 +2,10 @@ import React, {useState} from 'react';
 import {
     Box,
     List,
-    ListItemButton,
-    ListItemText,
 } from "@mui/material";
-import {ButtonStyled, ListItemButtonStyled} from "../MoveProduct.style";
+import {ButtonStyled} from "../MoveProduct.style";
 import style from './MoveSecondStep.module.css'
 import Typography from "@mui/material/Typography";
-import AirPlane from "../../../../Common/Icons/AirPlane";
-import Ship from "../../../../Common/Icons/Ship";
-import Car from "../../../../Common/Icons/Car";
 import StepModalSec from "../../../../Common/StepModal/StepModalSec";
 
 

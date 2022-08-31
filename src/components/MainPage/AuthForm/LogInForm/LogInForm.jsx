@@ -8,10 +8,13 @@ import {LoginSchema} from "./LoginFormValidation";
 
 import style from "./LogInForm.module.css";
 import {Routes} from '../../../../constants'
+import {setAuth} from "../../../../redux/store/authReducer";
+import {useDispatch} from "react-redux";
 
 const LogInForm = ({checkAuth, setValidError, handleClose, validError, openNext, value}) => {
-    const {setIsAuth, token, setToken} = useContext(Context)
+    const { token, setToken} = useContext(Context)
     let navigate = useNavigate();
+    const dispatch = useDispatch()
 
     const handleCloseWrap = () => {
         formik.resetForm()
@@ -37,7 +40,7 @@ const LogInForm = ({checkAuth, setValidError, handleClose, validError, openNext,
                     openNext(true)
                 } else if (value === "Log in") {
                     navigate(Routes.WAREHOUSES, {replace: true})
-                    setIsAuth(true)
+                    dispatch(setAuth(true))
                 }
             } else {
                 if (value === "Log in") {

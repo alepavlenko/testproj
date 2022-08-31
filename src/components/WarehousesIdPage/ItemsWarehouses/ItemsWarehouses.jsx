@@ -18,13 +18,14 @@ import style from "./ItemsWarehouses.module.css";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchProducts} from "../../../redux/store/productsReducer";
 import {fetchWarehouses} from "../../../redux/store/warehousesReducer";
+import Loader from "../../Common/Loader/Loader";
 
 const headCells = ['All products', 'Manufacturer', 'Item number', 'Purchasing technology', 'Shipment method'];
 
 const ItemsWarehouses = () => {
 
     const {warehouseId} = useParams();
-    const {token, setIsAuth} = useContext(Context)
+    const {setToken, token} = useContext(Context)
 
     const [selected, setSelected] = useState([]);
     const [openAddProduct, setOpenAddProduct] = useState(false)
@@ -32,12 +33,12 @@ const ItemsWarehouses = () => {
     const [openMoveProduct, setOpenMoveProduct] = useState(false)
     const [suckModal, setSuckModal] = useState(false)
     const items = useSelector(state => state.productsReducer.products)
-
+    const loading = useSelector(state => state.productsReducer.loading)
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(fetchProducts({token, setIsAuth, warehouseId}))
-        dispatch(fetchWarehouses({token, setIsAuth}))
+        dispatch(fetchProducts({setToken, token, warehouseId}))
+        dispatch(fetchWarehouses({setToken ,token}))
     }, [])
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
@@ -70,6 +71,8 @@ const ItemsWarehouses = () => {
         setSelected(newSelected);
     };
 
+    console.log("items",items)
+
     return (
         <div className={style.wrapTable}>
             <Box sx={{width: '100%'}}>
@@ -78,18 +81,21 @@ const ItemsWarehouses = () => {
                         warehouseId={warehouseId}
                         setOpenAddWarehouses={setOpenAddProduct}
                     />
-                    {items.length === 0
-                        ? <div className={style.wrapWarehouses}> Items dosnt have </div>
-                        : <TableContainer className={(selected.length >= 1) ? style.wrapBodyUltra : style.wrapBody}>
-                            <ItemsTable
-                                selected={selected}
-                                headCells={headCells}
-                                handleSelectAllClick={handleSelectAllClick}
-                                isSelected={isSelected}
-                                handleClick={handleClick}
-                                items={items}
-                            />
-                        </TableContainer>
+                    {loading
+                        ? <div className={style.wrapLoader}> <Loader/> </div>
+                        :<>{items.length === 0
+                            ? <div className={style.wrapWarehouses}> Items dosnt have </div>
+                            : <TableContainer className={(selected.length >= 1) ? style.wrapBodyUltra : style.wrapBody}>
+                                <ItemsTable
+                                    selected={selected}
+                                    headCells={headCells}
+                                    handleSelectAllClick={handleSelectAllClick}
+                                    isSelected={isSelected}
+                                    handleClick={handleClick}
+                                    items={items}
+                                />
+                            </TableContainer>
+                        }</>
                     }
                 </Paper>
             </Box>
