@@ -1,5 +1,5 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {Context} from "../../../App";
+import React, {useEffect, useState} from 'react';
+import {useDispatch, useSelector} from "react-redux";
 
 import Box from '@mui/material/Box';
 import TableContainer from '@mui/material/TableContainer';
@@ -12,28 +12,23 @@ import EnhancedTableToolbar from "../EnhancedTableToolbar/EnhancedTableToolbar";
 import WarehousesTable from "../WarehousesTable/WarehousesTable";
 
 import style from './Warehouses.module.css'
-import {useDispatch, useSelector} from "react-redux";
-import {fetchWarehouses} from "../../../redux/store/warehousesReducer";
 import Loader from "../../Common/Loader/Loader";
+import {fetchWarehouses} from "../../../redux/actions/warehousesAction";
+import {getLoadingWarehouses, getWarehouses} from "../../../redux/selectors/warehousesSelectors";
 
 const headCells = ['All stores', 'Number of products', 'Length, m', 'Width, m', 'Height, m'];
 
 const Warehouses = () => {
 
-    const {setToken, token} = useContext(Context)
+    const dispatch = useDispatch()
+
+    const warehouses = useSelector(getWarehouses)
+    const loading = useSelector(getLoadingWarehouses)
 
     const [selected, setSelected] = useState([]);
     const [openAddWarehouses, setOpenAddWarehouses] = useState(false)
     const [openSucksesWarehouses, setOpenSucksesWarehouses] = useState(false)
 
-    const warehouses = useSelector(state => state.warehousesReducer.warehouses)
-    const loading = useSelector(state => state.warehousesReducer.loading)
-    const dispatch = useDispatch()
-
-    useEffect(() => {
-        dispatch(fetchWarehouses({setToken, token}))
-
-    }, [])
     const isSelected = (name) => selected.indexOf(name) !== -1;
 
     const handleSelectAllClick = (event) => {
@@ -63,6 +58,11 @@ const Warehouses = () => {
         }
         setSelected(newSelected);
     };
+
+    useEffect(() => {
+        dispatch(fetchWarehouses({}))
+
+    }, [])
 
     return (
         <div className={style.wrapTable}>

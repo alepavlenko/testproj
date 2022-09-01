@@ -1,18 +1,16 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {useNavigate} from "react-router-dom";
 import {useFormik} from "formik";
 
-import {Context} from "../../../../App";
 import {ButtonStyled, FormStyled} from "./LogInForm.style";
 import {LoginSchema} from "./LoginFormValidation";
 
 import style from "./LogInForm.module.css";
 import {Routes} from '../../../../constants'
-import {setAuth} from "../../../../redux/store/authReducer";
 import {useDispatch} from "react-redux";
+import {setAuth} from "../../../../redux/actions/authActions";
 
 const LogInForm = ({checkAuth, setValidError, handleClose, validError, openNext, value}) => {
-    const { token, setToken} = useContext(Context)
     let navigate = useNavigate();
     const dispatch = useDispatch()
 
@@ -34,7 +32,7 @@ const LogInForm = ({checkAuth, setValidError, handleClose, validError, openNext,
         },
         validationSchema: LoginSchema,
         onSubmit: async (values) => {
-            if (await checkAuth(values, setValidError, token, setToken)) {
+            if (await checkAuth(values, setValidError)) {
                 handleCloseWrap()
                 if ((value === "Sign up")) {
                     openNext(true)

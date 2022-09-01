@@ -1,7 +1,7 @@
 import axios from "axios";
 
-export const getItems = async (setToken, token, warehouseId) => {
-
+export const getItems = async (warehouseId) => {
+    const token = localStorage.getItem('token')
     return await axios.get(`http://localhost:5000/api/products/${warehouseId}`,
         {
             headers: {
@@ -13,10 +13,7 @@ export const getItems = async (setToken, token, warehouseId) => {
         })
         .catch(e => {
             console.log(e)
-
-            if (e.response.data === 'Unauthorized') {
-                setToken('')
-            }
+            localStorage.setItem('auth', '')
             return false
 
         })

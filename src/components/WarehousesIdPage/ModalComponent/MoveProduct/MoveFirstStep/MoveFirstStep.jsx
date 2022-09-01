@@ -4,9 +4,10 @@ import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 import Move from "../../../../Common/Icons/Move";
 import style from './MoveFirstStep.module.css'
 import {useSelector} from "react-redux";
+import {getWarehouses} from "../../../../../redux/selectors/warehousesSelectors";
 
 const MoveFirstStep = ({nextStep, formik, warehouseId}) => {
-    const warehouses = useSelector(state => state.warehousesReducer.warehouses)
+    const warehouses = useSelector(getWarehouses)
 
     const basedWarehourses = warehouses.find((ware) => ware._id === warehouseId)
     const nameBasedWare = basedWarehourses.name;

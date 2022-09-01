@@ -9,10 +9,11 @@ import style from './TypographyBlock.module.css'
 import {loginAuth, signUpAuth} from "../../../utils";
 import {Routes} from '../../../constants/'
 import {useSelector} from "react-redux";
+import {getAuth} from "../../../redux/selectors/authSelectors";
 
 const TypographyBlock = () => {
     const navigate = useNavigate();
-    const isAuth = useSelector(state => state.authReducer.isAuth)
+    const isAuth = useSelector(getAuth)
 
     const [openSignUp, setOpenSignUp] = useState(false)
     const [openLogIn, setOpenLogIn] = useState(false)
@@ -31,7 +32,6 @@ const TypographyBlock = () => {
 
     const butGetStart = () => {
         if (isAuth) {
-            console.log(isAuth)
             navigate(Routes.WAREHOUSES, {replace: true})
         } else {
             setOpenLogIn(true)

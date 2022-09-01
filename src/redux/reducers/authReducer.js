@@ -1,8 +1,8 @@
+import {SET_AUTH} from "../actions/authActions";
+
 const defaultState = {
     isAuth: false
 }
-
-export const SET_AUTH = "SET_AUTH"
 
 export default function authReducer(state = defaultState, action) {
     switch(action.type) {
@@ -11,4 +11,3 @@ export default function authReducer(state = defaultState, action) {
     }
     return state
 }
-export const setAuth = payload => ({type: SET_AUTH, payload})

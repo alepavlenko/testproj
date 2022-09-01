@@ -1,21 +1,19 @@
-import React, {useContext} from 'react';
-import {Context} from "../../../App";
+import React from 'react';
 
 import Selected from "../../Common/Icons/Selected";
 import Move from "../../Common/Icons/Move";
 
 import style from "./DownItemNavbar.module.css";
 import {useDispatch} from "react-redux";
-import {deleteProducts} from "../../../redux/store/productsReducer";
+import {deleteProducts} from "../../../redux/actions/productAction";
 
 const DownItemNavbar = ({setOpenMoveProduct, stateSelected, setStateSelected}) => {
 
-    const {token} = useContext(Context)
     const dispatch = useDispatch()
 
     const removeSelected = () => {
         const categoy = 'products'
-        dispatch(deleteProducts({categoy, stateSelected, setStateSelected, token}))
+        dispatch(deleteProducts({categoy, stateSelected, setStateSelected}))
     }
 
     return (

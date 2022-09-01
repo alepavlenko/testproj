@@ -1,7 +1,7 @@
 import axios from "axios";
 
-export const moveProduct = async (values, warehouseId, stateSelected, setStateSelected, token) => {
-
+export const moveProduct = async (values, warehouseId, stateSelected, setStateSelected) => {
+    const token = localStorage.getItem('token')
     let temp = []
     for (const select of stateSelected) {
         await axios.patch(`http://localhost:5000/api/products/${select}/${values.selectWarehouses}`,

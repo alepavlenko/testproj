@@ -1,7 +1,7 @@
 import axios from "axios";
 
-export const getRows = async (token, setIsAuth) => {
-
+export const getRows = async () => {
+    const token = localStorage.getItem('token')
     return await axios.get('http://localhost:5000/api/warehouses/',
         {
             headers: {
@@ -13,11 +13,7 @@ export const getRows = async (token, setIsAuth) => {
         })
         .catch(e => {
             console.log(e)
-
-            if (e.response.data === 'Unauthorized') {
-                setIsAuth(false)
-            }
+            localStorage.setItem('auth', '')
             return false
-
         })
 }

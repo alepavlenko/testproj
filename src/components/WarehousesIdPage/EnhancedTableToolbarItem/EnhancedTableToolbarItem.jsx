@@ -6,10 +6,11 @@ import {ButtonStyled} from "../../WarehousesPage/EnhancedTableToolbar/EnhancedTa
 
 import PlusIcons from "../../Common/Icons/PlusIcons";
 import {useSelector} from "react-redux";
+import {getWarehouses} from "../../../redux/selectors/warehousesSelectors";
 
 const EnhancedTableToolbarItem = memo(({setOpenAddWarehouses, warehouseId}) => {
 
-    const warehouses = useSelector(state => state.warehousesReducer.warehouses)
+    const warehouses = useSelector(getWarehouses)
     const localWare = warehouses.filter((item) => item._id === warehouseId)
 
     return (

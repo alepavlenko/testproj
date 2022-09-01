@@ -1,6 +1,5 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import {useParams} from "react-router-dom";
-import {Context} from "../../../../App";
 import {useFormik} from "formik";
 import MoveFirstStep from "./MoveFirstStep/MoveFirstStep";
 import MoveSecondStep from "./MoveSecondStep/MoveSecondStep";
@@ -9,16 +8,16 @@ import {ButtonStyled, FormStyled} from "./MoveProduct.style";
 import {MoveItemSchema} from "./MoveProductForm";
 import ModalStepper from "../../../Common/ModalStepper/ModalStepper";
 import {useDispatch} from "react-redux";
-import {moveProducts} from "../../../../redux/store/productsReducer";
-import {setAuth} from "../../../../redux/store/authReducer";
+import {moveProducts} from "../../../../redux/actions/productAction";
 
 const MoveProduct = ({handleClose, openNext, value, stateSelected, setStateSelected}) => {
-    const {warehouseId} = useParams();
-    const [activeStep, setActiveStep] = useState(0);
-    const steps = ["1", "2", "3"];
 
-    const {token, items, setItems} = useContext(Context)
+    const {warehouseId} = useParams();
     const dispatch = useDispatch()
+
+    const [activeStep, setActiveStep] = useState(0);
+
+    const steps = ["1", "2", "3"];
 
 
     const handleNext = () => {
@@ -39,7 +38,7 @@ const MoveProduct = ({handleClose, openNext, value, stateSelected, setStateSelec
         validationSchema: MoveItemSchema,
         onSubmit: values => {
             values.baseWarehouses = warehouseId;
-            dispatch(moveProducts({values, warehouseId, stateSelected, setStateSelected, token, items, setItems, setAuth}))
+            dispatch(moveProducts({values, warehouseId, stateSelected, setStateSelected}))
             openNextModal();
 
         },

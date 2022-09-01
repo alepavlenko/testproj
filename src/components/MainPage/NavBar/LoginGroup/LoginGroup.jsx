@@ -1,5 +1,4 @@
-import React, {useContext, useState} from 'react';
-import {Context} from "../../../../App";
+import React, {useState} from 'react';
 
 import MyButton from "../../../Common/MyButton/MyButton";
 import MyModal from "../../../Common/MyModal/MyModal";
@@ -8,13 +7,13 @@ import {loginAuth, signUpAuth} from "../../../../utils";
 
 import style from './LoginGroup.module.css'
 import {useDispatch, useSelector} from "react-redux";
-import {setAuth} from "../../../../redux/store/authReducer";
+import {setAuth} from "../../../../redux/actions/authActions";
+import {getAuth} from "../../../../redux/selectors/authSelectors";
 
 
 const LoginGroup = () => {
-    const isAuth = useSelector(state => state.authReducer.isAuth)
     const dispatch = useDispatch()
-    const {setToken} = useContext(Context)
+    const isAuth = useSelector(getAuth)
 
     const [openSignUp, setOpenSignUp] = useState(false)
     const [openLogIn, setOpenLogIn] = useState(false)
@@ -34,7 +33,7 @@ const LoginGroup = () => {
     const logOut = () => {
         dispatch(setAuth(false))
         localStorage.removeItem('auth')
-        setToken('')
+        localStorage.removeItem('token')
     }
 
     return (

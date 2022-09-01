@@ -1,5 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {Context} from "../../../App";
+import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 
 import Box from "@mui/material/Box";
@@ -16,30 +15,26 @@ import SucsessfulModalMove from "../ModalComponent/SucsessfulModalMove/Sucsessfu
 
 import style from "./ItemsWarehouses.module.css";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchProducts} from "../../../redux/store/productsReducer";
-import {fetchWarehouses} from "../../../redux/store/warehousesReducer";
 import Loader from "../../Common/Loader/Loader";
+import {fetchProducts} from "../../../redux/actions/productAction";
+import {fetchWarehouses} from "../../../redux/actions/warehousesAction";
+import {getItems, getLoadingProducts} from "../../../redux/selectors/productSelectors";
 
 const headCells = ['All products', 'Manufacturer', 'Item number', 'Purchasing technology', 'Shipment method'];
 
 const ItemsWarehouses = () => {
 
+    const dispatch = useDispatch()
     const {warehouseId} = useParams();
-    const {setToken, token} = useContext(Context)
+
+    const items = useSelector(getItems)
+    const loading = useSelector(getLoadingProducts)
 
     const [selected, setSelected] = useState([]);
     const [openAddProduct, setOpenAddProduct] = useState(false)
     const [openSucksesWarehouses, setOpenSucksesWarehouses] = useState(false)
     const [openMoveProduct, setOpenMoveProduct] = useState(false)
     const [suckModal, setSuckModal] = useState(false)
-    const items = useSelector(state => state.productsReducer.products)
-    const loading = useSelector(state => state.productsReducer.loading)
-    const dispatch = useDispatch()
-
-    useEffect(() => {
-        dispatch(fetchProducts({setToken, token, warehouseId}))
-        dispatch(fetchWarehouses({setToken ,token}))
-    }, [])
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
 
@@ -71,7 +66,10 @@ const ItemsWarehouses = () => {
         setSelected(newSelected);
     };
 
-    console.log("items",items)
+    useEffect(() => {
+        dispatch(fetchProducts({warehouseId}))
+        dispatch(fetchWarehouses({}))
+    }, [])
 
     return (
         <div className={style.wrapTable}>

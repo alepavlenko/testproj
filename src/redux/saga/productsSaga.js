@@ -1,24 +1,28 @@
 import {put,takeEvery, call, select} from "redux-saga/effects"
-import {
-    ADD_PRODUCTS,
-    DELETE_PRODUCTS, errorProducts,
-    FETCH_PRODUCTS, loadingProducts, MOVE_PRODUCTS,
-    setProducts
-} from "../store/productsReducer";
+
 import {getItems} from "../../utils/gettingItems";
 import {addItems} from "../../utils/logicAddingItems";
 import {removeSelectedRow} from "../../utils/deletedSelectedWarehouses";
 import {moveProduct, syncMoveProduct} from "../../utils/movingProducts";
-import {setAuth} from "../store/authReducer";
+import {
+    ADD_PRODUCTS,
+    DELETE_PRODUCTS,
+    errorProducts,
+    FETCH_PRODUCTS,
+    loadingProducts,
+    MOVE_PRODUCTS, setProducts
+} from "../actions/productAction";
+import {setAuth} from "../actions/authActions";
 
 function* fetchProductsWorker(action) {
     try {
         yield put(loadingProducts(true))
-        const data = yield call(() => getItems(action.payload.setToken, action.payload.token , action.payload.warehouseId) )
-        console.log('ddddata', data)
+        const data = yield call(() => getItems(action.payload.warehouseId) )
+        if (data === false){
+            yield put(setAuth(false))
+        }
         yield put(setProducts(data))
     } catch (e){
-        yield put(setAuth(false))
         yield put(errorProducts(e))
     } finally {
         yield put(loadingProducts(false))
@@ -30,7 +34,10 @@ function* addProductsWorker(action) {
         yield put(loadingProducts(true))
         const state = yield select()
         const product = [...state.productsReducer.products]
-        const data = yield call(() => addItems(action.payload.token , action.payload.values, action.payload.warehouseId) )
+        const data = yield call(() => addItems(action.payload.values, action.payload.warehouseId) )
+        if (data === false){
+            yield put(setAuth(false))
+        }
         product.push(data.data)
         yield put(setProducts(product))
     } catch (e){
@@ -49,8 +56,10 @@ function* deleteProductsWorker(action) {
             action.payload.categoy,
             action.payload.stateSelected,
             action.payload.setStateSelected,
-            action.payload.token,
             product))
+        if (data === false){
+            yield put(setAuth(false))
+        }
         yield put(setProducts(data))
     } catch (e){
         yield put(errorProducts(e))
@@ -69,9 +78,10 @@ function* moveProductsWorker(action) {
             action.payload.warehouseId,
             action.payload.stateSelected,
             action.payload.setStateSelected,
-            action.payload.token,
-            action.payload.setItems,
         ))
+        if (data === false){
+            yield put(setAuth(false))
+        }
         const syncProduct = yield call(() => syncMoveProduct(product, data));
         yield put(setProducts(syncProduct))
     } catch (e){
