@@ -1,35 +1,19 @@
-import React, {useState} from "react";
-
+import React from "react";
+import {Provider} from "react-redux";
 import {BrowserRouter} from "react-router-dom";
+
 import AppRouter from "./components/AppRouter/AppRouter";
-
-export const Context = React.createContext();
-
+import {store} from "./redux/store";
 
 function App() {
 
-    const [isAuth, setIsAuth] = useState(Boolean(localStorage.getItem('auth')))
-    const [wareHouses, setWareHouses] = useState([])
-    const [items, setItems] = useState([])
-    const [token, setToken] = useState(localStorage.getItem('token'))
-
-    const values = {
-        isAuth,
-        setIsAuth,
-        wareHouses,
-        setWareHouses,
-        items,
-        setItems,
-        token,
-        setToken
-    }
+    store.dispatch({ type: 'todos/todoAdded', payload: 'Learn about actions' })
     return (
-        <Context.Provider value={values}>
-            <BrowserRouter>
-                <AppRouter/>
-            </BrowserRouter>
-        </Context.Provider>
-
+        <Provider store={store}>
+                <BrowserRouter>
+                    <AppRouter/>
+                </BrowserRouter>
+        </Provider>
     );
 }
 

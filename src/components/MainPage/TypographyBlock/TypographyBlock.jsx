@@ -1,6 +1,5 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import {useNavigate} from "react-router-dom";
-import {Context} from "../../../App";
 
 import MyButton from "../../Common/MyButton/MyButton";
 import MyModal from "../../Common/MyModal/MyModal";
@@ -9,10 +8,12 @@ import LogInForm from "../AuthForm/LogInForm/LogInForm";
 import style from './TypographyBlock.module.css'
 import {loginAuth, signUpAuth} from "../../../utils";
 import {Routes} from '../../../constants/'
+import {useSelector} from "react-redux";
+import {getAuth} from "../../../redux/selectors/authSelectors";
 
 const TypographyBlock = () => {
     const navigate = useNavigate();
-    const {isAuth} = useContext(Context)
+    const isAuth = useSelector(getAuth)
 
     const [openSignUp, setOpenSignUp] = useState(false)
     const [openLogIn, setOpenLogIn] = useState(false)

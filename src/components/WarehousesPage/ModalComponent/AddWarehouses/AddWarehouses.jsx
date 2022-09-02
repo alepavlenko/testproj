@@ -1,15 +1,16 @@
-import React, {useContext} from 'react';
-import {Context} from "../../../../App";
+import React from 'react';
 import {useFormik} from "formik";
+import {useDispatch} from "react-redux";
 
 import {ButtonStyled, FormStyled} from './AddWarehouses.style';
-import {addWarehouses} from "../../../../utils/logicAddingWarehouses";
-import {AddWarehousesSchema} from "./AddWarehousesForm";
 
+import {AddWarehousesSchema} from "./AddWarehousesForm";
 import style from './AddWarehouses.module.css'
+import {addWarehouses} from "../../../../redux/actions/warehousesAction";
 
 const AddWarehouses = ({handleClose, openNext, value}) => {
-    const {wareHouses, setWareHouses, token} = useContext(Context)
+
+    const dispatch = useDispatch()
 
     const handleCloseWrap = () => {
         formik.resetForm()
@@ -31,7 +32,7 @@ const AddWarehouses = ({handleClose, openNext, value}) => {
         },
         validationSchema: AddWarehousesSchema,
         onSubmit: values => {
-            addWarehouses(token, values, wareHouses, setWareHouses)
+            dispatch(addWarehouses({values}))
             handleCloseWrap();
             openNextModal()
         },

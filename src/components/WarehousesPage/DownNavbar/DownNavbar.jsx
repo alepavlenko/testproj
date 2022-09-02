@@ -1,18 +1,17 @@
-import React, {useContext} from 'react';
-import {Context} from "../../../App";
+import React from 'react';
+import {useDispatch} from "react-redux";
 
 import Selected from "../../Common/Icons/Selected";
-import {removeSelectedRow} from "../../../utils/deletedSelectedWarehouses";
-
 import style from './DownNavbar.module.css'
+import {deleteWarehouses} from "../../../redux/actions/warehousesAction";
 
 const DownNavbar = ({stateSelected, setStateSelected}) => {
 
-    const {wareHouses, setWareHouses, token} = useContext(Context)
+    const dispatch = useDispatch()
 
     const removeSelected = () => {
         const categoy = 'warehouses'
-        removeSelectedRow(categoy, stateSelected, setStateSelected, wareHouses, setWareHouses, token)
+        dispatch(deleteWarehouses({categoy, stateSelected, setStateSelected}))
     }
     return (
         <div className={style.downBar}>

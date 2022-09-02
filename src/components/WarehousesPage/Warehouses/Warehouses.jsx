@@ -1,5 +1,5 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {Context} from "../../../App";
+import React, {useEffect, useState} from 'react';
+import {useDispatch, useSelector} from "react-redux";
 
 import Box from '@mui/material/Box';
 import TableContainer from '@mui/material/TableContainer';
@@ -12,29 +12,28 @@ import EnhancedTableToolbar from "../EnhancedTableToolbar/EnhancedTableToolbar";
 import WarehousesTable from "../WarehousesTable/WarehousesTable";
 
 import style from './Warehouses.module.css'
-import {getRows} from "../../../utils/gettingRowsWarehouses";
+import Loader from "../../Common/Loader/Loader";
+import {fetchWarehouses} from "../../../redux/actions/warehousesAction";
+import {getLoadingWarehouses, getWarehouses} from "../../../redux/selectors/warehousesSelectors";
 
 const headCells = ['All stores', 'Number of products', 'Length, m', 'Width, m', 'Height, m'];
 
 const Warehouses = () => {
 
-    const {wareHouses, setWareHouses, token, setIsAuth} = useContext(Context)
+    const dispatch = useDispatch()
+
+    const warehouses = useSelector(getWarehouses)
+    const loading = useSelector(getLoadingWarehouses)
 
     const [selected, setSelected] = useState([]);
     const [openAddWarehouses, setOpenAddWarehouses] = useState(false)
     const [openSucksesWarehouses, setOpenSucksesWarehouses] = useState(false)
 
-    useEffect(() => {
-        getRows(token, setIsAuth).then((result) => {
-            setWareHouses(result)
-        })
-    }, [])
-
     const isSelected = (name) => selected.indexOf(name) !== -1;
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
-            const newSelected = wareHouses.map((n) => n._id);
+            const newSelected = warehouses.map((n) => n._id);
             setSelected(newSelected);
             return;
         }
@@ -60,6 +59,11 @@ const Warehouses = () => {
         setSelected(newSelected);
     };
 
+    useEffect(() => {
+        dispatch(fetchWarehouses({}))
+
+    }, [])
+
     return (
         <div className={style.wrapTable}>
             <Box sx={{width: '100%'}}>
@@ -67,19 +71,28 @@ const Warehouses = () => {
                     <EnhancedTableToolbar
                         setOpenAddWarehouses={setOpenAddWarehouses}
                     />
-                    {wareHouses.length === 0
-                        ? <div className={style.wrapWarehouses}> Warehouses doesn't have </div>
-                        : <TableContainer className={(selected.length >= 1) ? style.wrapBodyUltra : style.wrapBody}>
-                            <WarehousesTable
-                                selected={selected}
-                                headCells={headCells}
-                                handleSelectAllClick={handleSelectAllClick}
-                                wareHouses={wareHouses}
-                                isSelected={isSelected}
-                                handleClick={handleClick}
-                            />
-                        </TableContainer>
+
+                    {loading
+                        ? <div className={style.wrapLoader}><Loader/></div>
+                        :
+                        <>
+                            {warehouses.length === 0
+                                ? <div className={style.wrapWarehouses}> Warehouses doesn't have </div>
+                                : <TableContainer
+                                    className={(selected.length >= 1) ? style.wrapBodyUltra : style.wrapBody}>
+                                    <WarehousesTable
+                                        selected={selected}
+                                        headCells={headCells}
+                                        handleSelectAllClick={handleSelectAllClick}
+                                        wareHouses={warehouses}
+                                        isSelected={isSelected}
+                                        handleClick={handleClick}
+                                    />
+                                </TableContainer>
+                            }
+                        </>
                     }
+
                 </Paper>
             </Box>
             <MyModal open={openAddWarehouses} handleClose={setOpenAddWarehouses}>

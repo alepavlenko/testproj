@@ -1,8 +1,8 @@
 import axios from "axios";
-import {getItems} from "./gettingItems";
 
-export const moveProduct = async (values, warehouseId, stateSelected, setStateSelected, token, items, setItems, setIsAuth) => {
-
+export const moveProduct = async (values, warehouseId, stateSelected, setStateSelected) => {
+    const token = localStorage.getItem('token')
+    let temp = []
     for (const select of stateSelected) {
         await axios.patch(`http://localhost:5000/api/products/${select}/${values.selectWarehouses}`,
             {}, {
@@ -11,6 +11,7 @@ export const moveProduct = async (values, warehouseId, stateSelected, setStateSe
                 }
             })
             .then((res) => {
+                temp.push(res.data)
                 return true;
             })
             .catch(e => {
@@ -20,7 +21,11 @@ export const moveProduct = async (values, warehouseId, stateSelected, setStateSe
             });
     }
     setStateSelected([])
-    await getItems(token, setIsAuth, warehouseId).then((res) => {
-        setItems(res)
-    })
+    return temp
+}
+
+export const syncMoveProduct = async (product, data) => {
+    let tempProd = []
+    tempProd = product.filter(prod => !data.some(dat => dat._id === prod._id))
+    return tempProd
 }

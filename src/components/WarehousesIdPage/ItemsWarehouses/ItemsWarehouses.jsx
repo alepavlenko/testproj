@@ -1,5 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {Context} from "../../../App";
+import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 
 import Box from "@mui/material/Box";
@@ -15,30 +14,27 @@ import MoveProduct from "../ModalComponent/MoveProduct/MoveProduct";
 import SucsessfulModalMove from "../ModalComponent/SucsessfulModalMove/SucsessfulModalMove";
 
 import style from "./ItemsWarehouses.module.css";
-import {getItems} from "../../../utils/gettingItems";
-import {getRows} from "../../../utils/gettingRowsWarehouses";
+import {useDispatch, useSelector} from "react-redux";
+import Loader from "../../Common/Loader/Loader";
+import {fetchProducts} from "../../../redux/actions/productAction";
+import {fetchWarehouses} from "../../../redux/actions/warehousesAction";
+import {getItems, getLoadingProducts} from "../../../redux/selectors/productSelectors";
 
 const headCells = ['All products', 'Manufacturer', 'Item number', 'Purchasing technology', 'Shipment method'];
 
 const ItemsWarehouses = () => {
 
+    const dispatch = useDispatch()
     const {warehouseId} = useParams();
-    const {items, setItems, token, setIsAuth, setWareHouses} = useContext(Context)
+
+    const items = useSelector(getItems)
+    const loading = useSelector(getLoadingProducts)
 
     const [selected, setSelected] = useState([]);
     const [openAddProduct, setOpenAddProduct] = useState(false)
     const [openSucksesWarehouses, setOpenSucksesWarehouses] = useState(false)
     const [openMoveProduct, setOpenMoveProduct] = useState(false)
     const [suckModal, setSuckModal] = useState(false)
-
-    useEffect(() => {
-        getItems(token, setIsAuth, warehouseId).then((result) => {
-            setItems(result)
-        })
-        getRows(token, setIsAuth, warehouseId).then((result) => {
-            setWareHouses(result)
-        })
-    }, [])
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
 
@@ -70,6 +66,11 @@ const ItemsWarehouses = () => {
         setSelected(newSelected);
     };
 
+    useEffect(() => {
+        dispatch(fetchProducts({warehouseId}))
+        dispatch(fetchWarehouses({}))
+    }, [])
+
     return (
         <div className={style.wrapTable}>
             <Box sx={{width: '100%'}}>
@@ -78,18 +79,21 @@ const ItemsWarehouses = () => {
                         warehouseId={warehouseId}
                         setOpenAddWarehouses={setOpenAddProduct}
                     />
-                    {items.length === 0
-                        ? <div className={style.wrapWarehouses}> Items dosnt have </div>
-                        : <TableContainer className={(selected.length >= 1) ? style.wrapBodyUltra : style.wrapBody}>
-                            <ItemsTable
-                                selected={selected}
-                                headCells={headCells}
-                                handleSelectAllClick={handleSelectAllClick}
-                                isSelected={isSelected}
-                                handleClick={handleClick}
-                                items={items}
-                            />
-                        </TableContainer>
+                    {loading
+                        ? <div className={style.wrapLoader}> <Loader/> </div>
+                        :<>{items.length === 0
+                            ? <div className={style.wrapWarehouses}> Items dosnt have </div>
+                            : <TableContainer className={(selected.length >= 1) ? style.wrapBodyUltra : style.wrapBody}>
+                                <ItemsTable
+                                    selected={selected}
+                                    headCells={headCells}
+                                    handleSelectAllClick={handleSelectAllClick}
+                                    isSelected={isSelected}
+                                    handleClick={handleClick}
+                                    items={items}
+                                />
+                            </TableContainer>
+                        }</>
                     }
                 </Paper>
             </Box>

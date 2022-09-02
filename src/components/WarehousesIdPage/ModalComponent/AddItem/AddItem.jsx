@@ -1,6 +1,5 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import {useFormik} from "formik";
-import {Context} from "../../../../App";
 import {useParams} from "react-router-dom";
 
 import {ButtonStyled, FormStyled} from './AddItem.style';
@@ -10,14 +9,17 @@ import ThirdStep from "./ThirdStep/ThirdStep";
 import {AddItemSchema} from "./AddItemForm";
 import ModalStepper from "../../../Common/ModalStepper/ModalStepper";
 
-import {addItems} from "../../../../utils/logicAddingItems";
+import {useDispatch} from "react-redux";
+import {addProducts} from "../../../../redux/actions/productAction";
 
 const AddItem = ({handleClose, openNext, value}) => {
-    const {warehouseId} = useParams();
-    const [activeStep, setActiveStep] = useState(0);
-    const steps = ['1', '2', '3'];
 
-    const {setItems, items, token} = useContext(Context)
+    const {warehouseId} = useParams();
+    const dispatch = useDispatch()
+
+    const [activeStep, setActiveStep] = useState(0);
+
+    const steps = ['1', '2', '3'];
 
     const handleNext = () => {
         if (formik.values.name === '') {
@@ -40,7 +42,7 @@ const AddItem = ({handleClose, openNext, value}) => {
         },
         validationSchema: AddItemSchema,
         onSubmit: values => {
-            addItems(token, values, items, setItems, warehouseId)
+            dispatch(addProducts({values, warehouseId}))
             handleCloseWrap();
             openNextModal()
         },

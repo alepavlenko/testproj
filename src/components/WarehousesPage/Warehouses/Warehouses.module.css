@@ -26,6 +26,9 @@
     order: 3;
 }
 
+.wrapLoader{
+    margin-left: 39vw;
+}
 
 .wrapWarehouses{
 display: flex;

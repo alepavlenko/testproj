@@ -1,7 +1,8 @@
 import axios from "axios";
 
-export const addWarehouses = async (token, values, wareHouses, setWareHouses) => {
+export const addWarehouses = async (values) => {
     const num = '1'
+    const token = localStorage.getItem('token')
     return await axios.post('http://localhost:5000/api/warehouses/',
         {
             name: values.nameWarehouses.trim(),
@@ -17,12 +18,12 @@ export const addWarehouses = async (token, values, wareHouses, setWareHouses) =>
             }
         })
         .then((res) => {
-            setWareHouses([...wareHouses, {...res.data}])
-            return true;
+            return res;
         })
         .catch(e => {
             console.log(e)
-            return false
+            localStorage.setItem('auth', '')
+            return e
 
         })
 

@@ -1,21 +1,24 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import {useParams} from "react-router-dom";
-import {Context} from "../../../../App";
 import {useFormik} from "formik";
 import MoveFirstStep from "./MoveFirstStep/MoveFirstStep";
 import MoveSecondStep from "./MoveSecondStep/MoveSecondStep";
 import MoveThirdStep from "./MoveThirdStep/MoveThirdStep";
 import {ButtonStyled, FormStyled} from "./MoveProduct.style";
 import {MoveItemSchema} from "./MoveProductForm";
-import {moveProduct} from "../../../../utils/movingProducts";
 import ModalStepper from "../../../Common/ModalStepper/ModalStepper";
+import {useDispatch} from "react-redux";
+import {moveProducts} from "../../../../redux/actions/productAction";
 
 const MoveProduct = ({handleClose, openNext, value, stateSelected, setStateSelected}) => {
+
     const {warehouseId} = useParams();
+    const dispatch = useDispatch()
+
     const [activeStep, setActiveStep] = useState(0);
+
     const steps = ["1", "2", "3"];
 
-    const {token, items, setItems, setIsAuth} = useContext(Context)
 
     const handleNext = () => {
         if (formik.values.selectWarehouses === '') {
@@ -29,13 +32,13 @@ const MoveProduct = ({handleClose, openNext, value, stateSelected, setStateSelec
         initialValues: {
             baseWarehouses: '',
             selectWarehouses: '',
-            delivery: '',
-            payment: '',
+            delivery: 'AIR',
+            payment: 'CASH',
         },
         validationSchema: MoveItemSchema,
         onSubmit: values => {
             values.baseWarehouses = warehouseId;
-            moveProduct(values, warehouseId, stateSelected, setStateSelected, token, items, setItems, setIsAuth)
+            dispatch(moveProducts({values, warehouseId, stateSelected, setStateSelected}))
             openNextModal();
 
         },

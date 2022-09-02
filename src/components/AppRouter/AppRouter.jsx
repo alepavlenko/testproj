@@ -1,11 +1,21 @@
-import React, {useContext} from 'react';
+import React, {useEffect} from 'react';
 import {Navigate, Route, Routes} from 'react-router-dom';
+import {useDispatch, useSelector} from "react-redux";
 
-import {Context} from "../../App";
 import {privateRoutes, publicRoutes} from "../../routes";
+import {setAuth} from "../../redux/actions/authActions";
+import {getAuth} from "../../redux/selectors/authSelectors";
 
 const AppRouter = () => {
-    const {isAuth} = useContext(Context)
+    const dispatch = useDispatch()
+
+    const isAuth = useSelector(getAuth)
+
+    useEffect(() => {
+        const auth = Boolean(localStorage.getItem('auth'))
+        dispatch(setAuth(auth))
+    },[])
+
     return (
         isAuth
             ?

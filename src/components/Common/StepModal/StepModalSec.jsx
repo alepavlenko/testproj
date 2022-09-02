@@ -15,7 +15,8 @@ const StepModalSec = ({selectedIndex, formik, handleListItemClick}) => {
             {
                 arrayItem.map(item =>
                     <ListItemButtonStyled
-                        selected={selectedIndex === item.value}
+                        default
+                        selected={selectedIndex === item.value }
                         onChange={formik.handleChange}
                         onClick={() => handleListItemClick(item.value)}
                         key={item.value}

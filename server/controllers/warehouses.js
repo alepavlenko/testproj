@@ -20,9 +20,9 @@ module.exports.getById = async function (req,res) {
 module.exports.remove = async function (req,res) {
     try {
         await Warehouses.remove({_id:req.params.id})
-        res.status(200).json({
-            message: 'Category has been delete.'
-        })
+        const categories = await Warehouses.find({user: req.user.id})
+
+        res.status(200).json(categories)
     } catch (e) {
         errorHandler(res, e)
     }
