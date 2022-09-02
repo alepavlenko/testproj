@@ -1,5 +1,5 @@
 import React from 'react';
-import {useNavigate} from "react-router-dom";
+import {NavigateFunction, useNavigate} from "react-router-dom";
 import {useFormik} from "formik";
 
 import {ButtonStyled, FormStyled} from "./LogInForm.style";
@@ -10,8 +10,22 @@ import {Routes} from '../../../../constants'
 import {useDispatch} from "react-redux";
 import {setAuth} from "../../../../redux/actions/authActions";
 
-const LogInForm = ({checkAuth, setValidError, handleClose, validError, openNext, value}) => {
-    let navigate = useNavigate();
+interface LogInFormProps {
+    checkAuth: (
+        values: {password: string, email: string},
+        setValidError: (value: boolean) => void
+    ) => Promise<boolean>
+    setValidError: (value: boolean) => void
+    handleClose: () => void
+    validError: boolean
+    openNext: (value: boolean) => void
+    value: string
+}
+
+
+
+const LogInForm = ({checkAuth, setValidError, handleClose, validError, openNext, value}: LogInFormProps) => {
+    let navigate: NavigateFunction = useNavigate();
     const dispatch = useDispatch()
 
     const handleCloseWrap = () => {

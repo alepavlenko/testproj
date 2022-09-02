@@ -1,4 +1,4 @@
-import React, {memo} from 'react';
+import {memo} from 'react';
 
 import Person from "../../Common/Icons/Person";
 import Settings from "../../Common/Icons/Settings";
@@ -9,7 +9,12 @@ import style from './NavBarWereHouses.module.css'
 import {IconButton} from "@mui/material";
 import {Menu} from "@mui/icons-material";
 
-const NavBarWereHouses = memo(({setMobileOpen}) => {
+interface NavBarWereHousesProps {
+    setMobileOpen: (value: boolean) => void
+    mobileOpen: boolean
+}
+
+const NavBarWereHouses = memo(({setMobileOpen, mobileOpen}: NavBarWereHousesProps) => {
 
     const arrayLogo = [<Person/>, <Settings/>, <Notification/>]
 
@@ -20,7 +25,7 @@ const NavBarWereHouses = memo(({setMobileOpen}) => {
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"
-                        onClick={setMobileOpen}
+                        onClick={() => setMobileOpen(!mobileOpen)}
                         edge="start"
                         sx={{ mr: 2, display: {xs: 'block', sm: 'none' } }}
                     >

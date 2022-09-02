@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useNavigate} from "react-router-dom";
+import {NavigateFunction, useNavigate} from "react-router-dom";
 
 import MyButton from "../../Common/MyButton/MyButton";
 import MyModal from "../../Common/MyModal/MyModal";
@@ -12,12 +12,12 @@ import {useSelector} from "react-redux";
 import {getAuth} from "../../../redux/selectors/authSelectors";
 
 const TypographyBlock = () => {
-    const navigate = useNavigate();
-    const isAuth = useSelector(getAuth)
+    const navigate: NavigateFunction = useNavigate();
+    const isAuth: boolean = useSelector(getAuth)
 
     const [openSignUp, setOpenSignUp] = useState(false)
     const [openLogIn, setOpenLogIn] = useState(false)
-    const [validError, setValidError] = useState(null)
+    const [validError, setValidError] = useState(false)
 
     const handleClose1 = () => {
         setValidError(false)

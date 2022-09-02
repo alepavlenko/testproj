@@ -4,7 +4,17 @@ import Table from "@mui/material/Table";
 import EnhancedItemsTableHead from "../EnhancedItemsTableHead/EnhancedItemsTableHead";
 import ItemsTableBody from "../ItemsTableBody/ItemsTableBody";
 
-const ItemsTable = ({selected, items, headCells, handleSelectAllClick, isSelected, handleClick}) => {
+interface ItemsTableProps {
+    selected: string[]
+    items: any
+    headCells: string[]
+    handleSelectAllClick: any
+    isSelected: (name: string) => boolean
+    handleClick: any
+    // (value: Event) => string[]
+}
+
+const ItemsTable = ({selected, items, headCells, handleSelectAllClick, isSelected, handleClick}: ItemsTableProps) => {
     return (
         <Table>
             <EnhancedItemsTableHead

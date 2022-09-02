@@ -1,5 +1,5 @@
 import React from 'react';
-import {useNavigate} from "react-router-dom";
+import {NavigateFunction, useNavigate} from "react-router-dom";
 
 import Logo from "../../Common/Icons/Logo";
 import BarItem from "./BarItem/BarItem";
@@ -9,7 +9,7 @@ import style from './NavBar.module.css'
 
 const NavBar = () => {
 
-    let navigate = useNavigate();
+    let navigate: NavigateFunction = useNavigate();
 
     return (
         <div className={style.wrapperNav}>

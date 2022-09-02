@@ -7,7 +7,14 @@ import style from "./DownItemNavbar.module.css";
 import {useDispatch} from "react-redux";
 import {deleteProducts} from "../../../redux/actions/productAction";
 
-const DownItemNavbar = ({setOpenMoveProduct, stateSelected, setStateSelected}) => {
+interface DownItemNavbarProps {
+    setOpenMoveProduct: (value: boolean) => void
+    stateSelected: Array<string>
+    setStateSelected: any
+    // (Array<string>) => Array<string>
+}
+
+const DownItemNavbar = ({setOpenMoveProduct, stateSelected, setStateSelected}: DownItemNavbarProps) => {
 
     const dispatch = useDispatch()
 
@@ -25,7 +32,7 @@ const DownItemNavbar = ({setOpenMoveProduct, stateSelected, setStateSelected}) =
                 </div>
                 <div className={style.wrapButtonGroup}>
                     <button className={style.wrapButton} onClick={removeSelected}>Delete</button>
-                    <button className={style.wrapButtonMove} onClick={setOpenMoveProduct}>
+                    <button className={style.wrapButtonMove} onClick={() => setOpenMoveProduct(true)}>
                         Move
                         <Move/>
                     </button>

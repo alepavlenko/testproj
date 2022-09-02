@@ -5,11 +5,18 @@ import AirPlane from "../Icons/AirPlane";
 import Ship from "../Icons/Ship";
 import Car from "../Icons/Car";
 
-export const paymentArray = [
+
+interface paymentArrayProps {
+    value: string
+    text: string
+    logo: JSX.Element
+}
+
+export const paymentArray: paymentArrayProps[] = [
     {
         value: "VISA",
         text: "Visa, Mastercard",
-        logo: <Visa/>
+        logo: <Visa/>,
     },
     {
         value: "PAYPAL",
@@ -23,7 +30,7 @@ export const paymentArray = [
     },
 ]
 
-export const deliveryArray = [
+export const deliveryArray: paymentArrayProps[] = [
     {
         value: "AIR",
         text: "By air transport",

@@ -20,6 +20,10 @@ import {fetchProducts} from "../../../redux/actions/productAction";
 import {fetchWarehouses} from "../../../redux/actions/warehousesAction";
 import {getItems, getLoadingProducts} from "../../../redux/selectors/productSelectors";
 
+interface handleCloseProps{
+    hadleClose: (value: boolean) => void
+}
+
 const headCells = ['All products', 'Manufacturer', 'Item number', 'Purchasing technology', 'Shipment method'];
 
 const ItemsWarehouses = () => {
@@ -27,29 +31,29 @@ const ItemsWarehouses = () => {
     const dispatch = useDispatch()
     const {warehouseId} = useParams();
 
-    const items = useSelector(getItems)
+    const items: any = useSelector(getItems)
     const loading = useSelector(getLoadingProducts)
 
-    const [selected, setSelected] = useState([]);
-    const [openAddProduct, setOpenAddProduct] = useState(false)
-    const [openSucksesWarehouses, setOpenSucksesWarehouses] = useState(false)
-    const [openMoveProduct, setOpenMoveProduct] = useState(false)
-    const [suckModal, setSuckModal] = useState(false)
+    const [selected, setSelected] = useState<string[]>([]);
+    const [openAddProduct, setOpenAddProduct] = useState<boolean>(false)
+    const [openSucksesWarehouses, setOpenSucksesWarehouses] = useState<boolean>(false)
+    const [openMoveProduct, setOpenMoveProduct] = useState<boolean>(false)
+    const [suckModal, setSuckModal] = useState<boolean>(false)
 
-    const isSelected = (name) => selected.indexOf(name) !== -1;
+    const isSelected = (name: string) => selected.indexOf(name) !== -1;
 
-    const handleSelectAllClick = (event) => {
+    const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.checked) {
-            const newSelected = items.map((n) => n._id);
+            const newSelected = items.map((n: any) => n._id);
             setSelected(newSelected);
             return;
         }
         setSelected([]);
     };
 
-    const handleClick = (event, name) => {
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, name: string) => {
         const selectedIndex = selected.indexOf(name);
-        let newSelected = [];
+        let newSelected: string[] = [];
 
         if (selectedIndex === -1) {
             newSelected = newSelected.concat(selected, name);

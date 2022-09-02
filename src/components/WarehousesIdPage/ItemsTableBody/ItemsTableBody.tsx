@@ -7,8 +7,25 @@ import AirPlane from "../../Common/Icons/AirPlane";
 import Ship from "../../Common/Icons/Ship";
 import Car from "../../Common/Icons/Car";
 
-const ItemsTableBody = ({isSelected, handleClick, items}) => {
-    function rowIcons(row) {
+interface ItemsTableBodyProps {
+    isSelected: (name: string) => boolean
+    handleClick: any
+    items: any
+}
+
+interface itemsInterface{
+    name: string
+    manufacturer: string
+    itemNumber: number
+    purchasing: string
+    shipment: string
+    warehouse: string
+    user: string
+    _id: string
+}
+
+const ItemsTableBody = ({isSelected, handleClick, items}: ItemsTableBodyProps) => {
+    function rowIcons(row: string) {
         switch (row) {
             case 'AIR':
                 return <AirPlane/>;
@@ -21,7 +38,7 @@ const ItemsTableBody = ({isSelected, handleClick, items}) => {
 
     return (
         <TableBody>
-            {items.map((row, index) => {
+            {items.map((row: itemsInterface, index: string) => {
                 const isItemSelected = isSelected(row._id);
                 const labelId = `enhanced-table-checkbox-${index}`;
                 return (

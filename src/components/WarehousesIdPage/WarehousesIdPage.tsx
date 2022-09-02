@@ -1,22 +1,20 @@
-import React, {useState} from 'react';
+import {useState} from "react";
 
 import {BoxItemWrapper, BoxStyledInner} from "./WarehousesIdPage.style";
 import {CssBaseline} from "@mui/material";
 import NavBarWereHouses from "../WarehousesPage/NavBarWereHouses/NavBarWereHouses";
 import CustomDrawer from "../WarehousesPage/Drawer/CustomDrawer";
-import ItemsWarehouses from "./ItemsWarehouses/ItemsWarehouses";
 
-import style from './WarehousesIdPage.module.css'
+import ItemsWarehouses from "./ItemsWarehouses/ItemsWarehouses";
+import style from './WarehousesIdPage.module.css';
 
 const WarehousesIdPage = () => {
-    const [mobileOpen, setMobileOpen] = useState(false);
+    const [mobileOpen, setMobileOpen] = useState<boolean>(false);
 
     return (
         <BoxItemWrapper>
             <CssBaseline/>
-            <NavBarWereHouses
-                setMobileOpen={setMobileOpen}
-            />
+            <NavBarWereHouses mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
             <BoxStyledInner
                 component="nav"
                 aria-label="mailbox folders"

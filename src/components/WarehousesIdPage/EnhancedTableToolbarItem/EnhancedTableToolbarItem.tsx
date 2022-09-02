@@ -7,11 +7,27 @@ import {ButtonStyled} from "../../WarehousesPage/EnhancedTableToolbar/EnhancedTa
 import PlusIcons from "../../Common/Icons/PlusIcons";
 import {useSelector} from "react-redux";
 import {getWarehouses} from "../../../redux/selectors/warehousesSelectors";
+import {Params} from "react-router-dom";
 
-const EnhancedTableToolbarItem = memo(({setOpenAddWarehouses, warehouseId}) => {
+interface warehousesIterElem {
+    name: string
+    numberProduct: string
+    length: number
+    width: number
+    height: number
+    user: string
+    _id?: string
+}
+
+interface EnhancedTableToolbarItemProps {
+    setOpenAddWarehouses: (value: boolean) => void
+    warehouseId: any
+}
+
+const EnhancedTableToolbarItem = memo(({setOpenAddWarehouses, warehouseId}: EnhancedTableToolbarItemProps) => {
 
     const warehouses = useSelector(getWarehouses)
-    const localWare = warehouses.filter((item) => item._id === warehouseId)
+    const localWare = warehouses.filter((item: warehousesIterElem) => item._id === warehouseId)
 
     return (
         <Toolbar
@@ -30,7 +46,7 @@ const EnhancedTableToolbarItem = memo(({setOpenAddWarehouses, warehouseId}) => {
                     <div>Warehouses: {localWare[0]?.name}</div>
                 }
             </Typography>
-            <ButtonStyled variant="contained" onClick={setOpenAddWarehouses}>Add Cargo <PlusIcons/></ButtonStyled>
+            <ButtonStyled variant="contained" onClick={() => setOpenAddWarehouses(true)}>Add Cargo <PlusIcons/></ButtonStyled>
         </Toolbar>
     );
 });

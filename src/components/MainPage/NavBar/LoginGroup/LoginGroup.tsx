@@ -13,11 +13,11 @@ import {getAuth} from "../../../../redux/selectors/authSelectors";
 
 const LoginGroup = () => {
     const dispatch = useDispatch()
-    const isAuth = useSelector(getAuth)
+    const isAuth: boolean = useSelector(getAuth)
 
-    const [openSignUp, setOpenSignUp] = useState(false)
-    const [openLogIn, setOpenLogIn] = useState(false)
-    const [validError, setValidError] = useState(null)
+    const [openSignUp, setOpenSignUp] = useState<boolean>(false)
+    const [openLogIn, setOpenLogIn] = useState<boolean>(false)
+    const [validError, setValidError] = useState<boolean>(false)
 
     const handleClose1 = () => {
         setValidError(false)
@@ -34,6 +34,10 @@ const LoginGroup = () => {
         dispatch(setAuth(false))
         localStorage.removeItem('auth')
         localStorage.removeItem('token')
+    }
+
+    const testDich = (e: React.MouseEvent<HTMLElement>) => {
+
     }
 
     return (

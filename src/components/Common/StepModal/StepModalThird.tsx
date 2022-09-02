@@ -1,13 +1,18 @@
 import React from 'react';
+
+import {ListItemText} from "@mui/material";
+import {paymentArray} from "./arrayModal";
 import {ListItemButtonStyled} from "../../WarehousesIdPage/ModalComponent/MoveProduct/MoveProduct.style";
 import style from "../../WarehousesIdPage/ModalComponent/MoveProduct/MoveThirdStep/MoveThirdStep.module.css";
-import {ListItemText} from "@mui/material";
-import {deliveryArray, paymentArray} from "./arrayModal";
 
-const StepModalThird = ({ selectedIndex, formik, handleListItemClick}) => {
+interface StepModalThirdProps {
+    selectedIndex: string
+    formik: any
+    handleListItemClick: (index: string) => void
+}
 
+const StepModalThird = ({ selectedIndex, formik, handleListItemClick}: StepModalThirdProps) => {
     const arrayItem = paymentArray;
-
     return (
         <>
             {

@@ -2,7 +2,12 @@ import React from 'react';
 
 import {Step, StepLabel, Stepper} from "@mui/material";
 
-const ModalStepper = ({activeStep, steps}) => {
+interface ModalStepperProps {
+    activeStep: number
+    steps: Array<string>
+}
+
+const ModalStepper = ({activeStep, steps}: ModalStepperProps) => {
     return (
         <Stepper activeStep={activeStep}>
             {steps.map((label) => {

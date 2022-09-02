@@ -6,7 +6,15 @@ import TableCell from "@mui/material/TableCell";
 import Checkbox from "@mui/material/Checkbox";
 import TableSortLabel from "@mui/material/TableSortLabel";
 
-const EnhancedItemsTableHead = ({items, selected, onSelectAllClick, headCells}) => {
+interface EnhancedItemsTableHeadProps {
+    selected: string[]
+    headCells: string[]
+    items: any
+    onSelectAllClick: any
+    // (value: Event) => string[]
+}
+
+const EnhancedItemsTableHead = ({items, selected, onSelectAllClick, headCells}: EnhancedItemsTableHeadProps) => {
     return (
         <TableHead>
             <TableRow>
@@ -15,7 +23,7 @@ const EnhancedItemsTableHead = ({items, selected, onSelectAllClick, headCells}) 
                         color="primary"
                         indeterminate={selected.length > 0 && selected.length < items.length}
                         checked={items.length > 0 && selected.length === items.length}
-                        onChange={onSelectAllClick}
+                        onChange={(e) => onSelectAllClick(e)}
                     />
                 </TableCell>
                 {headCells.map((headCell) => (

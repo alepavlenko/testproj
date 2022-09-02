@@ -9,10 +9,10 @@ import {getAuth} from "../../redux/selectors/authSelectors";
 const AppRouter = () => {
     const dispatch = useDispatch()
 
-    const isAuth = useSelector(getAuth)
+    const isAuth: boolean = useSelector(getAuth)
 
     useEffect(() => {
-        const auth = Boolean(localStorage.getItem('auth'))
+        const auth: boolean = Boolean(localStorage.getItem('auth'))
         dispatch(setAuth(auth))
     },[])
 
