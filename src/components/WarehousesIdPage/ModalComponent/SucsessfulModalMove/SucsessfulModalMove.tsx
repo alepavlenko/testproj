@@ -3,8 +3,13 @@ import {ButtonStyled, FormStyled} from "../../../WarehousesPage/ModalComponent/S
 import CargoMoving from "../../../Common/Icons/CargoMoving";
 import style from "./SucsessfulModalMove.module.css";
 
-const SucsessfulModalMove = ({handleClose}) => {
-    const handleSubmit = (event) => {
+interface SucsessfulModalMoveProps {
+    handleClose: (value: boolean) => void
+
+}
+
+const SucsessfulModalMove = ({handleClose}: SucsessfulModalMoveProps) => {
+    const handleSubmit = (event: any) => {
         event.preventDefault()
         handleClose(false)
     }

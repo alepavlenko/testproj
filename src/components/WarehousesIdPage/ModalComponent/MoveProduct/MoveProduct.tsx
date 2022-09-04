@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useParams} from "react-router-dom";
+import {Params, useParams} from "react-router-dom";
 import {useFormik} from "formik";
 import MoveFirstStep from "./MoveFirstStep/MoveFirstStep";
 import MoveSecondStep from "./MoveSecondStep/MoveSecondStep";
@@ -10,9 +10,17 @@ import ModalStepper from "../../../Common/ModalStepper/ModalStepper";
 import {useDispatch} from "react-redux";
 import {moveProducts} from "../../../../redux/actions/productAction";
 
-const MoveProduct = ({handleClose, openNext, value, stateSelected, setStateSelected}) => {
+interface MoveProductProps {
+    handleClose: (value: boolean) => void
+    openNext: (value: boolean) => void
+    value: string
+    stateSelected: string[]
+    setStateSelected: (value: string[]) => void
+}
 
-    const {warehouseId} = useParams();
+const MoveProduct = ({handleClose, openNext, value, stateSelected, setStateSelected}: MoveProductProps) => {
+
+    const {warehouseId}:  any = useParams();
     const dispatch = useDispatch()
 
     const [activeStep, setActiveStep] = useState(0);
@@ -28,7 +36,7 @@ const MoveProduct = ({handleClose, openNext, value, stateSelected, setStateSelec
         }
     };
 
-    const formik = useFormik({
+    const formik: any = useFormik({
         initialValues: {
             baseWarehouses: '',
             selectWarehouses: '',
@@ -44,11 +52,10 @@ const MoveProduct = ({handleClose, openNext, value, stateSelected, setStateSelec
         },
     });
 
-    function getStepContent(step) {
+    function getStepContent(step: number) {
         switch (step) {
             case 0:
                 return <MoveFirstStep
-                    stateSelected={stateSelected}
                     nextStep={handleNext}
                     formik={formik}
                     warehouseId={warehouseId}

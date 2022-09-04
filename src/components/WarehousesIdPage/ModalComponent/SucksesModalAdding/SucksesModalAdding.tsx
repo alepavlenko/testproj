@@ -3,8 +3,12 @@ import {ButtonStyled, FormStyled} from "../../../WarehousesPage/ModalComponent/S
 import style from "./SucksesModalAdding.module.css";
 import CargoAdding from "../../../Common/Icons/CargoAdding";
 
-const SucksesModalAdding = ({handleClose}) => {
-    const handleSubmit = (event) => {
+interface SucksesModalAddingProps{
+    handleClose: (value: boolean) => void
+}
+
+const SucksesModalAdding = ({handleClose}: SucksesModalAddingProps) => {
+    const handleSubmit = (event: any) => {
         event.preventDefault()
         handleClose(false)
     }

@@ -5,7 +5,11 @@ import {ButtonStyled} from "./EnhancedTableToolbar.style";
 import PlusIcons from "../../Common/Icons/PlusIcons";
 import Toolbar from "@mui/material/Toolbar";
 
-const EnhancedTableToolbar = memo(({setOpenAddWarehouses}) => {
+interface EnhancedTableToolbarProps{
+    setOpenAddWarehouses: (value: boolean) => void
+}
+
+const EnhancedTableToolbar = memo(({setOpenAddWarehouses}: EnhancedTableToolbarProps) => {
     return (
         <Toolbar
             sx={{
@@ -21,7 +25,7 @@ const EnhancedTableToolbar = memo(({setOpenAddWarehouses}) => {
             >
                 Warehouses
             </Typography>
-            <ButtonStyled variant="contained" onClick={setOpenAddWarehouses}>Add Warehouses <PlusIcons/></ButtonStyled>
+            <ButtonStyled variant="contained" onClick={() =>setOpenAddWarehouses(true)}>Add Warehouses <PlusIcons/></ButtonStyled>
         </Toolbar>
     );
 });

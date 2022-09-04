@@ -6,11 +6,15 @@ import StepModalThird from "../../../../Common/StepModal/StepModalThird";
 
 import style from "../SecondStep/SecondStep.module.css";
 
-const ThirdStep = ({formik}) => {
+interface ThirdStepProps {
+    formik: any
+}
+
+const ThirdStep = ({formik}: ThirdStepProps) => {
 
     const [selectedIndex, setSelectedIndex] = useState('');
 
-    const handleListItemClick = (index) => {
+    const handleListItemClick = (index: string) => {
         setSelectedIndex(index);
         formik.values.payment = index;
     };

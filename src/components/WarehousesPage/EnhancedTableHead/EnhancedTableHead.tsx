@@ -6,8 +6,14 @@ import Checkbox from "@mui/material/Checkbox";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import TableHead from "@mui/material/TableHead";
 
+interface EnhancedTableHeadProps{
+    wareHouses: any
+    selected: string[]
+    onSelectAllClick: () => void
+    headCells: string[]
+}
 
-const EnhancedTableHead = ({wareHouses, selected, onSelectAllClick, headCells}) => {
+const EnhancedTableHead = ({wareHouses, selected, onSelectAllClick, headCells}: EnhancedTableHeadProps) => {
     return (
         <TableHead>
             <TableRow>

@@ -5,9 +5,12 @@ import {ButtonStyled, FormStyled} from './SucksesModal.style';
 
 import style from './SucksesModal.module.css'
 
+interface SucksesModalProps{
+    handleClose: (valuse: boolean) => void
+}
 
-const SucksesModal = ({handleClose}) => {
-    const handleSubmit = (event) => {
+const SucksesModal = ({handleClose}: SucksesModalProps) => {
+    const handleSubmit = (event: any) => {
         event.preventDefault()
         handleClose(false)
     }

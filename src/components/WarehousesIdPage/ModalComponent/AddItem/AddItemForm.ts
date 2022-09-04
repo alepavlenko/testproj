@@ -2,7 +2,6 @@ import * as Yup from "yup";
 
 import {Validation} from "../../../../constants";
 
-
 export const AddItemSchema = Yup.object().shape({
     name: Yup.string()
         .required(Validation.REQUIRED_VALUE),

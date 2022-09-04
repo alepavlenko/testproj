@@ -5,13 +5,31 @@ import Move from "../../../../Common/Icons/Move";
 import style from './MoveFirstStep.module.css'
 import {useSelector} from "react-redux";
 import {getWarehouses} from "../../../../../redux/selectors/warehousesSelectors";
+import {Params} from "react-router-dom";
 
-const MoveFirstStep = ({nextStep, formik, warehouseId}) => {
-    const warehouses = useSelector(getWarehouses)
+interface MoveFirstStep {
+    nextStep: () => void
+    formik: any
+    warehouseId: any
+    // Readonly<Params<string>>>
+}
 
-    const basedWarehourses = warehouses.find((ware) => ware._id === warehouseId)
+interface warehousesIterElem {
+    name: string
+    numberProduct: string
+    length: number
+    width: number
+    height: number
+    user: string
+    _id?: string
+}
+
+const MoveFirstStep = ({nextStep, formik, warehouseId}: MoveFirstStep) => {
+    const warehouses: any = useSelector(getWarehouses)
+
+    const basedWarehourses = warehouses.find((ware: warehousesIterElem) => ware._id === warehouseId)
     const nameBasedWare = basedWarehourses.name;
-    const anotherWarehourses = warehouses.filter((ware) => !warehouseId.includes(ware._id))
+    const anotherWarehourses = warehouses.filter((ware: warehousesIterElem) => !warehouseId.includes(ware._id))
 
     return (
         <div className={style.wrapForm}>
@@ -42,7 +60,7 @@ const MoveFirstStep = ({nextStep, formik, warehouseId}) => {
                     id={warehouseId}
                     name='selectWarehouses'
                 >
-                    {anotherWarehourses.map((warehouses) =>
+                    {anotherWarehourses.map((warehouses: warehousesIterElem) =>
                         (<MenuItem
                             key={warehouses._id}
                             value={warehouses._id}

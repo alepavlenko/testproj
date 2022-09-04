@@ -48,7 +48,12 @@ const listArray = [
 
 const drawerWidth = 240;
 
-const CustomDrawer = ({mobileOpen, setMobileOpen}) => {
+interface CustomDrawerProps{
+    mobileOpen: boolean
+    setMobileOpen: (value: boolean) => void
+}
+
+const CustomDrawer = ({mobileOpen, setMobileOpen}: CustomDrawerProps) => {
     const navigate = useNavigate();
 
     const [selectedIndex, setSelectedIndex] = useState(2);

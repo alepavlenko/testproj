@@ -5,7 +5,12 @@ import {FormControlLabel, FormLabel, Radio, RadioGroup} from "@mui/material";
 
 import style from "../AddItem.module.css";
 
-const FirstStep = ({nextStep, formik}) => {
+interface FirstStepProps {
+    nextStep: () => void
+    formik: any
+}
+
+const FirstStep = ({nextStep, formik}: FirstStepProps) => {
     const addWarehousesFormInputs = [
         {
             placeholder: 'Enter a name',

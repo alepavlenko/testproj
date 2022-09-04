@@ -6,7 +6,27 @@ import Checkbox from "@mui/material/Checkbox";
 
 import style from "../../../WarehousesPage/Warehouses/Warehouses.module.css";
 
-const ProductsTableRow = ({isItemSelected, handleClick, row, labelId, rowIcons}) => {
+interface ProductsTableRowProps {
+    isItemSelected: boolean
+    handleClick: any
+    row: rowProps
+    labelId: string
+    rowIcons: any
+        // (value: string): JSX.Element
+}
+
+interface rowProps{
+    name: string
+    manufacturer: string
+    itemNumber: number
+    purchasing: string
+    shipment: string
+    warehouse: string
+    user: string
+    _id: string
+}
+
+const ProductsTableRow = ({isItemSelected, handleClick, row, labelId, rowIcons}: ProductsTableRowProps) => {
     return (
         <TableRow
             hover

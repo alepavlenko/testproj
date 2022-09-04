@@ -8,11 +8,15 @@ import Typography from "@mui/material/Typography";
 import StepModalSec from "../../../../Common/StepModal/StepModalSec";
 import StepModalThird from "../../../../Common/StepModal/StepModalThird";
 
-const MoveThirdStep = ({formik}) => {
+interface MoveThirdStepProps{
+    formik: any
+}
+
+const MoveThirdStep = ({formik}: MoveThirdStepProps) => {
 
     const [selectedIndex, setSelectedIndex] = useState('');
 
-    const handleListItemClick = (index) => {
+    const handleListItemClick = (index: string) => {
         setSelectedIndex(index);
         formik.values.payment = index;
     };

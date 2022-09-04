@@ -18,31 +18,41 @@ import {getLoadingWarehouses, getWarehouses} from "../../../redux/selectors/ware
 
 const headCells = ['All stores', 'Number of products', 'Length, m', 'Width, m', 'Height, m'];
 
+interface warehousesIterElem {
+    name: string
+    numberProduct: string
+    length: number
+    width: number
+    height: number
+    user: string
+    _id?: string
+}
+
 const Warehouses = () => {
 
     const dispatch = useDispatch()
 
-    const warehouses = useSelector(getWarehouses)
-    const loading = useSelector(getLoadingWarehouses)
+    const warehouses: any = useSelector(getWarehouses)
+    const loading: any = useSelector(getLoadingWarehouses)
 
-    const [selected, setSelected] = useState([]);
-    const [openAddWarehouses, setOpenAddWarehouses] = useState(false)
-    const [openSucksesWarehouses, setOpenSucksesWarehouses] = useState(false)
+    const [selected, setSelected] = useState<string[]>([]);
+    const [openAddWarehouses, setOpenAddWarehouses] = useState<boolean>(false)
+    const [openSucksesWarehouses, setOpenSucksesWarehouses] = useState<boolean>(false)
 
-    const isSelected = (name) => selected.indexOf(name) !== -1;
+    const isSelected = (name: string) => selected.indexOf(name) !== -1;
 
-    const handleSelectAllClick = (event) => {
+    const handleSelectAllClick = (event: any) => {
         if (event.target.checked) {
-            const newSelected = warehouses.map((n) => n._id);
+            const newSelected = warehouses.map((n: warehousesIterElem) => n._id);
             setSelected(newSelected);
             return;
         }
         setSelected([]);
     };
 
-    const handleClick = (event, name) => {
+    const handleClick = (name: string) => {
         const selectedIndex = selected.indexOf(name);
-        let newSelected = [];
+        let newSelected: string[] = [];
 
         if (selectedIndex === -1) {
             newSelected = newSelected.concat(selected, name);

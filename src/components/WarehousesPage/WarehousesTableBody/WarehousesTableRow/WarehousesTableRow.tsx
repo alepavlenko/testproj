@@ -6,7 +6,25 @@ import TableRow from "@mui/material/TableRow";
 
 import style from "../../Warehouses/Warehouses.module.css";
 
-const WarehousesTableRow = ({isItemSelected, row, handleClick, labelId, redirect}) => {
+interface warehousesIterElem {
+    name: string
+    numberProduct: string
+    length: number
+    width: number
+    height: number
+    user: string
+    _id: string
+}
+
+interface WarehousesTableRowProps{
+    handleClick: any
+    row: warehousesIterElem
+    labelId: string
+    redirect: (value: string) => void
+    isItemSelected: boolean
+}
+
+const WarehousesTableRow = ({isItemSelected, row, handleClick, labelId, redirect}: WarehousesTableRowProps) => {
     return (
         <TableRow
             hover

@@ -8,13 +8,19 @@ import {AddWarehousesSchema} from "./AddWarehousesForm";
 import style from './AddWarehouses.module.css'
 import {addWarehouses} from "../../../../redux/actions/warehousesAction";
 
-const AddWarehouses = ({handleClose, openNext, value}) => {
+interface AddWarehousesProps{
+    handleClose: (value: boolean) => void
+    openNext: (value: boolean) => void
+    value: string
+}
+
+const AddWarehouses = ({handleClose, openNext, value}: AddWarehousesProps) => {
 
     const dispatch = useDispatch()
 
     const handleCloseWrap = () => {
         formik.resetForm()
-        handleClose();
+        handleClose(false);
     }
 
     const openNextModal = () => {
@@ -23,7 +29,7 @@ const AddWarehouses = ({handleClose, openNext, value}) => {
         openNext(true);
     }
 
-    const formik = useFormik({
+    const formik: any = useFormik({
         initialValues: {
             nameWarehouses: '',
             length: '',

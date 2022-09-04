@@ -9,13 +9,14 @@ import {BoxItemWrapper, BoxStyledInner} from "./WarehousesPage.style";
 import style from './WarehousesPage.module.css'
 
 const WarehousesPage = () => {
-    const [mobileOpen, setMobileOpen] = useState(false);
+    const [mobileOpen, setMobileOpen] = useState<boolean>(false);
 
     return (
         <BoxItemWrapper>
             <CssBaseline/>
             <NavBarWereHouses
                 setMobileOpen={setMobileOpen}
+                mobileOpen={mobileOpen}
             />
             <BoxStyledInner
                 component="nav"

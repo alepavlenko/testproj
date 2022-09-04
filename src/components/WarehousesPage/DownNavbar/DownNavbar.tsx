@@ -5,7 +5,12 @@ import Selected from "../../Common/Icons/Selected";
 import style from './DownNavbar.module.css'
 import {deleteWarehouses} from "../../../redux/actions/warehousesAction";
 
-const DownNavbar = ({stateSelected, setStateSelected}) => {
+interface DownNavbarProps{
+    stateSelected: string[]
+    setStateSelected: (value: string[]) => void
+}
+
+const DownNavbar = ({stateSelected, setStateSelected}: DownNavbarProps) => {
 
     const dispatch = useDispatch()
 

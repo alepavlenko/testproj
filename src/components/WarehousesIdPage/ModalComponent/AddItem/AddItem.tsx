@@ -12,7 +12,13 @@ import ModalStepper from "../../../Common/ModalStepper/ModalStepper";
 import {useDispatch} from "react-redux";
 import {addProducts} from "../../../../redux/actions/productAction";
 
-const AddItem = ({handleClose, openNext, value}) => {
+interface AddItemProps {
+    handleClose: (value: boolean) => void
+    openNext: (value: boolean) => void
+    value: string
+}
+
+const AddItem = ({handleClose, openNext, value}: AddItemProps) => {
 
     const {warehouseId} = useParams();
     const dispatch = useDispatch()
@@ -31,7 +37,7 @@ const AddItem = ({handleClose, openNext, value}) => {
         }
     };
 
-    const formik = useFormik({
+    const formik: any = useFormik({
         initialValues: {
             name: '',
             manufacturer: '',
@@ -43,12 +49,11 @@ const AddItem = ({handleClose, openNext, value}) => {
         validationSchema: AddItemSchema,
         onSubmit: values => {
             dispatch(addProducts({values, warehouseId}))
-            handleCloseWrap();
             openNextModal()
         },
     });
 
-    function getStepContent(step) {
+    function getStepContent(step: number) {
         switch (step) {
             case 0:
                 return <FirstStep nextStep={handleNext} formik={formik}/>;
@@ -61,12 +66,8 @@ const AddItem = ({handleClose, openNext, value}) => {
         }
     }
 
-    const handleCloseWrap = () => {
-        handleClose();
-    }
-
     const openNextModal = () => {
-        handleCloseWrap();
+        handleClose(false);
         openNext(true);
     }
 
