@@ -14,25 +14,22 @@ import MoveProduct from "../ModalComponent/MoveProduct/MoveProduct";
 import SucsessfulModalMove from "../ModalComponent/SucsessfulModalMove/SucsessfulModalMove";
 
 import style from "./ItemsWarehouses.module.css";
-import {useDispatch, useSelector} from "react-redux";
 import Loader from "../../Common/Loader/Loader";
-import {fetchProducts} from "../../../redux/actions/productAction";
-import {fetchWarehouses} from "../../../redux/actions/warehousesAction";
+import {productsActions} from "../../../redux/actions/productAction";
 import {getItems, getLoadingProducts} from "../../../redux/selectors/productSelectors";
-
-interface handleCloseProps{
-    hadleClose: (value: boolean) => void
-}
+import {warehousesActions} from "../../../redux/actions/warehousesAction";
+import {useAppDispatch, useAppSelector} from "../../../redux/store";
+import {warehousesItem} from "../../../types/warehouse";
 
 const headCells = ['All products', 'Manufacturer', 'Item number', 'Purchasing technology', 'Shipment method'];
 
 const ItemsWarehouses = () => {
 
-    const dispatch = useDispatch()
-    const {warehouseId} = useParams();
+    const dispatch = useAppDispatch()
+    const {warehouseId} = useParams<{ warehouseId: string }>();
 
-    const items: any = useSelector(getItems)
-    const loading = useSelector(getLoadingProducts)
+    const items: any = useAppSelector(getItems)
+    const loading = useAppSelector(getLoadingProducts)
 
     const [selected, setSelected] = useState<string[]>([]);
     const [openAddProduct, setOpenAddProduct] = useState<boolean>(false)
@@ -44,7 +41,7 @@ const ItemsWarehouses = () => {
 
     const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.checked) {
-            const newSelected = items.map((n: any) => n._id);
+            const newSelected = items.map((n: warehousesItem) => n._id);
             setSelected(newSelected);
             return;
         }
@@ -71,8 +68,8 @@ const ItemsWarehouses = () => {
     };
 
     useEffect(() => {
-        dispatch(fetchProducts({warehouseId}))
-        dispatch(fetchWarehouses({}))
+        dispatch(productsActions.fetchProducts({warehouseId}))
+        dispatch(warehousesActions.fetchWarehouses({}))
     }, [])
 
     return (

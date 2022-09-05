@@ -1,9 +1,9 @@
 import React from 'react';
-import {useDispatch} from "react-redux";
 
 import Selected from "../../Common/Icons/Selected";
 import style from './DownNavbar.module.css'
-import {deleteWarehouses} from "../../../redux/actions/warehousesAction";
+import {warehousesActions} from "../../../redux/actions/warehousesAction";
+import {useAppDispatch} from "../../../redux/store";
 
 interface DownNavbarProps{
     stateSelected: string[]
@@ -12,11 +12,11 @@ interface DownNavbarProps{
 
 const DownNavbar = ({stateSelected, setStateSelected}: DownNavbarProps) => {
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const removeSelected = () => {
-        const categoy = 'warehouses'
-        dispatch(deleteWarehouses({categoy, stateSelected, setStateSelected}))
+        const category = 'warehouses'
+        dispatch(warehousesActions.deleteWarehouses({category, stateSelected, setStateSelected}))
     }
     return (
         <div className={style.downBar}>

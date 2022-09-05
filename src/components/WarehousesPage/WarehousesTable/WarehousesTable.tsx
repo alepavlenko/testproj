@@ -3,10 +3,11 @@ import React from 'react';
 import WarehousesTableBody from "../WarehousesTableBody/WarehousesTableBody";
 import Table from "@mui/material/Table";
 import EnhancedTableHead from "../EnhancedTableHead/EnhancedTableHead";
+import {warehousesItem} from "../../../types/warehouse";
 
 interface WarehousesTableProps{
     selected: string[]
-    wareHouses: any
+    wareHouses: warehousesItem[]
     headCells: string[]
     handleSelectAllClick: any
     isSelected: (name: string) => boolean

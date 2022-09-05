@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
-import {Params, useParams} from "react-router-dom";
-import {useFormik} from "formik";
+import { useParams} from "react-router-dom";
+import { useFormik} from "formik";
 import MoveFirstStep from "./MoveFirstStep/MoveFirstStep";
 import MoveSecondStep from "./MoveSecondStep/MoveSecondStep";
 import MoveThirdStep from "./MoveThirdStep/MoveThirdStep";
 import {ButtonStyled, FormStyled} from "./MoveProduct.style";
 import {MoveItemSchema} from "./MoveProductForm";
 import ModalStepper from "../../../Common/ModalStepper/ModalStepper";
-import {useDispatch} from "react-redux";
-import {moveProducts} from "../../../../redux/actions/productAction";
+import {productsActions} from "../../../../redux/actions/productAction";
+import {useAppDispatch} from "../../../../redux/store";
 
 interface MoveProductProps {
     handleClose: (value: boolean) => void
@@ -18,10 +18,17 @@ interface MoveProductProps {
     setStateSelected: (value: string[]) => void
 }
 
+export interface MyValues {
+    baseWarehouses: string
+    selectWarehouses: string
+    delivery: string
+    payment: string
+}
+
 const MoveProduct = ({handleClose, openNext, value, stateSelected, setStateSelected}: MoveProductProps) => {
 
-    const {warehouseId}:  any = useParams();
-    const dispatch = useDispatch()
+    const {warehouseId}: any = useParams<{ warehouseId: string }>();
+    const dispatch = useAppDispatch()
 
     const [activeStep, setActiveStep] = useState(0);
 
@@ -30,28 +37,27 @@ const MoveProduct = ({handleClose, openNext, value, stateSelected, setStateSelec
 
     const handleNext = () => {
         if (formik.values.selectWarehouses === '') {
-            formik.setError('selectWarehouses', 'error')
+            formik.setStatus( 'error')
+
         } else {
             setActiveStep(prevActiveStep => prevActiveStep + 1);
         }
     };
-
-    const formik: any = useFormik({
-        initialValues: {
-            baseWarehouses: '',
-            selectWarehouses: '',
-            delivery: 'AIR',
-            payment: 'CASH',
-        },
-        validationSchema: MoveItemSchema,
-        onSubmit: values => {
-            values.baseWarehouses = warehouseId;
-            dispatch(moveProducts({values, warehouseId, stateSelected, setStateSelected}))
-            openNextModal();
-
-        },
-    });
-
+    const formik = useFormik<MyValues>({
+            initialValues: {
+                baseWarehouses: '',
+                selectWarehouses: '',
+                delivery: 'AIR',
+                payment: 'CASH',
+            },
+            validationSchema: MoveItemSchema,
+            onSubmit: values => {
+                values.baseWarehouses = warehouseId;
+                dispatch(productsActions.moveProducts({values, warehouseId, stateSelected, setStateSelected}))
+                openNextModal();
+            }
+        }
+    );
     function getStepContent(step: number) {
         switch (step) {
             case 0:
@@ -78,7 +84,7 @@ const MoveProduct = ({handleClose, openNext, value, stateSelected, setStateSelec
         <>
             <h1>{value}</h1>
             <FormStyled onSubmit={formik.handleSubmit}>
-                <ModalStepper activeStep={activeStep} steps={steps} />
+                <ModalStepper activeStep={activeStep} steps={steps}/>
                 {getStepContent(activeStep)}
                 {activeStep === 2
                     ? <ButtonStyled type="submit" variant="contained">Choose</ButtonStyled>

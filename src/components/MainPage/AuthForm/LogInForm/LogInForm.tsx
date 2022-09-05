@@ -1,14 +1,14 @@
 import React from 'react';
 import {NavigateFunction, useNavigate} from "react-router-dom";
-import {useFormik} from "formik";
+import {FormikProps, useFormik} from "formik";
 
 import {ButtonStyled, FormStyled} from "./LogInForm.style";
 import {LoginSchema} from "./LoginFormValidation";
 
 import style from "./LogInForm.module.css";
 import {Routes} from '../../../../constants'
-import {useDispatch} from "react-redux";
-import {setAuth} from "../../../../redux/actions/authActions";
+import {authActions} from "../../../../redux/actions/authActions";
+import {useAppDispatch} from "../../../../redux/store";
 
 interface LogInFormProps {
     checkAuth: (
@@ -22,11 +22,14 @@ interface LogInFormProps {
     value: string
 }
 
-
+export interface MyValuesLogIn{
+    password: string
+    email: string
+}
 
 const LogInForm = ({checkAuth, setValidError, handleClose, validError, openNext, value}: LogInFormProps) => {
     let navigate: NavigateFunction = useNavigate();
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const handleCloseWrap = () => {
         formik.resetForm()
@@ -39,28 +42,29 @@ const LogInForm = ({checkAuth, setValidError, handleClose, validError, openNext,
         openNext(true);
     }
 
-    const formik = useFormik({
-        initialValues: {
-            password: '',
-            email: '',
-        },
-        validationSchema: LoginSchema,
-        onSubmit: async (values) => {
-            if (await checkAuth(values, setValidError)) {
-                handleCloseWrap()
-                if ((value === "Sign up")) {
-                    openNext(true)
-                } else if (value === "Log in") {
-                    navigate(Routes.WAREHOUSES, {replace: true})
-                    dispatch(setAuth(true))
-                }
-            } else {
-                if (value === "Log in") {
-                    setValidError(true)
+    const formik: FormikProps<MyValuesLogIn> = useFormik<MyValuesLogIn>({
+            initialValues: {
+                password: '',
+                email: '',
+            },
+            validationSchema: LoginSchema,
+            onSubmit: async values => {
+                if (await checkAuth(values, setValidError)) {
+                    handleCloseWrap()
+                    if ((value === "Sign up")) {
+                        openNext(true)
+                    } else if (value === "Log in") {
+                        navigate(Routes.WAREHOUSES, {replace: true})
+                        dispatch(authActions.setAuth(true))
+                    }
+                } else {
+                    if (value === "Log in") {
+                        setValidError(true)
+                    }
                 }
             }
-        },
-    });
+        }
+    );
 
     return (
         <>

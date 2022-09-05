@@ -1,12 +1,19 @@
-import {ERROR_WAREHOUSES, LOADING_WAREHOUSES, SET_WAREHOUSES} from "../actions/warehousesAction";
+import {ERROR_WAREHOUSES, LOADING_WAREHOUSES, SET_WAREHOUSES, WarehousesActions} from "../actions/warehousesAction";
+import {warehousesItem} from "../../types/warehouse";
 
-const defaultState = {
+interface DefaultState {
+    warehouses: warehousesItem[],
+    error: string,
+    loading: boolean
+}
+
+const defaultState: DefaultState = {
     warehouses: [],
     error: '',
     loading: false
 }
 
-export default function warehousesReducer(state = defaultState, action) {
+export default function warehousesReducer(state = defaultState, action: WarehousesActions) {
     switch (action.type) {
         case SET_WAREHOUSES:
             return {

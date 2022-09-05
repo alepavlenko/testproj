@@ -8,12 +8,12 @@ import LogInForm from "../AuthForm/LogInForm/LogInForm";
 import style from './TypographyBlock.module.css'
 import {loginAuth, signUpAuth} from "../../../utils";
 import {Routes} from '../../../constants/'
-import {useSelector} from "react-redux";
 import {getAuth} from "../../../redux/selectors/authSelectors";
+import {useAppSelector} from "../../../redux/store";
 
 const TypographyBlock = () => {
     const navigate: NavigateFunction = useNavigate();
-    const isAuth: boolean = useSelector(getAuth)
+    const isAuth: boolean = useAppSelector(getAuth)
 
     const [openSignUp, setOpenSignUp] = useState(false)
     const [openLogIn, setOpenLogIn] = useState(false)

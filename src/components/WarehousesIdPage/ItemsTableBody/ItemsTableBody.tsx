@@ -6,22 +6,12 @@ import ProductsTableRow from "./ProductsTableRow/ProductsTableRow";
 import AirPlane from "../../Common/Icons/AirPlane";
 import Ship from "../../Common/Icons/Ship";
 import Car from "../../Common/Icons/Car";
+import {ProductsItem} from "../../../types/products";
 
 interface ItemsTableBodyProps {
     isSelected: (name: string) => boolean
     handleClick: any
-    items: any
-}
-
-interface itemsInterface{
-    name: string
-    manufacturer: string
-    itemNumber: number
-    purchasing: string
-    shipment: string
-    warehouse: string
-    user: string
-    _id: string
+    items: ProductsItem[]
 }
 
 const ItemsTableBody = ({isSelected, handleClick, items}: ItemsTableBodyProps) => {
@@ -38,7 +28,7 @@ const ItemsTableBody = ({isSelected, handleClick, items}: ItemsTableBodyProps) =
 
     return (
         <TableBody>
-            {items.map((row: itemsInterface, index: string) => {
+            {items.map((row: ProductsItem, index: number) => {
                 const isItemSelected = isSelected(row._id);
                 const labelId = `enhanced-table-checkbox-${index}`;
                 return (

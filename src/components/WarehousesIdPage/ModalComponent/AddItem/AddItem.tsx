@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useFormik} from "formik";
+import { useFormik} from "formik";
 import {useParams} from "react-router-dom";
 
 import {ButtonStyled, FormStyled} from './AddItem.style';
@@ -9,8 +9,8 @@ import ThirdStep from "./ThirdStep/ThirdStep";
 import {AddItemSchema} from "./AddItemForm";
 import ModalStepper from "../../../Common/ModalStepper/ModalStepper";
 
-import {useDispatch} from "react-redux";
-import {addProducts} from "../../../../redux/actions/productAction";
+import {productsActions} from "../../../../redux/actions/productAction";
+import {useAppDispatch} from "../../../../redux/store";
 
 interface AddItemProps {
     handleClose: (value: boolean) => void
@@ -18,10 +18,24 @@ interface AddItemProps {
     value: string
 }
 
+export interface MyValuesProduct extends Record<string, string | number>{
+    name: string
+    manufacturer: string
+    number: string
+    purchasing: string
+    delivery: string
+    payment: string
+    itemNumber: 0,
+    shipment: string
+    warehouse: string
+    user: string
+    _id: string
+}
+
 const AddItem = ({handleClose, openNext, value}: AddItemProps) => {
 
-    const {warehouseId} = useParams();
-    const dispatch = useDispatch()
+    const {warehouseId} = useParams<{ warehouseId: string }>();
+    const dispatch = useAppDispatch()
 
     const [activeStep, setActiveStep] = useState(0);
 
@@ -29,7 +43,7 @@ const AddItem = ({handleClose, openNext, value}: AddItemProps) => {
 
     const handleNext = () => {
         if (formik.values.name === '') {
-            formik.setError('name', 'error')
+            formik.setStatus('error')
             return
         }
         if (!formik.errors.name && !formik.errors.manufacturer && !formik.errors.number) {
@@ -37,22 +51,27 @@ const AddItem = ({handleClose, openNext, value}: AddItemProps) => {
         }
     };
 
-    const formik: any = useFormik({
-        initialValues: {
-            name: '',
-            manufacturer: '',
-            number: '',
-            purchasing: '',
-            delivery: '',
-            payment: '',
-        },
-        validationSchema: AddItemSchema,
-        onSubmit: values => {
-            dispatch(addProducts({values, warehouseId}))
-            openNextModal()
-        },
-    });
-
+    const formik = useFormik<MyValuesProduct>({
+            initialValues: {
+                name: '',
+                manufacturer: '',
+                number: '',
+                purchasing: '',
+                delivery: '',
+                payment: '',
+                itemNumber: 0,
+                shipment: '',
+                warehouse: '',
+                user: '',
+                _id: ''
+            },
+            validationSchema: AddItemSchema,
+            onSubmit:  values => {
+                        dispatch(productsActions.addProducts({values, warehouseId}))
+                        openNextModal()
+            }
+        }
+    );
     function getStepContent(step: number) {
         switch (step) {
             case 0:

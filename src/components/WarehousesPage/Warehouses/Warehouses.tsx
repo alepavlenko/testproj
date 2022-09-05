@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import {useDispatch, useSelector} from "react-redux";
 
 import Box from '@mui/material/Box';
 import TableContainer from '@mui/material/TableContainer';
@@ -13,8 +12,9 @@ import WarehousesTable from "../WarehousesTable/WarehousesTable";
 
 import style from './Warehouses.module.css'
 import Loader from "../../Common/Loader/Loader";
-import {fetchWarehouses} from "../../../redux/actions/warehousesAction";
+import {warehousesActions} from "../../../redux/actions/warehousesAction";
 import {getLoadingWarehouses, getWarehouses} from "../../../redux/selectors/warehousesSelectors";
+import {useAppDispatch, useAppSelector} from "../../../redux/store";
 
 const headCells = ['All stores', 'Number of products', 'Length, m', 'Width, m', 'Height, m'];
 
@@ -30,10 +30,10 @@ interface warehousesIterElem {
 
 const Warehouses = () => {
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
-    const warehouses: any = useSelector(getWarehouses)
-    const loading: any = useSelector(getLoadingWarehouses)
+    const warehouses: any = useAppSelector(getWarehouses)
+    const loading: any = useAppSelector(getLoadingWarehouses)
 
     const [selected, setSelected] = useState<string[]>([]);
     const [openAddWarehouses, setOpenAddWarehouses] = useState<boolean>(false)
@@ -70,7 +70,7 @@ const Warehouses = () => {
     };
 
     useEffect(() => {
-        dispatch(fetchWarehouses({}))
+        dispatch(warehousesActions.fetchWarehouses({}))
 
     }, [])
 

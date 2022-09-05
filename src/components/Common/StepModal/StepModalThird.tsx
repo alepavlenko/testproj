@@ -4,10 +4,12 @@ import {ListItemText} from "@mui/material";
 import {paymentArray} from "./arrayModal";
 import {ListItemButtonStyled} from "../../WarehousesIdPage/ModalComponent/MoveProduct/MoveProduct.style";
 import style from "../../WarehousesIdPage/ModalComponent/MoveProduct/MoveThirdStep/MoveThirdStep.module.css";
+import {FormikProps} from "formik";
+import {MyValuesProduct} from "../../WarehousesIdPage/ModalComponent/AddItem";
 
 interface StepModalThirdProps {
     selectedIndex: string
-    formik: any
+    formik: FormikProps<MyValuesProduct>
     handleListItemClick: (index: string) => void
 }
 

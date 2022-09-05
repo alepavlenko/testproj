@@ -5,9 +5,8 @@ import Typography from "@mui/material/Typography";
 import {ButtonStyled} from "../../WarehousesPage/EnhancedTableToolbar/EnhancedTableToolbar.style";
 
 import PlusIcons from "../../Common/Icons/PlusIcons";
-import {useSelector} from "react-redux";
 import {getWarehouses} from "../../../redux/selectors/warehousesSelectors";
-import {Params} from "react-router-dom";
+import {useAppSelector} from "../../../redux/store";
 
 interface warehousesIterElem {
     name: string
@@ -21,12 +20,12 @@ interface warehousesIterElem {
 
 interface EnhancedTableToolbarItemProps {
     setOpenAddWarehouses: (value: boolean) => void
-    warehouseId: any
+    warehouseId: string | undefined
 }
 
 const EnhancedTableToolbarItem = memo(({setOpenAddWarehouses, warehouseId}: EnhancedTableToolbarItemProps) => {
 
-    const warehouses = useSelector(getWarehouses)
+    const warehouses = useAppSelector(getWarehouses)
     const localWare = warehouses.filter((item: warehousesIterElem) => item._id === warehouseId)
 
     return (

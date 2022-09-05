@@ -1,12 +1,19 @@
-import {ERROR_PRODUCTS, LOADING_PRODUCTS, SET_PRODUCTS} from "../actions/productAction";
+import {ERROR_PRODUCTS, LOADING_PRODUCTS, ProductsActions, SET_PRODUCTS} from "../actions/productAction";
+import {ProductsItem} from "../../types/products";
 
-const defaultState = {
+interface DefaultState {
+    products: ProductsItem[],
+    error: string,
+    loading: boolean
+}
+
+const defaultState: DefaultState = {
     products: [],
     error: '',
     loading: false
 }
 
-export default function productsReducer(state = defaultState, action) {
+export default function productsReducer(state = defaultState, action: ProductsActions) {
     switch (action.type) {
         case SET_PRODUCTS:
             return {

@@ -5,13 +5,13 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import Checkbox from "@mui/material/Checkbox";
 import TableSortLabel from "@mui/material/TableSortLabel";
+import {ProductsItem} from "../../../types/products";
 
 interface EnhancedItemsTableHeadProps {
     selected: string[]
     headCells: string[]
-    items: any
+    items: ProductsItem[]
     onSelectAllClick: any
-    // (value: Event) => string[]
 }
 
 const EnhancedItemsTableHead = ({items, selected, onSelectAllClick, headCells}: EnhancedItemsTableHeadProps) => {

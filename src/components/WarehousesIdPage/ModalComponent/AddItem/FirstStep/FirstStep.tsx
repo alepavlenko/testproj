@@ -4,10 +4,12 @@ import {ButtonStyled} from "../AddItem.style";
 import {FormControlLabel, FormLabel, Radio, RadioGroup} from "@mui/material";
 
 import style from "../AddItem.module.css";
+import {FormikProps} from "formik";
+import {MyValuesProduct} from "../AddItem";
 
 interface FirstStepProps {
     nextStep: () => void
-    formik: any
+    formik: FormikProps<MyValuesProduct>
 }
 
 const FirstStep = ({nextStep, formik}: FirstStepProps) => {

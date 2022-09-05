@@ -9,7 +9,6 @@ interface MyModalProps {
     open: boolean
     handleClose: (value: boolean) => void
     children: JSX.Element
-        // JSX.Element
 }
 
 const MyModal = ({open, handleClose, children}: MyModalProps) => {

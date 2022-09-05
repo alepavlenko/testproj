@@ -5,20 +5,11 @@ import Checkbox from "@mui/material/Checkbox";
 import TableRow from "@mui/material/TableRow";
 
 import style from "../../Warehouses/Warehouses.module.css";
-
-interface warehousesIterElem {
-    name: string
-    numberProduct: string
-    length: number
-    width: number
-    height: number
-    user: string
-    _id: string
-}
+import {warehousesItem} from "../../../../types/warehouse";
 
 interface WarehousesTableRowProps{
     handleClick: any
-    row: warehousesIterElem
+    row: warehousesItem
     labelId: string
     redirect: (value: string) => void
     isItemSelected: boolean
@@ -37,7 +28,7 @@ const WarehousesTableRow = ({isItemSelected, row, handleClick, labelId, redirect
         >
             <TableCell padding="checkbox">
                 <Checkbox
-                    onClick={(event) => handleClick(event, row._id)}
+                    onClick={(event) => handleClick( row._id)}
                     color="primary"
                     checked={isItemSelected}
                     inputProps={{

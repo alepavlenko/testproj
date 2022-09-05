@@ -5,9 +5,11 @@ import Typography from "@mui/material/Typography";
 import StepModalThird from "../../../../Common/StepModal/StepModalThird";
 
 import style from "../SecondStep/SecondStep.module.css";
+import {FormikProps} from "formik";
+import {MyValuesProduct} from "../AddItem";
 
 interface ThirdStepProps {
-    formik: any
+    formik: FormikProps<MyValuesProduct>
 }
 
 const ThirdStep = ({formik}: ThirdStepProps) => {

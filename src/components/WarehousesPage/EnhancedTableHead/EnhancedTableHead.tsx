@@ -5,9 +5,10 @@ import TableCell from "@mui/material/TableCell";
 import Checkbox from "@mui/material/Checkbox";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import TableHead from "@mui/material/TableHead";
+import {warehousesItem} from "../../../types/warehouse";
 
 interface EnhancedTableHeadProps{
-    wareHouses: any
+    wareHouses: warehousesItem[]
     selected: string[]
     onSelectAllClick: () => void
     headCells: string[]

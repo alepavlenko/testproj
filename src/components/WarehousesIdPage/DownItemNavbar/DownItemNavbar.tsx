@@ -4,23 +4,22 @@ import Selected from "../../Common/Icons/Selected";
 import Move from "../../Common/Icons/Move";
 
 import style from "./DownItemNavbar.module.css";
-import {useDispatch} from "react-redux";
-import {deleteProducts} from "../../../redux/actions/productAction";
+import {productsActions} from "../../../redux/actions/productAction";
+import {useAppDispatch} from "../../../redux/store";
 
 interface DownItemNavbarProps {
     setOpenMoveProduct: (value: boolean) => void
     stateSelected: Array<string>
-    setStateSelected: any
-    // (Array<string>) => Array<string>
+    setStateSelected: (value: string[]) => void
 }
 
 const DownItemNavbar = ({setOpenMoveProduct, stateSelected, setStateSelected}: DownItemNavbarProps) => {
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const removeSelected = () => {
-        const categoy = 'products'
-        dispatch(deleteProducts({categoy, stateSelected, setStateSelected}))
+        const category = 'products'
+        dispatch(productsActions.deleteProducts({category, stateSelected, setStateSelected}))
     }
 
     return (

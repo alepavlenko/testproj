@@ -12,7 +12,6 @@ interface ProductsTableRowProps {
     row: rowProps
     labelId: string
     rowIcons: any
-        // (value: string): JSX.Element
 }
 
 interface rowProps{

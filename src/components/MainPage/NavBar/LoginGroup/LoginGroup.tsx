@@ -6,14 +6,15 @@ import LogInForm from "../../AuthForm/LogInForm/LogInForm";
 import {loginAuth, signUpAuth} from "../../../../utils";
 
 import style from './LoginGroup.module.css'
-import {useDispatch, useSelector} from "react-redux";
-import {setAuth} from "../../../../redux/actions/authActions";
+
 import {getAuth} from "../../../../redux/selectors/authSelectors";
+import {useAppDispatch, useAppSelector} from "../../../../redux/store";
+import {authActions} from "../../../../redux/actions/authActions";
 
 
 const LoginGroup = () => {
-    const dispatch = useDispatch()
-    const isAuth: boolean = useSelector(getAuth)
+    const dispatch = useAppDispatch()
+    const isAuth: boolean = useAppSelector(getAuth)
 
     const [openSignUp, setOpenSignUp] = useState<boolean>(false)
     const [openLogIn, setOpenLogIn] = useState<boolean>(false)
@@ -31,13 +32,9 @@ const LoginGroup = () => {
     };
 
     const logOut = () => {
-        dispatch(setAuth(false))
+        dispatch(authActions.setAuth(false))
         localStorage.removeItem('auth')
         localStorage.removeItem('token')
-    }
-
-    const testDich = (e: React.MouseEvent<HTMLElement>) => {
-
     }
 
     return (

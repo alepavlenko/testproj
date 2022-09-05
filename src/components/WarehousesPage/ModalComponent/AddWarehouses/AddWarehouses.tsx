@@ -1,22 +1,32 @@
 import React from 'react';
 import {useFormik} from "formik";
-import {useDispatch} from "react-redux";
 
 import {ButtonStyled, FormStyled} from './AddWarehouses.style';
 
 import {AddWarehousesSchema} from "./AddWarehousesForm";
 import style from './AddWarehouses.module.css'
-import {addWarehouses} from "../../../../redux/actions/warehousesAction";
-
-interface AddWarehousesProps{
+import {warehousesActions} from "../../../../redux/actions/warehousesAction";
+import {useAppDispatch} from "../../../../redux/store";
+interface AddWarehousesProps {
     handleClose: (value: boolean) => void
     openNext: (value: boolean) => void
     value: string
 }
 
+export interface MyValuesWarehouse extends Record<string, string | number>{
+    nameWarehouses: string
+    length: string
+    width: string
+    height: string
+    name: string
+    numberProduct: 0,
+    user: string
+    _id: string
+}
+
 const AddWarehouses = ({handleClose, openNext, value}: AddWarehousesProps) => {
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const handleCloseWrap = () => {
         formik.resetForm()
@@ -29,20 +39,25 @@ const AddWarehouses = ({handleClose, openNext, value}: AddWarehousesProps) => {
         openNext(true);
     }
 
-    const formik: any = useFormik({
-        initialValues: {
-            nameWarehouses: '',
-            length: '',
-            width: '',
-            height: '',
-        },
-        validationSchema: AddWarehousesSchema,
-        onSubmit: values => {
-            dispatch(addWarehouses({values}))
-            handleCloseWrap();
-            openNextModal()
-        },
-    });
+    const formik = useFormik<MyValuesWarehouse>({
+            initialValues: {
+                nameWarehouses: '',
+                length: '',
+                width: '',
+                height: '',
+                name: '',
+                numberProduct: 0,
+                user: '',
+                _id: '',
+            },
+            validationSchema: AddWarehousesSchema,
+            onSubmit: values => {
+                dispatch(warehousesActions.addWarehouses({values}))
+                handleCloseWrap();
+                openNextModal()
+            }
+        }
+    );
 
     const addWarehousesFormInputs = [
         {

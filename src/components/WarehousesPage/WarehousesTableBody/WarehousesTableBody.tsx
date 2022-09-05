@@ -3,23 +3,13 @@ import {useNavigate} from "react-router-dom";
 
 import TableBody from "@mui/material/TableBody";
 import WarehousesTableRow from "./WarehousesTableRow/WarehousesTableRow";
+import {warehousesItem} from "../../../types/warehouse";
 
 interface WarehousesTableBody{
-    wareHouses: any
+    wareHouses: warehousesItem[]
     isSelected: (name: string) => boolean
     handleClick: any
 }
-
-interface warehousesIterElem {
-    name: string
-    numberProduct: string
-    length: number
-    width: number
-    height: number
-    user: string
-    _id: string
-}
-
 
 const WarehousesTableBody = ({wareHouses, isSelected, handleClick,}: WarehousesTableBody) => {
 
@@ -28,7 +18,7 @@ const WarehousesTableBody = ({wareHouses, isSelected, handleClick,}: WarehousesT
     const redirect = (id: string) => navigate(`/warehouses/${id}`, {replace: true})
     return (
         <TableBody>
-            {wareHouses.map((row: warehousesIterElem, index: string) => {
+            {wareHouses.map((row: warehousesItem, index: number) => {
                 const isItemSelected = isSelected(row._id);
                 const labelId = `enhanced-table-checkbox-${index}`;
 

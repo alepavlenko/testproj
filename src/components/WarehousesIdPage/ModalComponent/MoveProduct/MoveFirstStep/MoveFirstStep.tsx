@@ -3,15 +3,15 @@ import {ButtonStyled} from "../MoveProduct.style";
 import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 import Move from "../../../../Common/Icons/Move";
 import style from './MoveFirstStep.module.css'
-import {useSelector} from "react-redux";
 import {getWarehouses} from "../../../../../redux/selectors/warehousesSelectors";
-import {Params} from "react-router-dom";
+import {useAppSelector} from "../../../../../redux/store";
+import {MyValues} from "../MoveProduct";
+import {FormikProps} from "formik";
 
 interface MoveFirstStep {
     nextStep: () => void
-    formik: any
-    warehouseId: any
-    // Readonly<Params<string>>>
+    formik: FormikProps<MyValues>
+    warehouseId: string | undefined
 }
 
 interface warehousesIterElem {
@@ -21,15 +21,15 @@ interface warehousesIterElem {
     width: number
     height: number
     user: string
-    _id?: string
+    _id: string
 }
 
 const MoveFirstStep = ({nextStep, formik, warehouseId}: MoveFirstStep) => {
-    const warehouses: any = useSelector(getWarehouses)
+    const warehouses: any = useAppSelector(getWarehouses)
 
     const basedWarehourses = warehouses.find((ware: warehousesIterElem) => ware._id === warehouseId)
     const nameBasedWare = basedWarehourses.name;
-    const anotherWarehourses = warehouses.filter((ware: warehousesIterElem) => !warehouseId.includes(ware._id))
+    const anotherWarehourses = warehouses.filter((ware: warehousesIterElem) => !warehouseId?.includes(ware._id))
 
     return (
         <div className={style.wrapForm}>

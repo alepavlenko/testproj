@@ -5,7 +5,6 @@ import {
 } from "@mui/material";
 import style from './MoveThirdStep.module.css'
 import Typography from "@mui/material/Typography";
-import StepModalSec from "../../../../Common/StepModal/StepModalSec";
 import StepModalThird from "../../../../Common/StepModal/StepModalThird";
 
 interface MoveThirdStepProps{

@@ -5,10 +5,12 @@ import {ListItemText} from "@mui/material";
 
 import style from "../../WarehousesIdPage/ModalComponent/MoveProduct/MoveThirdStep/MoveThirdStep.module.css";
 import {deliveryArray} from "./arrayModal";
+import {FormikProps} from "formik";
+import {MyValuesProduct} from "../../WarehousesIdPage/ModalComponent/AddItem";
 
 interface StepModalSecProps {
     selectedIndex: string
-    formik: any
+    formik: FormikProps<MyValuesProduct>
     handleListItemClick: (index: string) => void
 }
 
@@ -21,8 +23,6 @@ const StepModalSec = ({selectedIndex, formik, handleListItemClick}: StepModalSec
             {
                 arrayItem.map(item =>
                     <ListItemButtonStyled
-                        // default
-
                         selected={selectedIndex === item.value }
                         onChange={formik.handleChange}
                         onClick={() => handleListItemClick(item.value)}
