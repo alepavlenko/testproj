@@ -3,7 +3,7 @@ import React from "react";
 import {MainPage} from "./components/MainPage";
 import {BlockPage} from "./components/BlockPage/BlockPage";
 import WarehousesPage from "./components/WarehousesPage/WarehousesPage";
-import {Routes} from '../src/constants';
+import {Routes} from './constants';
 import WarehousesIdPage from "./components/WarehousesIdPage/WarehousesIdPage";
 
 
