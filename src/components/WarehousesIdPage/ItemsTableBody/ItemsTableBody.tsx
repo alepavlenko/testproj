@@ -10,7 +10,7 @@ import {ProductsItem} from "../../../types/products";
 
 interface ItemsTableBodyProps {
     isSelected: (name: string) => boolean
-    handleClick: any
+    handleClick: (e: React.MouseEvent, row: string) => void
     items: ProductsItem[]
 }
 

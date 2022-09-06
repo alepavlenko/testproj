@@ -48,7 +48,7 @@ const ItemsWarehouses = () => {
         setSelected([]);
     };
 
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, name: string) => {
+    const handleClick = (event: React.MouseEvent, name: string) => {
         const selectedIndex = selected.indexOf(name);
         let newSelected: string[] = [];
 

@@ -10,7 +10,7 @@ interface SucksesModalProps{
 }
 
 const SucksesModal = ({handleClose}: SucksesModalProps) => {
-    const handleSubmit = (event: any) => {
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         handleClose(false)
     }

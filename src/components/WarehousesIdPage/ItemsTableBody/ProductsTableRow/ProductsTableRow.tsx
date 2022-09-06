@@ -8,7 +8,7 @@ import style from "../../../WarehousesPage/Warehouses/Warehouses.module.css";
 
 interface ProductsTableRowProps {
     isItemSelected: boolean
-    handleClick: any
+    handleClick: (e: React.MouseEvent, row: string) => void
     row: rowProps
     labelId: string
     rowIcons: any

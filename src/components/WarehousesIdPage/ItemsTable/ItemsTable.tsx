@@ -11,7 +11,7 @@ interface ItemsTableProps {
     headCells: string[]
     handleSelectAllClick: any
     isSelected: (name: string) => boolean
-    handleClick: any
+    handleClick: (e: React.MouseEvent, row: string) => void
 }
 
 const ItemsTable = ({selected, items, headCells, handleSelectAllClick, isSelected, handleClick}: ItemsTableProps) => {
